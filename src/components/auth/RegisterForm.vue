@@ -9,10 +9,10 @@
       prepend-inner-icon="mdi-email"
     />
     <v-row class="ma-0">
-      <v-col class="px-0 py-0 pe-sm-4" cols="12" sm="6">
+      <v-col class="px-0 py-0 pe-sm-2" cols="12" sm="6">
         <v-text-field label="First Name" type="text" outlined required />
       </v-col>
-      <v-col class="px-0 py-0 ps-sm-4" cols="12" sm="6">
+      <v-col class="px-0 py-0 ps-sm-2" cols="12" sm="6">
         <v-text-field label="Last Name" type="text" outlined required />
       </v-col>
     </v-row>
@@ -34,7 +34,7 @@
       outlined
       required
       label="Phone (e.g. 082210381920)"
-      type="text"
+      type="number"
       prepend-inner-icon="mdi-phone"
     />
     <v-autocomplete label="Country" outlined :items="countryList" item-text="name" item-value="code" prepend-inner-icon="mdi-flag"/>

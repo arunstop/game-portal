@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-// import Home from '../views/Home.vue'
+import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
 
@@ -8,7 +8,7 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: () => import(/* webpackChunkName: "about" */ '../views/auth/Auth.vue')
+    component: Home
   },
   {
     path: '/about',
@@ -21,11 +21,12 @@ const routes = [
   {
     path: '/auth',
     name: 'Auth',
-    component: () => import(/* webpackChunkName: "about" */ '../views/auth/Auth.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/Auth.vue')
   }
 ]
 
 const router = new VueRouter({
+  mode: 'history',
   routes
 })
 

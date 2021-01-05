@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark>
+    <v-app-bar app color="primary">
       <div class="d-flex align-center">
         <v-img
           alt="Vuetify Logo"
@@ -23,27 +23,28 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
+      <v-switch
+        v-model="$vuetify.theme.dark"
+        color="black"
+        hide-details
+        inset
       >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
+        <template v-slot:label>
+          <b>{{ !$vuetify.theme.dark ? "Enable" : "Disable" }} Dark Theme</b>
+          <v-icon class="ms-2"> mdi-theme-light-dark </v-icon>
+        </template>
+      </v-switch>
     </v-app-bar>
     <v-main>
-       <!-- <router-link to="/auth">Go to Foo</router-link>
+      <!-- <router-link to="/auth">Go to Foo</router-link>
     <router-link to="/about">Go to Bar</router-link> -->
       <!-- <HelloWorld /> -->
-      <router-view>
-      </router-view>
+      <router-view> </router-view>
     </v-main>
   </v-app>
 </template>
 
 <script>
-
 export default {
   name: "App",
 
