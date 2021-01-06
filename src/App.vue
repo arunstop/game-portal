@@ -11,14 +11,9 @@
           width="40"
         />
 
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
+        <h2 class="hidden-sm-and-down white--text">
+          Game Portal
+        </h2>
       </div>
 
       <v-spacer></v-spacer>
@@ -57,3 +52,25 @@ export default {
   }),
 };
 </script>
+
+<style scoped>
+/* scrollbar */
+/* width */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  /* box-shadow: inset 0 0 10px 10px transparent;
+  border: solid 3px transparent; */
+  background-color: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 10px 10px #d63b30;
+  border: solid 3px transparent;
+  border-radius: 12px;
+}
+</style>

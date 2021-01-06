@@ -1,42 +1,125 @@
 <template>
-  <v-card width="400">
-        <v-img
-          height="200px"
-          src="https://cdn.pixabay.com/photo/2020/07/12/07/47/bee-5396362_1280.jpg"
-        >
-          <v-app-bar flat color="rgba(0, 0, 0, 0)">
-            <v-app-bar-nav-icon color="white"></v-app-bar-nav-icon>
-
-            <v-toolbar-title class="title white--text pl-0">
-              Messages
-            </v-toolbar-title>
-
-            <v-spacer></v-spacer>
-
-            <v-btn color="white" icon>
-              <v-icon>mdi-dots-vertical</v-icon>
-            </v-btn>
-          </v-app-bar>
-
-          <v-card-title class="white--text mt-8">
-            <v-avatar size="56">
-              <img
-                alt="user"
-                src="https://cdn.pixabay.com/photo/2020/06/24/19/12/cabbage-5337431_1280.jpg"
-              />
-            </v-avatar>
-            <p class="ml-3">John Doe</p>
+  <v-card class="c-card-item ma-0" width="240" outlined>
+    <v-img
+      class="fill-height"
+      :src="gameData.background_image"
+      :lazy-src="gameData.background_image"
+      height="360"
+    >
+      <template v-slot:placeholder>
+        <v-row class="fill-height ma-0" align="center" justify="center">
+          <v-progress-circular
+            indeterminate
+            size="90"
+            :width="6"
+            color="primary"
+          />
+        </v-row>
+      </template>
+      <div class="d-flex flex-column fill-height">
+        <v-menu offset-y>
+          <template v-slot:activator="{ on: menu, attrs }">
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on: tooltip }">
+                <v-btn
+                  class="pa-2 ms-auto"
+                  color="white"
+                  icon
+                  v-bind="attrs"
+                  v-on="{ ...menu, ...tooltip }"
+                >
+                  <v-icon>mdi-dots-horizontal</v-icon>
+                </v-btn>
+              </template>
+              <span>
+                Actions
+              </span>
+            </v-tooltip>
+          </template>
+          <v-list>
+            <v-list-item v-for="(menu, index) in menuActions" :key="index">
+              {{ menu.title }}
+            </v-list-item>
+          </v-list>
+        </v-menu>
+        <div class="mt-auto ma-4 pa-0">
+          <!-- <v-avatar size="56">
+            <img
+              alt="user"
+              src="https://cdn.pixabay.com/photo/2020/06/24/19/12/cabbage-5337431_1280.jpg"
+            />
+          </v-avatar> -->
+          <v-card-title
+            class="c-card-item-text c-card-item-title ma-0 pa-0 white--text"
+          >
+            {{ gameData.name }}
           </v-card-title>
-        </v-img>
-      </v-card>
+
+          <v-card-subtitle
+            class="c-cards-item-chips ma-0 pa-0 white--text font-weight-bold"
+          >
+            <v-chip small class="me-1 mt-1" color="primary">
+              <v-icon class="me-1" color="yellow" small> mdi-star </v-icon>
+              {{ Math.round(gameData.rating * 10) / 10 }}
+            </v-chip>
+            <v-chip
+              class="me-1 mt-1"
+              v-for="genre in gameData.genres"
+              :key="genre.id"
+              small
+            >
+              {{ genre.name }}
+            </v-chip>
+          </v-card-subtitle>
+          <v-row class="ma-0"> </v-row>
+        </div>
+      </div>
+    </v-img>
+  </v-card>
 </template>
 
 <script>
 export default {
-
-}
+  props: {
+    gameData: Object,
+  },
+  data: () => ({
+    menuActions: [
+      { title: "Click Me" },
+      { title: "Click Me" },
+      { title: "Click Me" },
+      { title: "Click Me 2" },
+    ],
+  }),
+};
 </script>
 
-<style>
-
+<style scoped>
+.c-card-item {
+  transition: transform 0.3s;
+  border-radius: 0px !important;
+  border: 0px;
+  display: inline-flex;
+  vertical-align: top;
+}
+.c-card-item:hover {
+  transform: scale(1.06) !important;
+  z-index: 1000;
+  cursor: pointer;
+  -webkit-box-shadow: 0px 10px 13px -7px #000000;
+  box-shadow: 0px 10px 13px -7px #000000;
+}
+.c-card-item-text {
+  text-shadow: 2px 2px black;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.c-card-item-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* number of lines to show */
+  -webkit-box-orient: vertical;
+}
+.c-cards-item-chips {
+  max-height: 60px !important;
+}
 </style>
