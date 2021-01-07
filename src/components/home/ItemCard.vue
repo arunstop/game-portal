@@ -31,14 +31,20 @@
                   <v-icon>mdi-dots-horizontal</v-icon>
                 </v-btn>
               </template>
-              <span>
-                Actions
-              </span>
+              <span> Actions </span>
             </v-tooltip>
           </template>
           <v-list>
-            <v-list-item v-for="(menu, index) in menuActions" :key="index">
-              {{ menu.title }}
+            <v-list-item
+              link
+              v-for="menu in menuActions"
+              :key="menu"
+              @click="showSnackbar = true"
+            >
+              <b>
+                <v-icon class="me-2">{{ menu.icon }}</v-icon>
+                {{ menu.title }}
+              </b>
             </v-list-item>
           </v-list>
         </v-menu>
@@ -75,21 +81,27 @@
         </div>
       </div>
     </v-img>
+    <!-- <snackbar
+      v-model="showSnackbar"
+      :message="gameData.name"
+    /> -->
   </v-card>
 </template>
 
 <script>
+// import Snackbar from "../Snackbar.vue";
 export default {
+  // components: { Snackbar },
   props: {
     gameData: Object,
   },
   data: () => ({
     menuActions: [
-      { title: "Click Me" },
-      { title: "Click Me" },
-      { title: "Click Me" },
-      { title: "Click Me 2" },
+      { title: "Add To Library", icon: "mdi-book-plus-multiple" },
+      { title: "Add To Wishlist", icon: "mdi-star-plus" },
+      { title: "Hide from list", icon: "mdi-eye-off" },
     ],
+    showSnackbar: false,
   }),
 };
 </script>

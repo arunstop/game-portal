@@ -11,45 +11,39 @@
           width="40"
         />
 
-        <h2 class="hidden-sm-and-down white--text">
-          Game Portal
-        </h2>
+        <h2 class="hidden-sm-and-down white--text">Game Portal</h2>
       </div>
-
       <v-spacer></v-spacer>
-
-      <v-switch
-        v-model="$vuetify.theme.dark"
-        color="black"
-        hide-details
-        inset
-      >
-        <template v-slot:label>
-          <b>{{ !$vuetify.theme.dark ? "Enable" : "Disable" }} Dark Theme</b>
-          <v-icon class="ms-2"> mdi-theme-light-dark </v-icon>
-        </template>
-      </v-switch>
+      <v-btn icon @click.stop="toggleDrawer"><v-icon>mdi-menu</v-icon> </v-btn>
     </v-app-bar>
+    <nav-drawer v-model="drawer" />
     <v-main>
-      <!-- <router-link to="/auth">Go to Foo</router-link>
-    <router-link to="/about">Go to Bar</router-link> -->
-      <!-- <HelloWorld /> -->
-      <router-view> </router-view>
+      <v-container class="ma-0 pa-0" fluid>
+        <router-view> </router-view>
+      </v-container>
     </v-main>
   </v-app>
 </template>
 
 <script>
+import NavDrawer from "./components/NavDrawer.vue";
 export default {
   name: "App",
 
   components: {
+    NavDrawer,
     // HelloWorld,
   },
 
   data: () => ({
-    //
+    drawer: false,
   }),
+  methods: {
+    toggleDrawer() {
+      // console.log(this.drawer)
+      this.drawer = !this.drawer;
+    },
+  },
 };
 </script>
 

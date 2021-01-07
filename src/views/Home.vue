@@ -1,33 +1,15 @@
 <template>
   <div class="home">
     <!-- <HelloWorld msg="Welcome to Your Vue.js App" /> -->
-    <p class="display-1 ma-0 mt-10">
-      <v-icon size="60" color="orange">mdi-fire</v-icon>
-      Hot Games
-    </p>
-    <div class="py-6 scrolls">
-      <item-card v-for="game in gameList.results" :key="game.slug" :gameData="game" />
-    </div>
+    <hot-list />
   </div>
 </template>
 
 <script>
-// @ is an alias to project root
-// import HelloWorld from "@/components/HelloWorld.vue";
-import ItemCard from "../components/ItemCard.vue";
-
+import HotList from "../components/home/HotList.vue";
 export default {
+  components: { HotList },
   name: "Home",
-  components: {
-    // HelloWorld,
-    ItemCard,
-  },
-  data: () => ({
-    gameList: require("@/assets/games.json"),
-  }),
-  created(){
-    console.log(this.gameList)
-  }
 };
 </script>
 
