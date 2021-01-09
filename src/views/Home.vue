@@ -1,14 +1,14 @@
 <template>
   <div class="home">
     <!-- <HelloWorld msg="Welcome to Your Vue.js App" /> -->
-    <hot-list />
+    <hot-section />
   </div>
 </template>
 
 <script>
-import HotList from "../components/home/HotList.vue";
+import HotSection from "../components/home/HotSection.vue";
 export default {
-  components: { HotList },
+  components: { HotSection },
   name: "Home",
 };
 </script>

@@ -1,0 +1,46 @@
+<template>
+  <!-- <v-snackbar multi-line v-bind="value">
+    <template v-slot:action="{}"> </template>
+  </v-snackbar> -->
+  <!-- creating snackbarcontainer -->
+  <v-col class="ma-0">
+    <v-snackbar
+      class="mb-2 justify-center"
+      bottom
+      :timeout="2400"
+      v-for="(snackbar, index) in snackbarList.filter((s) => s.showing === true)"
+      v-model="snackbar.showing"
+      :color="snackbar.type"
+      :multi-line="false"
+      :key="index + '' + Math.random()"
+      :style="`bottom : ${index * 60}px`"
+    >
+      <!-- <v-icon>
+        mdi-check
+      </v-icon> -->
+      {{ snackbar.message }}
+      <template v-slot:action="{ attrs }">
+        <v-btn icon v-bind="attrs" @click="snackbar.showing = false">
+          <v-icon> mdi-close </v-icon>
+        </v-btn>
+      </template>
+    </v-snackbar>
+  </v-col>
+</template>
+
+<script>
+import { mapState } from "vuex";
+export default {
+  props: {
+    message: String,
+    value: Boolean,
+  },
+  computed: {
+    ...mapState(["snackbarList"]),
+  },
+  data: () => ({}),
+};
+</script>
+
+<style>
+</style>

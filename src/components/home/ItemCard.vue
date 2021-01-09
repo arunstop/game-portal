@@ -37,9 +37,9 @@
           <v-list>
             <v-list-item
               link
-              v-for="menu in menuActions"
-              :key="menu"
-              @click="showSnackbar = true"
+              v-for="(menu, index) in menuList"
+              :key="index"
+              @click="actionHandler(menu)"
             >
               <b>
                 <v-icon class="me-2">{{ menu.icon }}</v-icon>
@@ -95,14 +95,40 @@ export default {
   props: {
     gameData: Object,
   },
-  data: () => ({
-    menuActions: [
-      { title: "Add To Library", icon: "mdi-book-plus-multiple" },
-      { title: "Add To Wishlist", icon: "mdi-star-plus" },
-      { title: "Hide from list", icon: "mdi-eye-off" },
-    ],
-    showSnackbar: false,
-  }),
+  data() {
+    return {
+      menuList: [
+        {
+          title: "Add To Library",
+          icon: "mdi-book-plus-multiple",
+          message:
+            this.gameData.name + " " + "has been added to your game library",
+          type: "success",
+        },
+        {
+          title: "Add To Wishlist",
+          icon: "mdi-star-plus",
+          message: this.gameData.name + " " + "has been added to your wishlist",
+          type: "success",
+        },
+        {
+          title: "Hide From list",
+          icon: "mdi-eye-off",
+          message: this.gameData.name + " " + "has been hidden form the list",
+          type: "warning",
+        },
+      ],
+    };
+  },
+  methods: {
+    actionHandler(menuAction) {
+      this.$store.dispatch("showSnackbar", menuAction);
+      // alert(message)
+    },
+    addToLibrary() {},
+    addtoWishlist() {},
+    hideFromList() {},
+  },
 };
 </script>
 

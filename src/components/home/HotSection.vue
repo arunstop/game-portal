@@ -28,7 +28,7 @@ import ItemCard from "./ItemCard.vue";
 import SearchSection from "./SearchSection.vue";
 
 export default {
-  name: "HotList",
+  name: "HotSection",
   components: {
     // HelloWorld,
     ItemCard,
@@ -38,7 +38,7 @@ export default {
     gameList: require("@/assets/games.json"),
   }),
   created() {
-    console.log(this.gameList);
+    // console.log(this.gameList);
   },
 };
 </script>

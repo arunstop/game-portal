@@ -22,22 +22,25 @@
         <router-view> </router-view>
       </v-container>
     </v-main>
+    <snackbars />
   </v-app>
 </template>
 
 <script>
 import NavDrawer from "./components/NavDrawer.vue";
+import Snackbars from "./components/container/Snackbars.vue";
 export default {
   name: "App",
 
   components: {
     NavDrawer,
+    Snackbars,
     // HelloWorld,
   },
-
   data: () => ({
     drawer: false,
   }),
+
   methods: {
     toggleDrawer() {
       // console.log(this.drawer)
