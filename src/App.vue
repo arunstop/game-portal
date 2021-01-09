@@ -23,6 +23,12 @@
       </v-container>
     </v-main>
     <snackbars />
+    <!-- <v-row>
+      <v-snackbar :timeout="3000" v-model="truer">KEKW</v-snackbar>
+      <v-snackbar :timeout="3000" v-model="truer">KEKW</v-snackbar>
+      <v-snackbar :timeout="3000" v-model="truer">KEKW</v-snackbar>
+      <v-snackbar :timeout="3000" v-model="truer">KEKW</v-snackbar>
+    </v-row> -->
   </v-app>
 </template>
 
@@ -39,6 +45,7 @@ export default {
   },
   data: () => ({
     drawer: false,
+    truer:true,
   }),
 
   methods: {

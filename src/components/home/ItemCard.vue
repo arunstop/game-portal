@@ -102,19 +102,19 @@ export default {
           title: "Add To Library",
           icon: "mdi-book-plus-multiple",
           message:
-            this.gameData.name + " " + "has been added to your game library",
+            this.gameData.name + " " + "has been ADDED to your game LIBRARY",
           type: "success",
         },
         {
           title: "Add To Wishlist",
           icon: "mdi-star-plus",
-          message: this.gameData.name + " " + "has been added to your wishlist",
+          message: this.gameData.name + " " + "has been ADDED to your WISHLIST",
           type: "success",
         },
         {
           title: "Hide From list",
           icon: "mdi-eye-off",
-          message: this.gameData.name + " " + "has been hidden form the list",
+          message: this.gameData.name + " " + "has been HIDDEN form the list",
           type: "warning",
         },
       ],
@@ -122,7 +122,11 @@ export default {
   },
   methods: {
     actionHandler(menuAction) {
-      this.$store.dispatch("showSnackbar", menuAction);
+      console.log(menuAction);
+      this.$store.dispatch("showSnackbar", {
+        message: menuAction.message,
+        type: menuAction.type,
+      });
       // alert(message)
     },
     addToLibrary() {},

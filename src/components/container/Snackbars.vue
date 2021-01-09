@@ -8,11 +8,12 @@
       class="mb-2 justify-center"
       bottom
       :timeout="2400"
-      v-for="(snackbar, index) in snackbarList.filter((s) => s.showing === true)"
+      v-for="(snackbar, index) in snackbarList.filter((s) => s.showing)"
       v-model="snackbar.showing"
+      :id="snackbar.key"
       :color="snackbar.type"
       :multi-line="false"
-      :key="index + '' + Math.random()"
+      :key="snackbar.key"
       :style="`bottom : ${index * 60}px`"
     >
       <!-- <v-icon>

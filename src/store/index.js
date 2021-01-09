@@ -12,13 +12,15 @@ export default new Vuex.Store({
   mutations: {
     SHOW_SNACKBAR(state, snackbar) {
       state.snackbarList = state.snackbarList.concat(snackbar)
+      console.log(state.snackbarList)
+
     }
   },
   actions: {
     showSnackbar({ commit }, snackbar) {
       //create a new property called showing to show the snackbar
-      snackbar.showing = true;
-      console.log(snackbar)
+      snackbar.key = Math.random()
+      snackbar.showing = true
       commit('SHOW_SNACKBAR', snackbar)
     }
   },
