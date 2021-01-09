@@ -64,7 +64,7 @@
 
 <script>
 import { mapGetters } from "vuex";
-
+import mixins from "../plugins/mixins.js";
 export default {
   props: {
     value: {
@@ -89,13 +89,8 @@ export default {
     //   },
     // },
   },
-  watch: {
-    "$vuetify.theme.dark"(newVal) {
-      localStorage.setItem("darkTheme", JSON.stringify(newVal));
-      // alert(JSON.parse(localStorage.getItem("darkTheme")));
-      // this.$vuetify.theme.dark = newVal;
-    },
-  },
+  mixins: mixins,
+  watch: mixins.themeWatcher,
   created() {
     // console.log(this.$store.state.ui.darkTheme);
   },
