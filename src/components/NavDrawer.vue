@@ -63,6 +63,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   props: {
     value: {
@@ -72,9 +74,30 @@ export default {
   },
   methods: {
     logoutHandler() {
-        //hiding the drawer
+      //hiding the drawer
       this.value = false;
     },
+  },
+  computed: {
+    ...mapGetters("ui", ["darkTheme"]),
+    // darkTheme1: {
+    //   get: function () {
+    //     return this.$store.state.ui.darkTheme;
+    //   },
+    //   set: function () {
+    //     this.$store.dispatch("ui/toggleTheme");
+    //   },
+    // },
+  },
+  watch: {
+    "$vuetify.theme.dark"(newVal) {
+      localStorage.setItem("darkTheme", JSON.stringify(newVal));
+      // alert(JSON.parse(localStorage.getItem("darkTheme")));
+      // this.$vuetify.theme.dark = newVal;
+    },
+  },
+  created() {
+    // console.log(this.$store.state.ui.darkTheme);
   },
 };
 </script>

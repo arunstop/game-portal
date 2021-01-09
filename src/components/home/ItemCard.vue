@@ -122,8 +122,8 @@ export default {
   },
   methods: {
     actionHandler(menuAction) {
-      console.log(menuAction);
-      this.$store.dispatch("showSnackbar", {
+      // console.log(menuAction);
+      this.$store.dispatch("ui/showSnackbar", {
         message: menuAction.message,
         type: menuAction.type,
       });

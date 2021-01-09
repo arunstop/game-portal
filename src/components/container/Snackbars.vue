@@ -37,9 +37,16 @@ export default {
     value: Boolean,
   },
   computed: {
-    ...mapState(["snackbarList"]),
+    ...mapState('ui', ["snackbarList"]),
+    // ...mapState({
+    //   snackbarList : state => state.ui.snackbarList
+    // }),
+    // snackbarList() {return this.$store.state.ui.snackbarList}
   },
   data: () => ({}),
+  created(){
+    // console.log(this.$vuetify.theme)
+  }
 };
 </script>
 
