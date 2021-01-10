@@ -36,6 +36,10 @@ export default {
         password: this.password,
         lastSession: Date.now(),
       });
+      // this.$store.dispatch("ui/showSnackbar", {
+      //   message: `Login success! Hello ${this.email}`,
+      //   type: `success`,
+      // });
       // this.$router.push("/about");
       this.$router.replace("/");
     },

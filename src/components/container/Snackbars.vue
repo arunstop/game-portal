@@ -3,7 +3,7 @@
     <template v-slot:action="{}"> </template>
   </v-snackbar> -->
   <!-- creating snackbarcontainer -->
-  <v-col class="ma-0">
+  <v-col class="c-snackbar-container ma-0">
     <v-snackbar
       class="mb-2 justify-center"
       bottom
@@ -50,5 +50,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.c-snackbar-container {
+  position: absolute;
+}
 </style>

@@ -17,15 +17,13 @@
       <v-btn color="white" icon @click.stop="toggleDrawer" v-if="isSignedIn">
         <v-icon>mdi-menu</v-icon>
       </v-btn>
-      <v-btn color="white"  class="font-weight-bold" outlined @click="$router.replace('/auth')" v-else>
+      <v-btn color="white" class="font-weight-bold" outlined @click="$router.replace('/auth')" v-else>
         Login here
       </v-btn>
     </v-app-bar>
     <nav-drawer />
     <v-main>
-      <v-container class="ma-0 pa-0" fluid>
         <router-view> </router-view>
-      </v-container>
     </v-main>
     <snackbars />
   </v-app>
