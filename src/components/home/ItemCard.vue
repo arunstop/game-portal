@@ -146,7 +146,8 @@ export default {
 }
 .c-card-item:hover {
   transform: scale(1.06) !important;
-  z-index: 1000;
+  /* z-index : 2 to make the hovered item not overlapped by the next items */
+  z-index: 2;
   cursor: pointer;
   -webkit-box-shadow: 0px 10px 13px -7px #000000;
   box-shadow: 0px 10px 13px -7px #000000;

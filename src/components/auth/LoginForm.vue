@@ -4,6 +4,7 @@
     <v-text-field
       label="Email"
       type="email"
+      v-model="email"
       outlined
       prepend-inner-icon="mdi-email"
       required
@@ -11,6 +12,7 @@
     <v-text-field
       label="Password"
       type="password"
+      v-model="password"
       outlined
       prepend-inner-icon="mdi-lock"
       required

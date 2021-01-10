@@ -13,7 +13,9 @@
         </v-list-item-avatar>
 
         <v-list-item-content>
-          <v-list-item-title class="font-weight-bold">Hakis Marniatchi</v-list-item-title>
+          <v-list-item-title class="font-weight-bold"
+            >Hakis Marniatchi</v-list-item-title
+          >
           <v-list-item-subtitle
             >h.marniatchi@gameportal.co.de</v-list-item-subtitle
           >
@@ -54,9 +56,7 @@
             </span>
             <v-icon
               class="ms-2"
-              :color="
-                darkTheme ? 'blue lighten-1' : 'amber lighten-1'
-              "
+              :color="darkTheme ? 'blue lighten-1' : 'amber lighten-1'"
             >
               {{
                 $vuetify.theme.dark
@@ -73,7 +73,9 @@
         <v-btn block color="error" @click="logoutHandler"> Logout </v-btn>
       </div>
       <div class="pa-2">
-        <v-btn block color="error" @click="$router.push('/auth')"> Login </v-btn>
+        <v-btn block color="error" @click="$router.push('/auth')">
+          Login
+        </v-btn>
       </div>
     </template>
   </v-navigation-drawer>
@@ -90,6 +92,7 @@ export default {
   },
   methods: {
     logoutHandler() {
+      this.$store.dispatch('auth/signOut');
       //hiding the drawer
       this.value = false;
     },
