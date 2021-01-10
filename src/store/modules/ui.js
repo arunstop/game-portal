@@ -7,6 +7,7 @@ export default {
   namespaced: true,
   state: function () {
     return {
+      darkTheme: false, //false is initial value only
       // snackbar: { showing: false, message: '', type:'success' },
       snackbarList: []
     }
@@ -16,8 +17,13 @@ export default {
       state.snackbarList = state.snackbarList.concat(snackbar)
       // console.log(state.snackbarList)
     },
-    TOGGLE_THEME() {
-      Vuetify.framework.theme.dark = !Vuetify.framework.theme.dark
+    INIT_THEME(state, newValue) {
+      //initializing theme state
+      state.darkTheme = newValue
+    },
+    TOGGLE_THEME(state) {
+      //changing state
+      state.darkTheme = !state.darkTheme
     }
   },
   actions: {
@@ -27,11 +33,15 @@ export default {
       snackbar.showing = true
       commit('SHOW_SNACKBAR', snackbar)
     },
-    toggleTheme({ commit }) {
+    initTheme({ commit }, newValue) {
+      commit('INIT_THEME', newValue)
+    },
+    toggleTheme({ commit, rootState }) {
+      Vuetify.framework.theme.dark = !Vuetify.framework.theme.dark
+      let localStorage = rootState.localStorage
+      localStorage.set('darkTheme', Vuetify.framework.theme.dark)
       commit('TOGGLE_THEME')
     }
   },
-  // getters: {
-  //   darkTheme() { return Vuetify.framework.theme.dark }
-  // }
+  getters: {}
 }

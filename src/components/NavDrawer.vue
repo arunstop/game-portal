@@ -6,7 +6,21 @@
     right
     temporary
   >
-    <v-list class="fill-height font-weight-bold grey--text">
+    <v-list class="fill-height grey--text">
+      <v-list-item two-line>
+        <v-list-item-avatar>
+          <img src="https://randomuser.me/api/portraits/men/81.jpg" />
+        </v-list-item-avatar>
+
+        <v-list-item-content>
+          <v-list-item-title class="font-weight-bold">Hakis Marniatchi</v-list-item-title>
+          <v-list-item-subtitle
+            >h.marniatchi@gameportal.co.de</v-list-item-subtitle
+          >
+        </v-list-item-content>
+      </v-list-item>
+
+      <v-divider></v-divider>
       <v-list-item link>
         <v-icon class="me-2">mdi-bookshelf</v-icon> My Library
       </v-list-item>
@@ -28,7 +42,7 @@
       <v-list-item class="my-auto" link>
         <v-switch
           class="my-0"
-          v-model="$vuetify.theme.dark"
+          v-model="darkTheme"
           color="black"
           hide-details
           inset
@@ -36,12 +50,12 @@
         >
           <template v-slot:label>
             <span
-              >Dark Theme: <b>{{ !$vuetify.theme.dark ? "OFF" : "ON" }}</b>
+              >Dark Theme: <b>{{ !darkTheme ? "OFF" : "ON" }}</b>
             </span>
             <v-icon
               class="ms-2"
               :color="
-                $vuetify.theme.dark ? 'blue lighten-1' : 'amber lighten-1'
+                darkTheme ? 'blue lighten-1' : 'amber lighten-1'
               "
             >
               {{
@@ -58,13 +72,15 @@
       <div class="pa-2">
         <v-btn block color="error" @click="logoutHandler"> Logout </v-btn>
       </div>
+      <div class="pa-2">
+        <v-btn block color="error" @click="$router.push('/auth')"> Login </v-btn>
+      </div>
     </template>
   </v-navigation-drawer>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import mixins from "../plugins/mixins.js";
+// import mixins from "../plugins/mixins.js";
 export default {
   props: {
     value: {
@@ -79,18 +95,17 @@ export default {
     },
   },
   computed: {
-    ...mapGetters("ui", ["darkTheme"]),
-    // darkTheme1: {
-    //   get: function () {
-    //     return this.$store.state.ui.darkTheme;
-    //   },
-    //   set: function () {
-    //     this.$store.dispatch("ui/toggleTheme");
-    //   },
-    // },
+    darkTheme: {
+      get: function () {
+        return this.$store.state.ui.darkTheme;
+      },
+      set: function () {
+        this.$store.dispatch("ui/toggleTheme");
+      },
+    },
   },
-  mixins: mixins,
-  watch: mixins.themeWatcher,
+  // mixins: mixins,
+  // watch: mixins.themeWatcher,
   created() {
     // console.log(this.$store.state.ui.darkTheme);
   },

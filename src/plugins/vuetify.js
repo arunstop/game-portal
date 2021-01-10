@@ -3,6 +3,4 @@ import Vuetify from 'vuetify/lib/framework';
 
 Vue.use(Vuetify);
 
-export default new Vuetify({
-    theme: { dark: JSON.parse(localStorage.getItem('darkTheme')) },
-});
+export default new Vuetify({});

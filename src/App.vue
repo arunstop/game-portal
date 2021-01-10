@@ -54,6 +54,9 @@ export default {
       this.drawer = !this.drawer;
     },
   },
+  beforeCreate(){
+    // this.$vuetify.theme.dark = true
+  }
 };
 </script>
 

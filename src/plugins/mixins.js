@@ -1,11 +1,20 @@
 export default {
-    themeWatcher: {
-        "$vuetify.theme.dark"(newVal) {
-            localStorage.setItem("darkTheme", JSON.stringify(newVal));
-            // alert(JSON.parse(localStorage.getItem("darkTheme")));
-            // this.$vuetify.theme.dark = newVal;
-        },
+    //initializing dark theme
+    
+    initTheme() {
+        let darkTheme = this.$store.state.localStorage.get('darkTheme', undefined);
+        if (darkTheme != undefined) {
+            this.$store.dispatch('ui/initTheme', darkTheme);
+            this.$vuetify.theme.dark = darkTheme;
+        }
     },
+    // themeWatcher: {
+    //     "$vuetify.theme.dark"(newVal) {
+    //         localStorage.setItem("darkTheme", JSON.stringify(newVal));
+    //         // alert(JSON.parse(localStorage.getItem("darkTheme")));
+    //         // this.$vuetify.theme.dark = newVal;
+    //     },
+    // },
     pageTitleWatcher: {
         $route: {
             immediate: true,
