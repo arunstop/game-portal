@@ -13,6 +13,7 @@ new Vue({
   store,
   vuetify,
   mixins,
-  beforeCreate: [mixins.initTheme],
+  beforeCreate: [mixins.inits.auth, mixins.inits.theme],
+  watch: mixins.watchers.pageTitle,
   render: h => h(App)
 }).$mount('#app')

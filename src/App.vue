@@ -14,27 +14,27 @@
         <h2 class="hidden-sm-and-down white--text">Game Portal</h2>
       </div>
       <v-spacer></v-spacer>
-      <v-btn icon @click.stop="toggleDrawer"><v-icon>mdi-menu</v-icon> </v-btn>
+      <v-btn color="white" icon @click.stop="toggleDrawer" v-if="isSignedIn">
+        <v-icon>mdi-menu</v-icon>
+      </v-btn>
+      <v-btn color="white"  class="font-weight-bold" outlined @click="$router.replace('/auth')" v-else>
+        Login here
+      </v-btn>
     </v-app-bar>
-    <nav-drawer v-model="drawer" />
+    <nav-drawer />
     <v-main>
       <v-container class="ma-0 pa-0" fluid>
         <router-view> </router-view>
       </v-container>
     </v-main>
     <snackbars />
-    <!-- <v-row>
-      <v-snackbar :timeout="3000" v-model="truer">KEKW</v-snackbar>
-      <v-snackbar :timeout="3000" v-model="truer">KEKW</v-snackbar>
-      <v-snackbar :timeout="3000" v-model="truer">KEKW</v-snackbar>
-      <v-snackbar :timeout="3000" v-model="truer">KEKW</v-snackbar>
-    </v-row> -->
   </v-app>
 </template>
 
 <script>
 import NavDrawer from "./components/NavDrawer.vue";
 import Snackbars from "./components/container/Snackbars.vue";
+import { mapGetters } from "vuex";
 export default {
   name: "App",
 
@@ -44,19 +44,20 @@ export default {
     // HelloWorld,
   },
   data: () => ({
-    drawer: false,
-    truer:true,
+    // drawer: false,
   }),
-
+  computed: {
+    ...mapGetters("auth", ["isSignedIn"]),
+  },
   methods: {
     toggleDrawer() {
       // console.log(this.drawer)
-      this.drawer = !this.drawer;
+      this.$store.dispatch("ui/toggleDrawer");
     },
   },
-  beforeCreate(){
+  beforeCreate() {
     // this.$vuetify.theme.dark = true
-  }
+  },
 };
 </script>
 

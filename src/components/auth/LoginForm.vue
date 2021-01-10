@@ -36,7 +36,8 @@ export default {
         password: this.password,
         lastSession: Date.now(),
       });
-      this.$router.push("/about");
+      // this.$router.push("/about");
+      this.$router.replace("/");
     },
   },
 };
