@@ -3,9 +3,11 @@ export default {
     inits: {
         //reauthenticate
         auth() {
+            //update local storage expire date whenever user open the app
             let user = this.$store.state.localStorage.get('user', null);
             if (user != null) {
-                this.$store.dispatch('auth/signIn', user);
+                user.lastSession = Date.now()
+                this.$store.dispatch('auth/initSignIn', user);
             }
         },
         theme() {

@@ -12,6 +12,10 @@ export default {
         }
     },
     actions: {
+        initSignIn({ commit, rootState}, user) {
+            rootState.localStorage.set('user', user);
+            commit('SIGN_IN', user)
+        },
         signIn({ commit, rootState, dispatch }, user) {
             rootState.localStorage.set('user', user);
             let snackbarProps = {

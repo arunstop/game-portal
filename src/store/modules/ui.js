@@ -9,9 +9,11 @@ export default {
     darkTheme: false, //false is initial value only
     drawer: false,
     // snackbar: { showing: false, message: '', type:'success' },
-    snackbarList: []
+    snackbarList: [],
+    dialogList: [],
   }),
   mutations: {
+    // THEME
     INIT_THEME(state, newValue) {
       //initializing theme state
       state.darkTheme = newValue
@@ -20,16 +22,24 @@ export default {
       //changing theme state
       state.darkTheme = !state.darkTheme
     },
+    // DRAWER
     TOGGLE_DRAWER(state) {
       //changing drawer state
       state.drawer = !state.drawer
     },
+    // SNACKBARS
     SHOW_SNACKBAR(state, snackbar) {
       state.snackbarList = state.snackbarList.concat(snackbar)
       // console.log(state.snackbarList)
     },
+    // DIALOG
+    SHOW_DIALOG(state, dialog) {
+      //changing dialog state
+      state.dialogList = state.dialogList.concat(dialog)
+    },
   },
   actions: {
+    // THEME
     initTheme({ commit }, newValue) {
       //initializing theme
       Vuetify.framework.theme.dark = newValue
@@ -41,14 +51,22 @@ export default {
       localStorage.set('darkTheme', Vuetify.framework.theme.dark)
       commit('TOGGLE_THEME')
     },
+    // DRAWER
     toggleDrawer({ commit }) {
       commit('TOGGLE_DRAWER')
     },
+    // SNACKBARS
     showSnackbar({ commit }, snackbar) {
       //create a new property called showing to show the snackbar
       snackbar.key = Math.random()
       snackbar.showing = true
       commit('SHOW_SNACKBAR', snackbar)
+    },
+    // DIALOG
+    showDialog({ commit }, dialog) {
+      dialog.key = Math.random()
+      dialog.showing = true
+      commit('SHOW_DIALOG', dialog)
     },
   },
   getters: {}

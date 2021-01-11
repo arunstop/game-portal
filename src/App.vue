@@ -17,33 +17,47 @@
       <v-btn color="white" icon @click.stop="toggleDrawer" v-if="isSignedIn">
         <v-icon>mdi-menu</v-icon>
       </v-btn>
-      <v-btn color="white" class="font-weight-bold" outlined @click="$router.replace('/auth')" v-else>
+      <v-btn
+        color="white"
+        class="font-weight-bold"
+        outlined
+        @click="$router.replace('/auth')"
+        v-else
+      >
         Login here
       </v-btn>
     </v-app-bar>
-    <nav-drawer />
     <v-main>
-        <router-view> </router-view>
+      <!-- UI containers -->
+      <nav-drawer />
+      <snackbars />
+      <dialogs />
+      <!-- main navigation pages -->
+      <router-view> </router-view>
     </v-main>
-    <snackbars />
   </v-app>
 </template>
 
 <script>
 import NavDrawer from "./components/NavDrawer.vue";
 import Snackbars from "./components/container/Snackbars.vue";
+import Dialogs from "./components/container/Dialogs.vue";
 import { mapGetters } from "vuex";
+
 export default {
   name: "App",
 
   components: {
     NavDrawer,
     Snackbars,
+    Dialogs,
     // HelloWorld,
   },
-  data: () => ({
-    // drawer: false,
-  }),
+  data: function () {
+    return {
+      dialog: this.$store.state.ui.dialog,
+    };
+  },
   computed: {
     ...mapGetters("auth", ["isSignedIn"]),
   },
