@@ -1,6 +1,12 @@
 <template>
   <div>
-    <v-navigation-drawer v-model="$store.state.ui.drawer" app right temporary>
+    <v-navigation-drawer
+      v-model="$store.state.ui.drawer"
+      app
+      right
+      bottom
+      temporary
+    >
       <v-list class="fill-height grey--text">
         <v-list-item two-line>
           <v-list-item-avatar>
@@ -17,27 +23,16 @@
           </v-list-item-content>
         </v-list-item>
         <v-divider></v-divider>
-        <div>
+        <router-link
+          v-for="(menu, index) in menuList"
+          :key="index"
+          class="text-decoration-none"
+          :to="menu.path"
+        >
           <v-list-item link>
-            <v-icon class="me-2">mdi-bookshelf</v-icon> My Library
+            <v-icon class="me-2">{{ menu.icon }}</v-icon> {{ menu.title }}
           </v-list-item>
-          <v-list-item link>
-            <v-icon class="me-2">mdi-star-check</v-icon> My Wishlist
-          </v-list-item>
-          <v-list-item link>
-            <v-icon class="me-2">mdi-account-circle</v-icon>Account
-          </v-list-item>
-          <v-list-item link>
-            <v-icon class="me-2">mdi-cog</v-icon> Settings
-          </v-list-item>
-          <v-list-item link>
-            <v-icon class="me-2">mdi-information</v-icon> About
-          </v-list-item>
-          <v-list-item link>
-            <v-icon class="me-2">mdi-help-circle</v-icon> Help
-          </v-list-item>
-        </div>
-
+        </router-link>
         <v-list-item class="my-auto" link>
           <v-switch
             class="my-0"
@@ -65,9 +60,7 @@
           </v-switch>
         </v-list-item>
         <div class="pa-2" v-if="isSignedIn">
-          <v-btn block color="error" @click.prevent="logoutHandler">
-            Logout
-          </v-btn>
+          <v-btn block color="error" @click="logoutHandler"> Logout </v-btn>
         </div>
       </v-list>
       <!-- <template v-slot:append>
@@ -86,7 +79,7 @@ export default {
   props: {},
   data: function () {
     return {
-      drawer: this.$store.state.ui.drawer,
+      
     };
   },
   methods: {
@@ -104,6 +97,7 @@ export default {
   computed: {
     ...mapGetters("auth", ["isSignedIn"]),
     ...mapState("auth", ["user"]),
+    ...mapState(['menuList']),
     // ...mapState("ui", ["drawer"]),
     // ...mapState("ui", ["darkTheme"]),
     darkTheme: {

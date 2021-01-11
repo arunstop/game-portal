@@ -27,14 +27,15 @@
         Login here
       </v-btn>
     </v-app-bar>
+    <!-- navdrawer -->
+    <nav-drawer />
     <v-main>
-      <!-- UI containers -->
-      <nav-drawer />
-      <snackbars />
-      <dialogs />
-      <!-- main navigation pages -->
+      <!-- main nav pages -->
       <router-view> </router-view>
     </v-main>
+    <!-- UI overlays containers -->
+    <snackbars />
+    <dialogs />
   </v-app>
 </template>
 

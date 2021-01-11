@@ -6,6 +6,7 @@
       :key="dialog.key"
       v-model="dialog.showing"
       transition="dialog-bottom-transition"
+      max-width="720px"
     >
       <v-card>
         <v-card-title>{{ dialog.title }}</v-card-title>
