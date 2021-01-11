@@ -8,7 +8,7 @@
       class="mb-2 justify-center"
       bottom
       :timeout="2400"
-      v-for="(snackbar, index) in snackbarList.filter((s) => s.showing)"
+      v-for="(snackbar, index) in snackbarSet.filter((s) => s.showing)"
       v-model="snackbar.showing"
       :id="snackbar.key"
       :color="snackbar.type"
@@ -37,11 +37,11 @@ export default {
     value: Boolean,
   },
   computed: {
-    ...mapState('ui', ["snackbarList"]),
+    ...mapState('ui', ["snackbarSet"]),
     // ...mapState({
-    //   snackbarList : state => state.ui.snackbarList
+    //   snackbarSet : state => state.ui.snackbarSet
     // }),
-    // snackbarList() {return this.$store.state.ui.snackbarList}
+    // snackbarSet() {return this.$store.state.ui.snackbarSet}
   },
   data: () => ({}),
   created(){

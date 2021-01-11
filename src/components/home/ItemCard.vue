@@ -17,6 +17,7 @@
         </v-row>
       </template>
       <div class="d-flex flex-column fill-height">
+        <!-- MENU ACTIONS -->
         <v-menu offset-y>
           <template v-slot:activator="{ on: menu, attrs }">
             <v-tooltip bottom>
@@ -48,33 +49,30 @@
             </v-list-item>
           </v-list>
         </v-menu>
+        <!-- GAME LABELS -->
         <div class="mt-auto ma-4 pa-0">
-          <!-- <v-avatar size="56">
-            <img
-              alt="user"
-              src="https://cdn.pixabay.com/photo/2020/06/24/19/12/cabbage-5337431_1280.jpg"
-            />
-          </v-avatar> -->
+          <!-- GAME TITLE -->
+          <!-- text-break class to make text go to the next line if it -->
           <v-card-title
-            class="c-card-item-text c-card-item-title ma-0 pa-0 white--text"
+            class="ma-0 pa-0 c-card-item-text c-card-item-title white--text text-break"
           >
             {{ gameData.name }}
           </v-card-title>
-
+          <!-- GAME GENRES -->
           <v-card-subtitle
             class="c-cards-item-chips ma-0 pa-0 white--text font-weight-bold"
           >
-            <v-chip small class="me-1 mt-1" color="primary">
+            <v-chip small class="c-chip-text me-1 mt-1" color="primary">
               <v-icon class="me-1" color="yellow" small> mdi-star </v-icon>
               {{ Math.round(gameData.rating * 10) / 10 }}
             </v-chip>
             <v-chip
-              class="me-1 mt-1"
+              class="c-chip-text me-1 mt-1"
               v-for="genre in gameData.genres"
               :key="genre.id"
               small
             >
-              {{ genre.name }}
+              <span>{{ genre.name }}</span>
             </v-chip>
           </v-card-subtitle>
           <v-row class="ma-0"> </v-row>
@@ -163,6 +161,13 @@ export default {
   -webkit-box-orient: vertical;
 }
 .c-cards-item-chips {
-  max-height: 60px !important;
+  max-height: 90px !important;
+}
+/* elli */
+.c-chip-text span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 114px !important;
 }
 </style>

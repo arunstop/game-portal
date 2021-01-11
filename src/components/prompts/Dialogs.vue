@@ -1,7 +1,7 @@
 <template>
   <v-col class="c-dialog-container ma-0">
     <v-dialog
-      v-for="(dialog, index) in dialogList.filter((s) => s.showing)"
+      v-for="(dialog, index) in dialogSet.filter((s) => s.showing)"
       :id="index"
       :key="dialog.key"
       v-model="dialog.showing"
@@ -33,7 +33,7 @@
 import { mapState } from "vuex";
 export default {
   computed: {
-    ...mapState("ui", ["dialogList"]),
+    ...mapState("ui", ["dialogSet"]),
   },
   methods: {
   },

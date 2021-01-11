@@ -1,18 +1,20 @@
 <template>
   <v-app>
     <v-app-bar app color="primary">
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
+      <router-link class="text-decoration-none" to="/">
+        <div class="d-flex align-center">
+          <v-img
+            alt="Vuetify Logo"
+            class="shrink mr-2"
+            contain
+            src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
+            transition="scale-transition"
+            width="40"
+          />
 
-        <h2 class="hidden-sm-and-down white--text">Game Portal</h2>
-      </div>
+          <h2 class="hidden-sm-and-down white--text">Game Portal</h2>
+        </div>
+      </router-link>
       <v-spacer></v-spacer>
       <v-btn color="white" icon @click.stop="toggleDrawer" v-if="isSignedIn">
         <v-icon>mdi-menu</v-icon>
@@ -33,17 +35,21 @@
       <!-- main nav pages -->
       <router-view> </router-view>
     </v-main>
-    <!-- UI overlays containers -->
+    <!-- prompts containers -->
     <snackbars />
     <dialogs />
+    <!-- footer -->
+    <main-footer/>
   </v-app>
 </template>
 
 <script>
-import NavDrawer from "./components/NavDrawer.vue";
-import Snackbars from "./components/container/Snackbars.vue";
-import Dialogs from "./components/container/Dialogs.vue";
 import { mapGetters } from "vuex";
+
+import NavDrawer from "./components/NavDrawer.vue";
+import Snackbars from "./components/prompts/Snackbars.vue";
+import Dialogs from "./components/prompts/Dialogs.vue";
+import MainFooter from './components/MainFooter.vue';
 
 export default {
   name: "App",
@@ -52,6 +58,7 @@ export default {
     NavDrawer,
     Snackbars,
     Dialogs,
+    MainFooter,
     // HelloWorld,
   },
   data: function () {

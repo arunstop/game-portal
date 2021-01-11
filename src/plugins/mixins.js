@@ -26,12 +26,13 @@ export default {
                     // console.log(to)
                     // handling undefined value of meta title that happens at the start of loading
                     from = ''
+                    let appName = this.$store.state.appName
                     let pageTitle = () => {
                         if (to.meta.title != undefined) {
-                            return to.meta.title + ' — ' + 'GamePortal'
+                            return to.meta.title + ' — ' + appName
                         }
                         else {
-                            return 'GamePortal' + from
+                            return appName + from
                         }
                     }
                     document.title = pageTitle()

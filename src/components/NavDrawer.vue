@@ -22,11 +22,13 @@
             </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
+
         <v-divider></v-divider>
+        <!-- MENU LIST -->
         <router-link
           v-for="(menu, index) in menuList"
           :key="index"
-          class="text-decoration-none"
+          class="text-decoration-none font-weight-bold"
           :to="menu.path"
         >
           <v-list-item link>
@@ -35,9 +37,9 @@
         </router-link>
         <v-list-item class="my-auto" link>
           <v-switch
-            class="my-0"
+            class="my-0 ms-1 pa-0 col"
             v-model="darkTheme"
-            color="black"
+            color="blue lighten-1"
             hide-details
             inset
             ripple
@@ -78,15 +80,13 @@ import { mapState, mapGetters } from "vuex";
 export default {
   props: {},
   data: function () {
-    return {
-      
-    };
+    return {};
   },
   methods: {
     logoutHandler() {
       this.$store.dispatch("ui/showDialog", {
         title: "Log out",
-        message: "Kool Keppa Kleb",
+        message: "Do you want end this authentication session ?",
         okAction: () => {
           this.$store.dispatch("auth/signOut");
           this.$store.dispatch("ui/toggleDrawer");
@@ -97,7 +97,7 @@ export default {
   computed: {
     ...mapGetters("auth", ["isSignedIn"]),
     ...mapState("auth", ["user"]),
-    ...mapState(['menuList']),
+    ...mapState(["menuList"]),
     // ...mapState("ui", ["drawer"]),
     // ...mapState("ui", ["darkTheme"]),
     darkTheme: {

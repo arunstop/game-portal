@@ -8,6 +8,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    appName : 'Game Portal',
     localStorage,
     menuList: [
       { title: `My Library`, icon: `mdi-bookshelf`, path: "library" },

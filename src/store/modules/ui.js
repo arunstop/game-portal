@@ -9,8 +9,8 @@ export default {
     darkTheme: false, //false is initial value only
     drawer: false,
     // snackbar: { showing: false, message: '', type:'success' },
-    snackbarList: [],
-    dialogList: [],
+    snackbarSet: [],
+    dialogSet: [],
   }),
   mutations: {
     // THEME
@@ -29,13 +29,13 @@ export default {
     },
     // SNACKBARS
     SHOW_SNACKBAR(state, snackbar) {
-      state.snackbarList = state.snackbarList.concat(snackbar)
-      // console.log(state.snackbarList)
+      state.snackbarSet = state.snackbarSet.concat(snackbar)
+      // console.log(state.snackbarSet)
     },
     // DIALOG
     SHOW_DIALOG(state, dialog) {
       //changing dialog state
-      state.dialogList = state.dialogList.concat(dialog)
+      state.dialogSet = state.dialogSet.concat(dialog)
     },
   },
   actions: {
