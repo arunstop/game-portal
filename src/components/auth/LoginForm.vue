@@ -1,5 +1,5 @@
 <template>
-  <v-form ref="login-form">
+  <v-form ref="login-form" @submit.prevent="submitLogin">
     <p class="display-1">Login to proceed!</p>
     <v-text-field
       label="Email"
@@ -19,7 +19,7 @@
       prepend-inner-icon="mdi-lock"
       required
     />
-    <v-btn block color="primary" large @click="login"> Login </v-btn>
+    <v-btn block color="primary" large type="submit"> Login </v-btn>
   </v-form>
 </template>
 
@@ -38,13 +38,13 @@ export default {
         value: "",
         rules: [
           (v) => !!v || "Password is required",
-          (v) => v.length >= 8 || "Password is too short (min 8 characters)",
+          (v) => (v && v.length) >= 8 || "Password is too short (min 8 characters)",
         ],
       },
     };
   },
   methods: {
-    login() {
+    submitLogin() {
       let loginForm = this.$refs["login-form"];
       if (loginForm.validate() === true) {
         this.$store.dispatch("auth/signIn", {

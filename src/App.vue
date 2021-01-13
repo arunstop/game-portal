@@ -23,7 +23,7 @@
         color="white"
         class="font-weight-bold"
         outlined
-        @click="$router.replace('/auth')"
+        @click="$router.replace('/auth').catch(err => {})"
         v-else
       >
         Login here

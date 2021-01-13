@@ -5,11 +5,11 @@
       After filling this form you will be sent a reset password request email by
       our system. Also note this:
     </p>
-    <p class="font-weight-bold">
+    <v-alert type="warning" border="left">
       If you recieved any password request emails but you feel you didn't
       request them, please
-      <b class="error--text">DO NOT RESPOND.</b>
-    </p>
+      <strong>DO NOT RESPOND.</strong>
+    </v-alert>
     <v-text-field
       v-model="email.value"
       :rules="email.rules"
@@ -20,7 +20,7 @@
       prepend-inner-icon="mdi-email"
       required
     />
-    <v-btn block color="warning" large @click="resetPassword">
+    <v-btn block color="success" large @click="resetPassword">
       Reset Password
     </v-btn>
   </v-form>

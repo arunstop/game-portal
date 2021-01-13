@@ -1,5 +1,5 @@
 <template>
-  <v-form ref="register-form">
+  <v-form ref="register-form" @submit.prevent="submitRegister">
     <p class="display-1">Join us!</p>
     <v-text-field
       outlined
@@ -45,8 +45,8 @@
       outlined
       required
       label="Confirm Password"
-      v-model="confirmPassword.value"
-      :rules="confirmPassword.rules"
+      v-model="confirmPassword1.value"
+      :rules="confirmPassword1.rules"
       type="password"
       prepend-inner-icon="mdi-key"
     />
@@ -69,7 +69,7 @@
       item-value="code"
       prepend-inner-icon="mdi-flag"
     />
-    <v-btn block color="primary" large @click="register"> Register </v-btn>
+    <v-btn block color="primary" large type="submit"> Register </v-btn>
     <v-btn class="mt-6" block color="error" large @click="resetForm">
       Clear
     </v-btn>
@@ -94,14 +94,16 @@ export default {
       value: "",
       rules: [
         (v) => !!v || "Password is required",
-        (v) => v.length >= 8 || "Password requires at least 8 characters",
+        (v) =>
+          (v && v.length) >= 8 || "Password requires at least 8 characters",
       ],
     },
     confirmPassword: {
       value: "",
       rules: [
         (v) => !!v || "Confirm Password is required",
-        (v) => v.length >= 8 || "Password requires at least 8 characters",
+        (v) =>
+          (v && v.length) >= 8 || "Password requires at least 8 characters",
       ],
     },
     phone: { value: "", rules: [(v) => !!v || "Phone is required"] },
@@ -109,7 +111,7 @@ export default {
     countryList: require("../../assets/countryList.json"),
   }),
   methods: {
-    register() {
+    submitRegister() {
       let registerForm = this.$refs["register-form"];
       if (registerForm.validate()) {
         this.$store.dispatch("auth/signIn", {
@@ -117,11 +119,28 @@ export default {
           password: this.password.value,
           lastSession: Date.now(),
         });
-        this.$router.push('/')
+        this.$router.push("/");
       }
     },
     resetForm() {
       this.$refs["register-form"].reset();
+    },
+  },
+  computed: {
+    confirmPassword1: {
+      get() {
+        return {
+          value: "",
+          rules: [
+            (v) => !!v || "Confirm Password is required",
+            (v) =>
+              (v && v.length) >= 8 || "Password requires at least 8 characters",
+            (v) =>
+              v === this.password.value ||
+              "Confirmation password doesn't match",
+          ],
+        };
+      },
     },
   },
 };

@@ -1,7 +1,7 @@
 export default {
     //initializing dark theme
     inits: {
-        //reauthenticate
+        //re-authenticate
         auth() {
             //update local storage expire date whenever user open the app
             let user = this.$store.state.localStorage.get('user', null);
@@ -10,6 +10,7 @@ export default {
                 this.$store.dispatch('auth/initSignIn', user);
             }
         },
+        //initiate theme
         theme() {
             let darkTheme = this.$store.state.localStorage.get('darkTheme', undefined);
             if (darkTheme != undefined) {
