@@ -6,25 +6,41 @@
       <p class="ma-0 text-h5"><strong>Game Portal</strong></p>
 
       <v-row class="ma-2" align="center" justify="center">
-        <a class="text-decoration-none" href="https://www.facebook.com" target="_blank">
+        <a
+          class="text-decoration-none"
+          href="https://www.facebook.com"
+          target="_blank"
+        >
           <v-btn class="mx-2" icon color="white" large>
             <v-icon>mdi-facebook</v-icon>
           </v-btn>
         </a>
 
-        <a class="text-decoration-none" href="https://www.twitter.com" target="_blank">
+        <a
+          class="text-decoration-none"
+          href="https://www.twitter.com"
+          target="_blank"
+        >
           <v-btn class="mx-2" icon color="white" large>
             <v-icon>mdi-twitter</v-icon>
           </v-btn>
         </a>
 
-        <a class="text-decoration-none" href="https://www.instagram.com" target="_blank">
+        <a
+          class="text-decoration-none"
+          href="https://www.instagram.com"
+          target="_blank"
+        >
           <v-btn class="mx-2" icon color="white" large>
             <v-icon>mdi-instagram</v-icon>
           </v-btn>
         </a>
 
-        <a class="text-decoration-none" href="https://www.youtube.com" target="_blank">
+        <a
+          class="text-decoration-none"
+          href="https://www.youtube.com"
+          target="_blank"
+        >
           <v-btn class="mx-2" icon color="white" large>
             <v-icon>mdi-youtube</v-icon>
           </v-btn>
@@ -39,28 +55,31 @@
 
       <v-col class="mx-auto px-6">
         <v-row align="center" justify="center">
-          <v-text-field
-            height="60"
-            placeholder="Enter your email here...."
-            hide-details
-            solo
-            rounded
-            clearable
-            light
-            style="max-width: 480px !important"
-          >
-            <template v-slot:append>
-              <v-btn
-                rounded
-                color="primary"
-                depressed
-                @click="subscribeNewsLetter"
-              >
-                <span class="hidden-sm-and-down me-2">Subscribe</span>
-                <v-icon>mdi-email-newsletter</v-icon>
-              </v-btn>
-            </template>
-          </v-text-field>
+          <v-form ref="newsletter-form">
+            <v-text-field
+              v-model="email.value"
+              :rules="email.rules"
+              placeholder="Enter your email here...."
+              style="max-width: 480px !important"
+              height="60"
+              solo
+              rounded
+              clearable
+              light
+            >
+              <template v-slot:append>
+                <v-btn
+                  rounded
+                  color="primary"
+                  depressed
+                  @click="subscribeNewsLetter"
+                >
+                  <span class="hidden-sm-and-down me-2">Subscribe</span>
+                  <v-icon>mdi-email-newsletter</v-icon>
+                </v-btn>
+              </template>
+            </v-text-field>
+          </v-form>
         </v-row>
       </v-col>
 
@@ -88,13 +107,26 @@
 import Logo from "./Logo.vue";
 export default {
   components: { Logo },
+  data: () => ({
+    email: {
+      value: "",
+      rules: [
+        (v) => !!v || "Email is required",
+        (v) => /.+@.+\..+/.test(v) || "Email is not valid",
+      ],
+    },
+  }),
   methods: {
     subscribeNewsLetter() {
-      this.$store.dispatch("ui/showSnackbar", {
-        message:
-          "Thank you, we will send a confirmation email to you pretty soon! Have a nice day!",
-        type: "success",
-      });
+      let newsletterForm = this.$refs["newsletter-form"]
+      if (newsletterForm.validate() === true) {
+        this.$store.dispatch("ui/showSnackbar", {
+          message:
+            "Thank you, we will send a confirmation email to you pretty soon! Have a nice day!",
+          type: "success",
+        });
+        newsletterForm.reset();
+      }
     },
   },
 };

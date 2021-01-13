@@ -1,11 +1,11 @@
 <template>
   <div>
     <v-navigation-drawer
-      v-model="$store.state.ui.drawer"
       app
       right
       bottom
       temporary
+      v-model="$store.state.ui.drawer"
     >
       <v-list class="fill-height grey--text">
         <v-list-item two-line>

@@ -33,7 +33,7 @@
     <nav-drawer />
     <v-main>
       <!-- main nav pages -->
-      <router-view> </router-view>
+      <router-view class="c-vh100"> </router-view>
     </v-main>
     <!-- prompts containers -->
     <snackbars />
@@ -82,6 +82,11 @@ export default {
 </script>
 
 <style scoped>
+/* 100% viewport height */
+.c-vh100{
+  height: 100vh;
+}
+
 /* scrollbar */
 /* width */
 ::-webkit-scrollbar {

@@ -1,5 +1,5 @@
 <template>
-  <v-row class="ma-auto fill-height pa-4">
+  <v-row class="ma-auto pa-4">
     <div
       class="c-fw-900 ma-auto justify-center text-center text-uppercase grey--text"
     >
