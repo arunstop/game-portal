@@ -84,7 +84,7 @@ export default {
 <style scoped>
 /* 100% viewport height */
 .c-vh100{
-  height: 100vh;
+  min-height: 100vh;
 }
 
 /* scrollbar */

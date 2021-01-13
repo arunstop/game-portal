@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex fill-height pa-4">
+  <div class="d-flex pa-4">
     <v-card
       class="my-auto mx-auto flex-fill"
       outlined
