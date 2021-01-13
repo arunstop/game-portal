@@ -45,30 +45,63 @@
       outlined
       required
       label="Confirm Password"
-      v-model="confirmPassword1.value"
-      :rules="confirmPassword1.rules"
+      v-model="confirmPassword.value"
+      :rules="confirmPassword.rules"
       type="password"
       prepend-inner-icon="mdi-key"
     />
+
+    <v-autocomplete
+      v-model="dialCode.value"
+      :rules="dialCode.rules"
+      :items="countryList"
+      item-text="name"
+      item-value="dial_code"
+      label="Country/Dial code"
+      prepend-inner-icon="mdi-flag"
+      outlined
+      single-line
+      auto-select-first
+    >
+      <template v-slot:selection="data">
+        <v-list-item-avatar class="mx-0 me-2 rounded-xl">
+          <v-img
+            max-width="32"
+            :src="countryFlag(data.item.code)"
+          />
+        </v-list-item-avatar>
+        <strong class="me-1">{{
+          data.item.name + " (" + data.item.dial_code + ")"
+        }}</strong>
+      </template>
+      <template v-slot:item="data">
+        <template>
+          <v-list-item-avatar class="rounded-xl">
+            <v-img
+              max-width="32"
+              :src="countryFlag(data.item.code)"
+            />
+          </v-list-item-avatar>
+          <v-list-item-content>
+            <v-list-item-title ><b>{{data.item.name}}</b></v-list-item-title>
+            <v-list-item-subtitle>{{data.item.code + " (" + data.item.dial_code + ")"}}</v-list-item-subtitle>
+          </v-list-item-content>
+        </template>
+      </template>
+    </v-autocomplete>
+
     <v-text-field
       outlined
       required
-      label="Phone (e.g. 082210381920)"
+      label="Phone Number"
+      :prefix="dialCode.value"
+      placeholder="81234567890"
       v-model="phone.value"
       :rules="phone.rules"
       type="number"
       prepend-inner-icon="mdi-phone"
     />
-    <v-autocomplete
-      label="Country"
-      v-model="country.value"
-      :rules="country.rules"
-      outlined
-      :items="countryList"
-      item-text="name"
-      item-value="code"
-      prepend-inner-icon="mdi-flag"
-    />
+
     <v-btn block color="primary" large type="submit"> Register </v-btn>
     <v-btn class="mt-6" block color="error" large @click="resetForm">
       Clear
@@ -77,8 +110,7 @@
 </template>
 
 <script>
-// import countryList from "../../assets/countryList.json"
-
+import { mapGetters } from 'vuex';
 export default {
   data: () => ({
     email: {
@@ -98,17 +130,12 @@ export default {
           (v && v.length) >= 8 || "Password requires at least 8 characters",
       ],
     },
-    confirmPassword: {
+    dialCode: {
       value: "",
-      rules: [
-        (v) => !!v || "Confirm Password is required",
-        (v) =>
-          (v && v.length) >= 8 || "Password requires at least 8 characters",
-      ],
+      rules: [(v) => !!v || "Country/Dial code is required"],
     },
     phone: { value: "", rules: [(v) => !!v || "Phone is required"] },
-    country: { value: "", rules: [(v) => !!v || "Country is required"] },
-    countryList: require("../../assets/countryList.json"),
+    countryList: [],
   }),
   methods: {
     submitRegister() {
@@ -127,7 +154,8 @@ export default {
     },
   },
   computed: {
-    confirmPassword1: {
+    ...mapGetters(['countryFlag']),
+    confirmPassword: {
       get() {
         return {
           value: "",
@@ -142,9 +170,29 @@ export default {
         };
       },
     },
+    // dialCode: {
+    //   get() {
+    //     return { value: "", rules: [(v) => !!v || "Code is required"] };
+    //   },
+    //   set(val){
+    //     console.log(val+"ASDASDASASASD")
+    //   }
+    // },
+    // phone: {
+    //   get() {
+    //     return { value: "", rules: [(v) => !!v || "Phone is required"] };
+    //   },
+    // },
+  },
+  mounted() {
+    this.$http.get(this.$store.state.countryList).then((response) => {
+      this.countryList = response.data;
+      // console.log(this.countryList)
+    });
   },
 };
 </script>
 
 <style>
+
 </style>
