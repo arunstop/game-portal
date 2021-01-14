@@ -35,17 +35,34 @@ export default {
     SearchSection,
   },
   data: () => ({
-    gameList: require("@/assets/games.json"),
+    gameList: [],
   }),
   created() {
     // console.log(this.gameList);
+  },
+  mounted() {
+    // console.log(this.$store.getters.dateNow);
+    // this.$api.rawg
+    //   .get("",{
+    //     params:{
+    //       dates: '2019-09-01,2019-09-30',
+    //       platforms: '18,1,7'
+    //     }
+    //   })
+    this.$api
+      .rawg("get", "games", {
+        dates: "2020-09-01,2020-09-30",
+        platforms: "18,1,7",
+      })
+      .then((response) => this.gameList = response.data)
+      .catch((error) => console.log(error));
   },
 };
 </script>
 
 <style scoped>
 .c-section-label {
-    border-width: 3px;
+  border-width: 3px;
   border-top-right-radius: 60px;
   border-bottom-right-radius: 60px;
   pointer-events: none;

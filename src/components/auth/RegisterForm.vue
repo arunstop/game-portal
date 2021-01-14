@@ -56,7 +56,7 @@
       :rules="dialCode.rules"
       :items="countryList"
       item-text="name"
-      item-value="dial_code"
+      item-value="unique_code"
       label="Country/Dial code"
       prepend-inner-icon="mdi-flag"
       outlined
@@ -65,28 +65,24 @@
     >
       <template v-slot:selection="data">
         <v-list-item-avatar class="mx-0 me-2 rounded-xl">
-          <v-img
-            max-width="32"
-            :src="countryFlag(data.item.code)"
-          />
+          <v-img max-width="32" :src="$api.countryFlag(data.item.code)" />
         </v-list-item-avatar>
         <strong class="me-1">{{
           data.item.name + " (" + data.item.dial_code + ")"
         }}</strong>
       </template>
       <template v-slot:item="data">
-        <template>
-          <v-list-item-avatar class="rounded-xl">
-            <v-img
-              max-width="32"
-              :src="countryFlag(data.item.code)"
-            />
-          </v-list-item-avatar>
-          <v-list-item-content>
-            <v-list-item-title ><b>{{data.item.name}}</b></v-list-item-title>
-            <v-list-item-subtitle>{{data.item.code + " (" + data.item.dial_code + ")"}}</v-list-item-subtitle>
-          </v-list-item-content>
-        </template>
+        <v-list-item-avatar class="rounded-xl">
+          <v-img max-width="32" :src="$api.countryFlag(data.item.code)" />
+        </v-list-item-avatar>
+        <v-list-item-content>
+          <v-list-item-title>
+            <b>{{ data.item.name }}</b>
+          </v-list-item-title>
+          <v-list-item-subtitle>
+            {{ data.item.code + " (" + data.item.dial_code + ")" }}
+          </v-list-item-subtitle>
+        </v-list-item-content>
       </template>
     </v-autocomplete>
 
@@ -110,7 +106,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 export default {
   data: () => ({
     email: {
@@ -135,6 +131,7 @@ export default {
       rules: [(v) => !!v || "Country/Dial code is required"],
     },
     phone: { value: "", rules: [(v) => !!v || "Phone is required"] },
+    // countryList: require('../../assets/country_dial_info.json'),
     countryList: [],
   }),
   methods: {
@@ -154,7 +151,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['countryFlag']),
+    ...mapGetters(["countryFlag"]),
     confirmPassword: {
       get() {
         return {
@@ -185,14 +182,20 @@ export default {
     // },
   },
   mounted() {
-    this.$http.get(this.$store.state.countryList).then((response) => {
-      this.countryList = response.data;
-      // console.log(this.countryList)
-    });
+    console.log(this.$store.getters.dateNow.y);
+    this.$api.github
+      .get('/')
+      .then((response) => {
+        this.countryList = response.data.filter(
+          //creating new unique code
+          (v) => (v.unique_code = v.code+v.dial_code)
+        );
+        // console.log(this.countryList);
+      })
+      .catch((error) => console.log(error));
   },
 };
 </script>
 
 <style>
-
 </style>

@@ -22,8 +22,23 @@ export default new Vuex.Store({
   mutations: {},
   actions: {},
   getters: {
-    countryFlag:() => (code) =>{
-      return `https://www.countryflags.io/${code}/flat/32.png`;
+    // dateNow: (state) => (val) => { <-- function
+    dateNow:  () => {
+      let now = new Date();
+      let tensChecker = (v) => {
+        return v > 10 ? v : "0" + v;
+      };
+      return {
+        y: now.getFullYear(),
+        m: now.getMonth() + 1,
+        d: now.getDate(),
+        h: now.getHours(),
+        mm: tensChecker(now.getMonth()),
+        dd: tensChecker(now.getDate()),
+        todayDateTime: now.toLocaleString(),
+        todayDate: now.toLocaleDateString(),
+        todayTime: now.toTimeString(),
+      }
     }
   },
   modules: {

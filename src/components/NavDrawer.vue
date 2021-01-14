@@ -6,6 +6,7 @@
       bottom
       temporary
       v-model="$store.state.ui.drawer"
+      width="300"
     >
       <v-list class="fill-height grey--text">
         <v-list-item two-line>
