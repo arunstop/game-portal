@@ -130,7 +130,14 @@ export default {
       value: "",
       rules: [(v) => !!v || "Country/Dial code is required"],
     },
-    phone: { value: "", rules: [(v) => !!v || "Phone is required"] },
+    phone: {
+      value: "",
+      rules: [
+        (v) => !!v || "Phone is required",
+        (v) =>
+          (v && v.length) >= 10 || "Phone requires at least 10 characters",
+      ],
+    },
     // countryList: require('../../assets/country_dial_info.json'),
     countryList: [],
   }),
