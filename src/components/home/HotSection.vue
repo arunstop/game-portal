@@ -51,14 +51,35 @@ export default {
     //   })
     let now = this.$store.getters.dateNow;
     let ymdNow = now.y + "-" + now.mm + "-" + now.dd;
-    this.$api.rawg
-      .getRecentGames({
+    // let getRecentGames = async (attempt) => {
+    //   if (attempt <= 0) return;
+    //   this.$api.rawg
+    //     .getRecentGames({
+    //       dates: "2020-12-01," + ymdNow,
+    //       platforms: "18,1,7",
+    //     })
+    //     .then((response) => {
+    //       this.gameList = response.data;
+    //       console.log(
+    //         "Getting recent games, attempt #" + attempt + " has succeded"
+    //       );
+    //       console.log("The data has been parsed");
+    //     })
+    //     .catch((error) => {
+    //       console.log("Attempt #" + attempt + " has failed : \n" + error);
+    //       console.log("Executing next attempt....");
+    //       getRecentGames(attempt - 1);
+    //     });
+    // };
+    // getRecentGames(3);
+
+    this.gameList = this.$api.call.rawg.getRecentGames(
+      {
         dates: "2020-12-01," + ymdNow,
         platforms: "18,1,7",
-      })
-      .then((response) => (this.gameList = response.data))
-      .catch((error) => console.log(error));
-    console.log(this.$api);
+      },
+      (response) => (this.gameList = response.data)
+    );
   },
 };
 </script>
