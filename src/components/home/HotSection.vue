@@ -3,7 +3,7 @@
     <!-- search section -->
     <search-section />
     <v-btn
-      class="c-section-label ma-0 mt-4 text-none white--text"
+      class="c-section-label ma-0 mt-4 text-none white--text rounded-br-xl rounded-tr-xl"
       color="orange"
       x-large
     >
@@ -49,22 +49,25 @@ export default {
     //       platforms: '18,1,7'
     //     }
     //   })
-    this.$api
-      .rawg("get", "games", {
-        dates: "2020-09-01,2020-09-30",
+    let now = this.$store.getters.dateNow;
+    let ymdNow = now.y + "-" + now.mm + "-" + now.dd;
+    this.$api.rawg
+      .getRecentGames({
+        dates: "2020-12-01," + ymdNow,
         platforms: "18,1,7",
       })
-      .then((response) => this.gameList = response.data)
+      .then((response) => (this.gameList = response.data))
       .catch((error) => console.log(error));
+    console.log(this.$api);
   },
 };
 </script>
 
 <style scoped>
 .c-section-label {
-  border-width: 3px;
+  /* border-width: 3px;
   border-top-right-radius: 60px;
-  border-bottom-right-radius: 60px;
+  border-bottom-right-radius: 60px; */
   pointer-events: none;
 }
 

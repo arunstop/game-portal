@@ -90,7 +90,7 @@
       outlined
       required
       label="Phone Number"
-      :prefix="dialCode.value"
+      :prefix="dialCode.value.slice(2)/*slicing the country code out*/"
       placeholder="81234567890"
       v-model="phone.value"
       :rules="phone.rules"
@@ -182,9 +182,8 @@ export default {
     // },
   },
   mounted() {
-    console.log(this.$store.getters.dateNow.y);
-    this.$api.github
-      .get('/')
+    console.log(this.$store.getters.dateNow);
+    this.$api.github.getCountryList
       .then((response) => {
         this.countryList = response.data.filter(
           //creating new unique code

@@ -33,7 +33,7 @@ export default new Vuex.Store({
         m: now.getMonth() + 1,
         d: now.getDate(),
         h: now.getHours(),
-        mm: tensChecker(now.getMonth()),
+        mm: tensChecker(now.getMonth()+1),
         dd: tensChecker(now.getDate()),
         todayDateTime: now.toLocaleString(),
         todayDate: now.toLocaleDateString(),
