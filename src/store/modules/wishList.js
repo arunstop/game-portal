@@ -1,7 +1,8 @@
 export default {
     namespaced: true,
     state: {
-        wishList: []
+        wishList: [],
+        searchQ: '',
     },
     mutations: {
         ADD(state, game) {
@@ -17,6 +18,9 @@ export default {
         },
         INIT(state, wishList) {
             state.wishList = wishList
+        },
+        SEARCH(state, query){
+            state.searchQ = query.toLowerCase().trim()
         }
     },
     actions: {
@@ -63,6 +67,9 @@ export default {
         init({ commit }, wishList) {
             commit('INIT', wishList)
             // rootState.localStorage.set('wishList', state.wishList);
+        },
+        search({commit}, query){
+            commit('SEARCH', query)
         }
     },
     getters: {

@@ -1,8 +1,5 @@
 <template>
-  <div class="home">
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App" /> -->
     <wish-list-section/>
-  </div>
 </template>
 
 <script>

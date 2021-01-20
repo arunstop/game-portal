@@ -99,9 +99,7 @@ export default {
         {
           title: "Add To Library",
           icon: "mdi-book-plus-multiple",
-          action: () => {
-            
-          },
+          action: () => {},
         },
         {
           title: "Add To Wishlist",
@@ -113,17 +111,14 @@ export default {
         {
           title: "Hide From list",
           icon: "mdi-eye-off",
-          action: () => {
-            this.$store.dispatch("auth/wishList/remove", this.gameData);
-          },
+          action: () => {},
         },
       ],
     };
   },
   methods: {
-    actionHandler(menuAction) {
-      // console.log(menuAction);
-      menuAction.action();
+    actionHandler(menu) {
+      menu.action();
     },
   },
 };
