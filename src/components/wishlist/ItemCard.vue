@@ -97,22 +97,11 @@ export default {
     return {
       menuList: [
         {
-          title: "Add To Library",
-          icon: "mdi-book-plus-multiple",
-          action: () => {
-            
-          },
-        },
-        {
-          title: "Add To Wishlist",
-          icon: "mdi-star-plus",
-          action: () => {
-            this.$store.dispatch("auth/wishList/add", this.gameData);
-          },
-        },
-        {
-          title: "Hide From list",
-          icon: "mdi-eye-off",
+          title: "Remove from Wish List",
+          icon: "mdi-delete-forever",
+          message:
+            this.gameData.name + " " + "has been REMOVED from WISHLIST",
+          type: "error",
           action: () => {
             this.$store.dispatch("auth/wishList/remove", this.gameData);
           },
@@ -123,7 +112,11 @@ export default {
   methods: {
     actionHandler(menuAction) {
       // console.log(menuAction);
-      menuAction.action();
+      this.$store.dispatch("ui/showSnackbar", {
+        message: menuAction.message,
+        type: menuAction.type,
+      });
+      menuAction.action()
     },
   },
 };

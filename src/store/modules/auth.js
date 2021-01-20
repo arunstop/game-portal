@@ -1,3 +1,5 @@
+import wishList from "./wishList";
+
 export default {
     namespaced: true,
     state: {
@@ -12,7 +14,7 @@ export default {
         }
     },
     actions: {
-        initSignIn({ commit, rootState}, user) {
+        initSignIn({ commit, rootState }, user) {
             rootState.localStorage.set('user', user);
             commit('SIGN_IN', user)
         },
@@ -44,5 +46,8 @@ export default {
             }
             return true
         }
+    },
+    modules: {
+        wishList
     }
 }

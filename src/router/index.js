@@ -24,14 +24,20 @@ const routes = [
     path: '/auth',
     name: 'Auth',
     meta: { auth: true, title: 'Auth' },
-    component: () => import(/* webpackChunkName: "about" */ '../views/Auth.vue')
+    component: () => import(/* webpackChunkName: "auth" */ '../views/Auth.vue')
+  },
+  {
+    path: '/wishlist',
+    name: 'Wish List',
+    meta: { auth: true, title: 'Wish List' },
+    component: () => import(/* webpackChunkName: "wishlist" */ '../views/WishList.vue')
   },
   {
     path: '*',
     name: 'Not Found',
     meta: { auth: true, title: 'Page Not Found' },
-    component: () => import(/* webpackChunkName: "about" */ '../views/NotFound.vue')
-  }
+    component: () => import(/* webpackChunkName: "*" */ '../views/NotFound.vue')
+  },
 ]
 
 const router = new VueRouter({

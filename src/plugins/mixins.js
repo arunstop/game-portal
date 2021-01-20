@@ -18,6 +18,14 @@ export default {
                 // this.$vuetify.theme.dark = darkTheme;
             }
         },
+        //initite wishlist
+        wishList() {
+            let wishList = this.$store.state.localStorage.get('wishList', undefined);
+            if (wishList != undefined) {
+                this.$store.dispatch('auth/wishList/init', wishList);
+                // this.$vuetify.theme.dark = darkTheme;
+            }
+        },
     },
     watchers: {
         pageTitle: {
