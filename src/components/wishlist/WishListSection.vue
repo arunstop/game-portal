@@ -2,9 +2,9 @@
   <!-- item cards -->
   <!-- showing nothing if wishlist is empty -->
   <v-row class="ma-auto pa-4" v-if="wishList.length == 0">
-    <div class="ma-auto justify-center text-center grey--text">
+    <div class="ma-auto justify-center text-center">
       <p class="ma-0">
-        <v-icon size="180" color="grey"> mdi-robot-confused </v-icon>
+        <v-icon size="180"> mdi-robot-confused </v-icon>
       </p>
       <p class="ma-0 mt-4 text-h5 font-weight-black">
         Your wish list is empty....

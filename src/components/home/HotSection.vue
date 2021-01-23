@@ -12,8 +12,12 @@
     </v-btn>
     <!-- item cards -->
     <div class="py-6 c-scroll-y">
+      <v-row class="ma-0 pa-0 justify-center" v-if="gameList.loading">
+        <v-progress-circular indeterminate size="120" width="6" />
+      </v-row>
       <item-card
-        v-for="game in gameList.results"
+        v-else
+        v-for="game in gameList.data.results"
         :key="game.slug"
         :gameData="game"
       />
@@ -35,7 +39,8 @@ export default {
     SearchSection,
   },
   data: () => ({
-    gameList: [],
+    gameList: { data: [], loading: true },
+    krappa: "krappa",
   }),
   created() {
     // console.log(this.gameList);
@@ -73,12 +78,14 @@ export default {
     // };
     // getRecentGames(3);
 
-    this.gameList = this.$api.call.rawg.getRecentGames(
+    this.$api.call.rawg.getRecentGames(
       {
         dates: "2020-12-01," + ymdNow,
         platforms: "18,1,7",
       },
-      (response) => (this.gameList = response.data)
+      (response) => {
+        this.gameList = { data: response.data, loading: false };
+      }
     );
   },
 };

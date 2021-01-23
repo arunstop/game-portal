@@ -29,7 +29,8 @@ export default {
             dispatch("ui/showSnackbar", snackbarProps, { root: true });
         },
         signOut({ commit, rootState, dispatch }) {
-            rootState.localStorage.remove('user')
+            // rootState.localStorage.remove('user')
+            rootState.localStorage.clear();
             let snackbarProps = {
                 message: `Logout success, see ya next time!`,
                 type: `success`,

@@ -59,7 +59,7 @@ export default {
                 getCountryList: (container) => handler(apis.github.getCountryList(), container, attemptCount)
             },
             rawg: {
-                getRecentGames: (params, container) => handler(apis.rawg.getRecentGames(params), container, attemptCount)
+                getRecentGames: (params, container) => (handler(apis.rawg.getRecentGames(params), container, attemptCount))
             }
         }
 

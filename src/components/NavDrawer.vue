@@ -33,7 +33,15 @@
           :to="menu.path"
         >
           <v-list-item link>
-            <v-icon class="me-2">{{ menu.icon }}</v-icon> {{ menu.title }}
+            <v-badge
+              overlap
+              left
+              color="amber darken-4"
+              :content="notificationCount[menu.path] || 0"
+              :value="notificationCount[menu.path] || 0"
+              ><v-icon class="me-2">{{ menu.icon }}</v-icon></v-badge
+            >
+            {{ menu.title }}
           </v-list-item>
         </router-link>
         <v-list-item class="my-auto" link>
@@ -96,9 +104,10 @@ export default {
     },
   },
   computed: {
-    ...mapGetters("auth", ["isSignedIn"]),
-    ...mapState("auth", ["user"]),
     ...mapState(["menuList"]),
+    ...mapGetters(["notificationCount"]),
+    ...mapState("auth", ["user"]),
+    ...mapGetters("auth", ["isSignedIn"]),
     // ...mapState("ui", ["drawer"]),
     // ...mapState("ui", ["darkTheme"]),
     darkTheme: {

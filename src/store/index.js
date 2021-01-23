@@ -12,7 +12,7 @@ export default new Vuex.Store({
     localStorage,
     menuList: [
       { title: `My Library`, icon: `mdi-bookshelf`, path: "library" },
-      { title: `My Wishlist`, icon: `mdi-star-check`, path: "wishlist" },
+      { title: `My Wishlist`, icon: `mdi-star-check`, path: "wishList" },
       { title: `Account`, icon: `mdi-account-circle`, path: "account" },
       { title: `Settings`, icon: `mdi-cog`, path: "settings" },
       { title: `About`, icon: `mdi-information`, path: "about" },
@@ -23,7 +23,7 @@ export default new Vuex.Store({
   actions: {},
   getters: {
     // dateNow: (state) => (val) => { <-- function
-    dateNow:  () => {
+    dateNow: () => {
       let now = new Date();
       let tensChecker = (v) => {
         return v > 10 ? v : "0" + v;
@@ -33,11 +33,24 @@ export default new Vuex.Store({
         m: now.getMonth() + 1,
         d: now.getDate(),
         h: now.getHours(),
-        mm: tensChecker(now.getMonth()+1),
+        mm: tensChecker(now.getMonth() + 1),
         dd: tensChecker(now.getDate()),
         todayDateTime: now.toLocaleString(),
         todayDate: now.toLocaleDateString(),
         todayTime: now.toTimeString(),
+      }
+    },
+    notificationCount(state) {
+      let wishList = state.auth.wishList.wishList.length
+      let total = wishList + wishList;
+      return {
+        wishList,
+        total
+      }
+    },
+    menuList(){
+      return{
+
       }
     }
   },

@@ -17,13 +17,20 @@
       </router-link>
       <v-spacer></v-spacer>
       <v-btn color="white" icon @click.stop="toggleDrawer" v-if="isSignedIn">
-        <v-icon>mdi-menu</v-icon>
+        <v-badge
+          overlap
+          color="amber darken-4"
+          :content="notificationCount.total"
+          :value="notificationCount.total"
+        >
+          <v-icon>mdi-menu</v-icon>
+        </v-badge>
       </v-btn>
       <v-btn
         color="white"
         class="font-weight-bold"
         outlined
-        @click="$router.replace('/auth').catch(err => {})"
+        @click="$router.replace('/auth').catch((err) => {})"
         v-else
       >
         Login here
@@ -39,7 +46,7 @@
     <snackbars />
     <dialogs />
     <!-- footer -->
-    <main-footer/>
+    <main-footer />
   </v-app>
 </template>
 
@@ -49,7 +56,7 @@ import { mapGetters } from "vuex";
 import NavDrawer from "./components/NavDrawer.vue";
 import Snackbars from "./components/prompts/Snackbars.vue";
 import Dialogs from "./components/prompts/Dialogs.vue";
-import MainFooter from './components/MainFooter.vue';
+import MainFooter from "./components/MainFooter.vue";
 
 export default {
   name: "App",
@@ -63,10 +70,10 @@ export default {
   },
   data: function () {
     return {
-      dialog: this.$store.state.ui.dialog,
     };
   },
   computed: {
+    ...mapGetters(["notificationCount"]),
     ...mapGetters("auth", ["isSignedIn"]),
   },
   methods: {
@@ -78,12 +85,15 @@ export default {
   beforeCreate() {
     // this.$vuetify.theme.dark = true
   },
+  created() {
+    // console.log(this.notificationCount);
+  },
 };
 </script>
 
 <style scoped>
 /* 100% viewport height */
-.c-vh100{
+.c-vh100 {
   min-height: 100vh;
 }
 

@@ -55,7 +55,7 @@
 
       <v-col class="mx-auto px-6">
         <v-row align="center" justify="center">
-          <v-form ref="newsletter-form">
+          <v-form ref="newsletter-form" @submit.prevent="subscribeNewsLetter">
             <v-text-field
               v-model="email.value"
               :rules="email.rules"
@@ -68,12 +68,7 @@
               light
             >
               <template v-slot:append>
-                <v-btn
-                  rounded
-                  color="primary"
-                  depressed
-                  @click="subscribeNewsLetter"
-                >
+                <v-btn rounded color="primary" depressed type="submit">
                   <span class="hidden-sm-and-down me-2">Subscribe</span>
                   <v-icon>mdi-email-newsletter</v-icon>
                 </v-btn>
@@ -118,7 +113,7 @@ export default {
   }),
   methods: {
     subscribeNewsLetter() {
-      let newsletterForm = this.$refs["newsletter-form"]
+      let newsletterForm = this.$refs["newsletter-form"];
       if (newsletterForm.validate() === true) {
         this.$store.dispatch("ui/showSnackbar", {
           message:
