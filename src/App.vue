@@ -53,10 +53,10 @@
 <script>
 import { mapGetters } from "vuex";
 
-import MainNavDrawer from "./components/misc/MainNavDrawer.vue";
+import MainNavDrawer from "./components/miscs/MainNavDrawer.vue";
 import Snackbars from "./components/prompts/Snackbars.vue";
 import Dialogs from "./components/prompts/Dialogs.vue";
-import MainFooter from "./components/misc/MainFooter.vue";
+import MainFooter from "./components/miscs/MainFooter.vue";
 
 export default {
   name: "App",

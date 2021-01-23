@@ -24,8 +24,8 @@
 
 <script>
 import { mapState } from "vuex";
-import ButtonNavigation from "../misc/ButtonNavigation.vue";
-import EmptySection from "../misc/EmptySection.vue";
+import ButtonNavigation from "../../miscs/ButtonNavigation.vue";
+import EmptySection from "../../miscs/EmptySection.vue";
 import WishListActionSection from "./WishListActionSection.vue";
 // @ is an alias to project root
 // import HelloWorld from "@/components/HelloWorld.vue";

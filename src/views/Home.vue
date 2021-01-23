@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import HotSection from "../components/home/HotSection.vue";
+import HotSection from "../components/pages/home/HotSection.vue";
 export default {
   components: { HotSection },
   name: "Home",

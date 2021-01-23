@@ -57,9 +57,9 @@
 </template>
 
 <script>
-import LoginForm from "../components/auth/LoginForm.vue";
-import RegisterForm from "../components/auth/RegisterForm.vue";
-import ResetForm from "../components/auth/ResetForm.vue";
+import LoginForm from "../components/pages/auth/LoginForm.vue";
+import RegisterForm from "../components/pages/auth/RegisterForm.vue";
+import ResetForm from "../components/pages/auth/ResetForm.vue";
 
 export default {
   components: { LoginForm, RegisterForm, ResetForm },

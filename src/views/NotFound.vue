@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import ButtonNavigation from "../components/misc/ButtonNavigation.vue";
+import ButtonNavigation from "../components/miscs/ButtonNavigation.vue";
 export default {
   components: { ButtonNavigation },
 };

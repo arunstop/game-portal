@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import WishListSection from '../components/wishlist/WishListSection.vue';
+import WishListSection from '../components/pages/wishlist/WishListSection.vue';
 export default {
   components: { WishListSection },
 };
