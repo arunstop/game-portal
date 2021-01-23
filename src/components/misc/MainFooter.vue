@@ -1,7 +1,7 @@
 <template>
   <v-footer class="mt-4 py-6" padless color="grey darken-4">
     <v-col class="text-center white--text" cols="12">
-      <logo class="mx-auto my-4" :mw="90" />
+      <main-logo class="mx-auto my-4" :mw="90" />
 
       <p class="ma-0 text-h5"><strong>Game Portal</strong></p>
 
@@ -99,9 +99,9 @@
 </template>
 
 <script>
-import Logo from "./Logo.vue";
+import MainLogo from "./MainLogo.vue";
 export default {
-  components: { Logo },
+  components: { MainLogo },
   data: () => ({
     email: {
       value: "",

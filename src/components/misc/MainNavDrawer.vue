@@ -33,15 +33,14 @@
           :to="menu.path"
         >
           <v-list-item link>
-            <v-badge
-              overlap
-              left
-              color="amber darken-4"
-              :content="notificationCount[menu.path] || 0"
-              :value="notificationCount[menu.path] || 0"
-              ><v-icon class="me-2">{{ menu.icon }}</v-icon></v-badge
-            >
+            <v-icon class="me-2">{{ menu.icon }}</v-icon>
             {{ menu.title }}
+            <v-badge
+              inline
+              color="amber darken-4"
+              :content="notificationCount[menu.name] || 0"
+              :value="notificationCount[menu.name] || 0"
+            />
           </v-list-item>
         </router-link>
         <v-list-item class="my-auto" link>

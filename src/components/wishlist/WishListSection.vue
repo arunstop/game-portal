@@ -1,19 +1,17 @@
 <template>
   <!-- item cards -->
   <!-- showing nothing if wishlist is empty -->
-  <v-row class="ma-auto pa-4" v-if="wishList.length == 0">
-    <div class="ma-auto justify-center text-center">
-      <p class="ma-0">
-        <v-icon size="180"> mdi-robot-confused </v-icon>
-      </p>
-      <p class="ma-0 mt-4 text-h5 font-weight-black">
-        Your wish list is empty....
-      </p>
-      <button-back-home :message="'Go Back '" />
-    </div>
-  </v-row>
+  <empty-section
+    v-if="wishList.length == 0"
+    :message="'Your wish list is empty...'"
+  >
+    <template v-slot:action>
+      <button-navigation :message="`Let's add some games`" />
+    </template>
+  </empty-section>
+
   <div v-else>
-    <wish-list-action-section/>
+    <wish-list-action-section />
     <v-row class="py-6 justify-center">
       <wish-list-item-card
         v-for="game in wishListSearchResult"
@@ -26,8 +24,9 @@
 
 <script>
 import { mapState } from "vuex";
-import ButtonBackHome from "../misc/ButtonBackHome.vue";
-import WishListActionSection from './WishListActionSection.vue';
+import ButtonNavigation from "../misc/ButtonNavigation.vue";
+import EmptySection from "../misc/EmptySection.vue";
+import WishListActionSection from "./WishListActionSection.vue";
 // @ is an alias to project root
 // import HelloWorld from "@/components/HelloWorld.vue";
 import WishListItemCard from "./WishListItemCard.vue";
@@ -36,15 +35,18 @@ export default {
   name: "HotSection",
   components: {
     WishListItemCard,
-    ButtonBackHome,
     WishListActionSection,
+    EmptySection,
+    ButtonNavigation,
   },
   computed: {
-    ...mapState("auth/wishList", ["wishList","searchQ"]),
-    wishListSearchResult:function(){
-      let sq = this.searchQ
-      return this.wishList.filter((data) => data.name.toLowerCase().includes(sq))
-    }
+    ...mapState("auth/wishList", ["wishList", "searchQ"]),
+    wishListSearchResult: function () {
+      let sq = this.searchQ;
+      return this.wishList.filter((data) =>
+        data.name.toLowerCase().includes(sq)
+      );
+    },
   },
 };
 </script>

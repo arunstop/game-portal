@@ -189,7 +189,6 @@ export default {
     // },
   },
   mounted() {
-    console.log(this.$store.getters.dateNow);
     this.$api.github.getCountryList
       .then((response) => {
         this.countryList = response.data.filter(

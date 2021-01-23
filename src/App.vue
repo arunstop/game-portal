@@ -37,7 +37,7 @@
       </v-btn>
     </v-app-bar>
     <!-- navdrawer -->
-    <nav-drawer />
+    <main-nav-drawer />
     <v-main>
       <!-- main nav pages -->
       <router-view class="c-vh100"> </router-view>
@@ -53,16 +53,16 @@
 <script>
 import { mapGetters } from "vuex";
 
-import NavDrawer from "./components/NavDrawer.vue";
+import MainNavDrawer from "./components/misc/MainNavDrawer.vue";
 import Snackbars from "./components/prompts/Snackbars.vue";
 import Dialogs from "./components/prompts/Dialogs.vue";
-import MainFooter from "./components/MainFooter.vue";
+import MainFooter from "./components/misc/MainFooter.vue";
 
 export default {
   name: "App",
 
   components: {
-    NavDrawer,
+    MainNavDrawer,
     Snackbars,
     Dialogs,
     MainFooter,

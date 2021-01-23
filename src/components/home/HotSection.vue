@@ -12,7 +12,7 @@
     </v-btn>
     <!-- item cards -->
     <div class="py-6 c-scroll-y">
-      <v-row class="ma-0 pa-0 justify-center" v-if="gameList.loading">
+      <v-row class="ma-0 mt-16 pa-0 justify-center" v-if="gameList.loading">
         <v-progress-circular indeterminate size="120" width="6" />
       </v-row>
       <item-card

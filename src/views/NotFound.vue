@@ -3,24 +3,23 @@
     <div
       class="c-fw-900 ma-auto justify-center text-center text-uppercase grey--text"
     >
-      <p class="ma-0 text-h5 text-start">HTTP ERROR :</p>
+      <p class="ma-0 text-h5 text-start">HTTP ERROR : <strong class="error--text">404</strong> </p>
       <v-btn class="c-fs-8rem ma-0 error--text" text>
-        4
-        <v-icon size="120" color="error">
-          mdi-emoticon-confused-outline
+        <v-icon size="180" color="error">
+          mdi-robot-confused
         </v-icon>
-        4
       </v-btn>
       <p class="ma-0 text-h5 text-end">Page not found</p>
-      <button-back-home :message="'Go back home'"/>
+      <button-navigation :message="'Go back home'" />
     </div>
   </v-row>
 </template>
 
 <script>
-import ButtonBackHome from '../components/misc/ButtonBackHome.vue';
+import ButtonNavigation from "../components/misc/ButtonNavigation.vue";
 export default {
-  components: { ButtonBackHome },};
+  components: { ButtonNavigation },
+};
 </script>
 <style scoped>
 .c-fw-900 p {
