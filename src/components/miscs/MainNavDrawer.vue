@@ -29,8 +29,8 @@
         <router-link
           v-for="(menu, index) in menuList"
           :key="index"
-          class="text-decoration-none font-weight-bold"
           :to="menu.path"
+          class="text-decoration-none font-weight-bold"          
         >
           <v-list-item link>
             <v-icon class="me-2">{{ menu.icon }}</v-icon>

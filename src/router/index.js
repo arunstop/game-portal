@@ -42,6 +42,7 @@ const routes = [
     path: '/game/:slug',
     name: 'game',
     meta: { auth: true, title: 'Game' },
+    props: true,
     component: () => import(/* webpackChunkName: "wishlist" */ '../views/Game.vue')
   },
   {

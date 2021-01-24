@@ -122,7 +122,14 @@ export default {
     },
     navigationGame() {
       // this.$router.push({ path: "game", query: { slug: this.gameData.slug } });
-      this.$router.push({ name: "game", params: { slug: this.gameData.slug } });
+      this.$router.push({
+        name: "game",
+        params: {
+          slug: this.gameData.slug,
+          // id: this.gameData.id,
+          // id: this.gameData.id,
+        },
+      });
     },
   },
 };
