@@ -9,7 +9,7 @@
       hide-details
     />
     <v-btn
-      
+      class="mt-4"
       color="primary"
       :outlined="!toggleAdvSearch"
       @click="toggleAdvSearchHandler"

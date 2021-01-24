@@ -1,5 +1,5 @@
 <template>
-  <v-card class="c-card-item ma-0" width="240" outlined>
+  <v-card class="c-card-item ma-0" width="240" outlined @click="navigationGame">
     <v-img
       class="fill-height"
       :src="gameData.background_image"
@@ -119,6 +119,10 @@ export default {
   methods: {
     actionHandler(menu) {
       menu.action();
+    },
+    navigationGame() {
+      // this.$router.push({ path: "game", query: { slug: this.gameData.slug } });
+      this.$router.push({ name: "game", params: { slug: this.gameData.slug } });
     },
   },
 };
