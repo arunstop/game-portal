@@ -27,6 +27,12 @@ const routes = [
     component: () => import(/* webpackChunkName: "auth" */ '../views/Auth.vue')
   },
   {
+    path: '/library',
+    name: 'Library',
+    meta: { auth: true, title: 'Library' },
+    component: () => import(/* webpackChunkName: "wishlist" */ '../views/Library.vue')
+  },
+  {
     path: '/wishList',
     name: 'Wish List',
     meta: { auth: true, title: 'Wish List' },

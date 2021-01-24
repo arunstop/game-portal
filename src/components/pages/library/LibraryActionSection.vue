@@ -22,7 +22,7 @@
               v-on="on"
             >
               Sort By
-              <v-icon class="ma-0 ms-2 "> mdi-sort-variant</v-icon>
+              <v-icon class="ms-2"> mdi-sort-variant</v-icon>
             </v-btn>
           </template>
           <v-list>
@@ -164,6 +164,8 @@ export default {
         return "";
       },
       set: function (val) {
+        // val || ""
+        // meaning it's the value passed never be null
         this.$store.dispatch("auth/wishList/search", val || "");
       },
     },

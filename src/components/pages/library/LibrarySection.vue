@@ -11,7 +11,7 @@
   </layout-empty>
 
   <div v-else>
-    <wish-list-action-section />
+    <library-action-section />
     <v-row class="ma-0 py-6 justify-center">
       <v-fade-transition leave-absolute>
         <layout-empty
@@ -20,7 +20,7 @@
           :icon="''"
         />
         <v-row justify="center" >
-          <wish-list-item-card
+          <library-item-card
             v-for="game in wishListSearchResult"
             :key="game.slug"
             :gameData="game"
@@ -35,16 +35,16 @@
 import { mapState } from "vuex";
 import ButtonNavigation from "../../miscs/ButtonNavigation.vue";
 import LayoutEmpty from "../../miscs/LayoutEmpty.vue";
-import WishListActionSection from "./WishListActionSection.vue";
+import LibraryActionSection from "./LibraryActionSection.vue";
 // @ is an alias to project root
 // import HelloWorld from "@/components/HelloWorld.vue";
-import WishListItemCard from "./WishListItemCard.vue";
+import LibraryItemCard from "./LibraryItemCard.vue";
 
 export default {
   name: "HotSection",
   components: {
-    WishListItemCard,
-    WishListActionSection,
+    LibraryItemCard,
+    LibraryActionSection,
     LayoutEmpty,
     ButtonNavigation,
   },
