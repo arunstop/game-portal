@@ -10,8 +10,9 @@ export default {
         let baseUrlSet = {
             rawg: (module) => {
                 let apiUrl = "https://api.rawg.io/api/"
-                let key = "8cce4b01b3ba424f8d0a405393a02f25"
-                return apiUrl + module + '?key=' + key
+                // let key = "8cce4b01b3ba424f8d0a405393a02f25"
+                // return apiUrl + module + '?key=' + key
+                return apiUrl + module
             },
             github: {
                 countryList: 'https://gist.githubusercontent.com/DmytroLisitsyn/1c31186e5b66f1d6c52da6b5c70b12ad/raw/01b1af9b267471818f4f8367852bd4a2814cbae6/country_dial_info.json'
@@ -65,6 +66,9 @@ export default {
             }
         }
 
+
+
+        // declaring  prototype
         Vue.prototype.$api = {
             // spread the apis
             ...apis,

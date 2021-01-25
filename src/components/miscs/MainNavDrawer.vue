@@ -30,17 +30,21 @@
           v-for="(menu, index) in menuList"
           :key="index"
           :to="menu.path"
-          class="text-decoration-none font-weight-bold"          
+          class="text-decoration-none font-weight-bold"
         >
           <v-list-item link>
-            <v-icon class="me-2">{{ menu.icon }}</v-icon>
-            {{ menu.title }}
+            <!-- v-spacer to space the badge to end -->
+            <!-- <v-spacer/> -->
             <v-badge
-              inline
-              color="amber darken-4"
-              :content="notificationCount[menu.name] || 0"
+            :content="notificationCount[menu.name] || 0"
               :value="notificationCount[menu.name] || 0"
-            />
+              class="me-4"
+              overlap
+              color="amber darken-4"
+            >
+              <v-icon>{{ menu.icon }}</v-icon>
+            </v-badge>
+            {{ menu.title }}
           </v-list-item>
         </router-link>
         <v-list-item class="my-auto" link>

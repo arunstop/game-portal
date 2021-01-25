@@ -22,7 +22,7 @@
               v-on="on"
             >
               Sort By
-              <v-icon class="ma-0 ms-2 "> mdi-sort-variant</v-icon>
+              <v-icon class="ma-0 ms-2"> mdi-sort-variant</v-icon>
             </v-btn>
           </template>
           <v-list>
@@ -73,57 +73,17 @@ export default {
     sortList() {
       return {
         byName: () => {
-          this.wishList.sort((a, b) => {
-            let nameA = a.name.toUpperCase();
-            let nameB = b.name.toUpperCase();
-            if (nameA > nameB) {
-              return -1;
-            }
-            if (nameB > nameA) {
-              return 1;
-            }
-            return 0;
-          });
+          this.$global.sorting.sortAsc(this.wishList, "name");
         },
         byRating: () => {
-          this.wishList.sort((a, b) => {
-            let ratingA = a.rating;
-            let ratingB = b.rating;
-            if (ratingA > ratingB) {
-              return -1;
-            }
-            if (ratingB > ratingA) {
-              return 1;
-            }
-            return 0;
-          });
+          this.$global.sorting.sortAsc(this.wishList, "rating");
         },
         byPopularity: () => {
-          this.wishList.sort((a, b) => {
-            //based on how many user added this to their libraries
-            let addedA = a.added;
-            let addedB = b.added;
-            if (addedA > addedB) {
-              return -1;
-            }
-            if (addedB > addedA) {
-              return 1;
-            }
-            return 0;
-          });
+          //based on how many user added this to their libraries
+          this.$global.sorting.sortAsc(this.wishList, "added");
         },
         byReleaseDate: () => {
-          this.wishList.sort((a, b) => {
-            let releasedA = a.released.toUpperCase();
-            let releasedB = b.released.toUpperCase();
-            if (releasedA > releasedB) {
-              return -1;
-            }
-            if (releasedB > releasedA) {
-              return 1;
-            }
-            return 0;
-          });
+          this.$global.sorting.sortAsc(this.wishList, "released");
         },
       };
     },

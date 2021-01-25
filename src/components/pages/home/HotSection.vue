@@ -12,7 +12,7 @@
     </v-btn>
     <!-- item cards -->
     <div class="py-6 c-scroll-y">
-      <v-row class="ma-0 mt-16 pa-0 justify-center" v-if="gameList.loading">
+      <v-row class="ma-0 mt-16 pa-0 justify-center" v-if="gameList.isLoading">
         <v-progress-circular indeterminate size="120" width="6" />
       </v-row>
       <item-card
@@ -39,7 +39,7 @@ export default {
     SearchSection,
   },
   data: () => ({
-    gameList: { data: [], loading: true },
+    gameList: { data: [], isLoading: true },
     krappa: "krappa",
   }),
   created() {
@@ -84,7 +84,7 @@ export default {
         platforms: "18,1,7",
       },
       (response) => {
-        this.gameList = { data: response.data, loading: false };
+        this.gameList = { data: response.data, isLoading: false };
       }
     );
   },

@@ -5,11 +5,13 @@ import store from './store'
 import vuetify from './plugins/vuetify';
 import mixins from './plugins/mixins';
 import api from './plugins/api';
+import global from './plugins/global';
 
 
 
 Vue.config.productionTip = false
 Vue.use(api)
+Vue.use(global)
 
 new Vue({
   router,
