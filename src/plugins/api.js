@@ -34,7 +34,10 @@ export default {
         let handler = async (func, container, attempt) => {
             // attempting 3 API CALLS
             // if all attempts are used, nothing happened
-            if (attempt <= 0) return;
+            if (attempt <= 0) {
+                console.log('All attempts are used, try to reload the page');
+                return;
+            }
             // if there are attempts left
             // calling api
             func
@@ -50,7 +53,7 @@ export default {
                     //calling the handler again up to 3 times
                     console.log("Attempt #" + attempt + " has failed : \n" + error);
                     console.log('Executing next attempt....')
-                    handler(func, attempt - 1);
+                    handler(func, container, attempt - 1);
                 });
         }
         //global attempt count

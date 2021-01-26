@@ -1,5 +1,5 @@
 <template>
-  <v-footer class="mt-4 py-6" padless color="grey darken-4">
+  <v-footer class="py-6" padless color="grey darken-4">
     <v-col class="text-center white--text" cols="12">
       <main-logo class="mx-auto my-4" :mw="90" />
 

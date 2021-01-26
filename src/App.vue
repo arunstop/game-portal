@@ -1,31 +1,26 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary">
+    <v-app-bar app color="primary" elevate-on-scroll dense>
       <router-link class="text-decoration-none" to="/">
-        <div class="d-flex align-center">
-          <v-img
-            alt="Vuetify Logo"
-            class="shrink mr-2"
-            contain
-            src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-            transition="scale-transition"
-            width="40"
-          />
+        <v-toolbar-title>
+          <v-row no-gutters>
+          <main-logo :mw="24" />
 
-          <h2 class="hidden-sm-and-down white--text">Game Portal</h2>
-        </div>
+          <h3 class="ms-4 hidden-sm-and-down white--text">Game Portal</h3>
+          </v-row>
+        </v-toolbar-title>
       </router-link>
-      <v-spacer></v-spacer>
-      <v-btn color="white" icon @click.stop="toggleDrawer" v-if="isSignedIn">
+      <v-spacer/>
+      <v-app-bar-nav-icon @click="toggleDrawer" v-if="isSignedIn">
         <v-badge
           overlap
           color="amber darken-4"
           :content="notificationCount.total"
           :value="notificationCount.total"
         >
-          <v-icon>mdi-menu</v-icon>
+          <v-icon color="white">mdi-menu</v-icon>
         </v-badge>
-      </v-btn>
+      </v-app-bar-nav-icon>
       <v-btn
         color="white"
         class="font-weight-bold"
@@ -57,6 +52,7 @@ import MainNavDrawer from "./components/miscs/MainNavDrawer.vue";
 import Snackbars from "./components/prompts/Snackbars.vue";
 import Dialogs from "./components/prompts/Dialogs.vue";
 import MainFooter from "./components/miscs/MainFooter.vue";
+import MainLogo from "./components/miscs/MainLogo.vue";
 
 export default {
   name: "App",
@@ -66,11 +62,11 @@ export default {
     Snackbars,
     Dialogs,
     MainFooter,
+    MainLogo,
     // HelloWorld,
   },
   data: function () {
-    return {
-    };
+    return {};
   },
   computed: {
     ...mapGetters(["notificationCount"]),
