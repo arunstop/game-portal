@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex pa-4">
     <v-card
-      class="my-auto mx-auto flex-fill"
+      class="my-auto mx-auto flex-fill rounded-xl"
       outlined
       max-width="480"
       elevation="12"
