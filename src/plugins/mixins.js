@@ -1,31 +1,36 @@
 export default {
     //initializing dark theme
-    inits: {
+    initializers() {
+        
         //re-authenticate
-        auth() {
+        let auth = () => {
             //update local storage expire date whenever user open the app
             let user = this.$store.state.localStorage.get('user', null);
             if (user != null) {
                 user.lastSession = Date.now()
                 this.$store.dispatch('auth/initSignIn', user);
             }
-        },
+        }
         //initiate theme
-        theme() {
+        let theme = () => {
             let darkTheme = this.$store.state.localStorage.get('darkTheme', undefined);
             if (darkTheme != undefined) {
                 this.$store.dispatch('ui/initTheme', darkTheme);
                 // this.$vuetify.theme.dark = darkTheme;
             }
-        },
+        }
         //initite wishlist
-        wishList() {
+        let wishList = () => {
             let wishList = this.$store.state.localStorage.get('wishList', undefined);
             if (wishList != undefined) {
                 this.$store.dispatch('auth/wishList/init', wishList);
                 // this.$vuetify.theme.dark = darkTheme;
             }
-        },
+        }
+
+        //EXECUTE THE FUNCTIONS
+        auth(); theme(); wishList();
+
     },
     watchers: {
         pageTitle: {
