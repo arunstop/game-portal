@@ -31,7 +31,7 @@ export default {
             countryFlag: (code) => { return `https://www.countryflags.io/${code}/flat/48.png` },
         }
         // handling the promise event
-        let handler = async (func, container, attempt) => {
+        let handler = async (apiCall, container, attempt) => {
             // attempting 3 API CALLS
             // if all attempts are used, nothing happened
             if (attempt <= 0) {
@@ -40,7 +40,7 @@ export default {
             }
             // if there are attempts left
             // calling api
-            func
+            apiCall
                 .then((response) => {
                     //if success
                     //filling container with response data
@@ -53,7 +53,7 @@ export default {
                     //calling the handler again up to 3 times
                     console.log("Attempt #" + attempt + " has failed : \n" + error);
                     console.log('Executing next attempt....')
-                    handler(func, container, attempt - 1);
+                    handler(apiCall, container, attempt - 1);
                 });
         }
         //global attempt count
@@ -70,7 +70,7 @@ export default {
         }
 
 
-
+        //========================
         // declaring  prototype
         Vue.prototype.$api = {
             // spread the apis
