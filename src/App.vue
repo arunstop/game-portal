@@ -4,19 +4,21 @@
       <router-link class="text-decoration-none" to="/">
         <v-toolbar-title>
           <v-row no-gutters>
-          <main-logo :mw="24" />
+            <main-logo :mw="24" />
 
-          <h3 class="ms-4 hidden-sm-and-down white--text">Game Portal</h3>
+            <h3 class="ms-4 hidden-sm-and-down white--text">Game Portal</h3>
           </v-row>
         </v-toolbar-title>
       </router-link>
-      <v-spacer/>
+      <v-spacer />
       <v-app-bar-nav-icon @click="toggleDrawer" v-if="isSignedIn">
         <v-badge
           overlap
           color="amber darken-4"
-          :content="notificationCount.total"
+          class="animate__animated animate__swing"
           :value="notificationCount.total"
+          :content="notificationCount.total"
+          :key="notificationCount.total"
         >
           <v-icon color="white">mdi-menu</v-icon>
         </v-badge>

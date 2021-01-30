@@ -6,6 +6,8 @@ import vuetify from './plugins/vuetify';
 import mixins from './plugins/mixins';
 import api from './plugins/api';
 import global from './plugins/global';
+// animate.css
+import 'animate.css'
 
 
 

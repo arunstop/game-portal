@@ -24,11 +24,14 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+// import { mapState } from "vuex";
 export default {
-  computed: {
-    ...mapState(["gameDetails"]),
+  props:{
+    gameDetails : Object
   },
+  // computed: {
+  //   ...mapState(["gameDetails"]),
+  // },
   methods: {
     platformIcon(platformName) {
       // getting icon by platform name

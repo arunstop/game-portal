@@ -6,38 +6,38 @@
     <v-col>
       <!-- GAME MEDIAS -->
       <v-row class="my-4" no-gutters>
-        <game-media />
+        <game-media :gameDetails="gameDetails"/>
       </v-row>
       <!-- GAME NAME -->
       <h1 class="my-4">{{ gameDetails.data.name }}</h1>
       <!-- RATINGS -->
       <v-row class="my-2 ps-2 pe-3" no-gutters>
-        <game-score />
-        <game-rating />
+        <game-score :gameDetails="gameDetails"/>
+        <game-rating :gameDetails="gameDetails"/>
       </v-row>
       <!-- PLATFORMS AND GENRES -->
       <v-row class="my-2 ps-2 pe-3" no-gutters>
-        <game-platform />
-        <game-genre />
+        <game-platform :gameDetails="gameDetails"/>
+        <game-genre :gameDetails="gameDetails"/>
       </v-row>
       <!-- DEVELOPERS AND PUBLISHERS -->
       <v-row class="my-2 ps-2 pe-3" no-gutters>
-        <game-developer />
-        <game-publisher />
+        <game-developer :gameDetails="gameDetails"/>
+        <game-publisher :gameDetails="gameDetails"/>
       </v-row>
       <!-- REFERENCES -->
       <v-row class="my-2 ps-2 pe-3" no-gutters>
-        <game-store />
-        <game-website />
+        <game-store :gameDetails="gameDetails"/>
+        <game-website :gameDetails="gameDetails"/>
       </v-row>
-      <game-description />
-      <game-sys-req />
+      <game-description :gameDetails="gameDetails"/>
+      <game-sys-req :gameDetails="gameDetails"/>
     </v-col>
   </v-col>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+// import { mapState } from "vuex";
 import GameDescription from "./parts/GameDescription.vue";
 import GameDeveloper from "./parts/GameDeveloper.vue";
 import GameGenre from "./parts/GameGenre.vue";
@@ -63,22 +63,25 @@ export default {
     GameDescription,
     GameSysReq,
   },
-  computed:{
-    ...mapState(['gameDetails'])
+  computed: {
+    // ...mapState(["gameDetails"]),
   },
   props: {},
   data: function () {
-    return {};
+    return {
+      gameDetails: { data: {}, isLoading: true },
+    };
   },
   methods: {},
   created() {
     // calling API
     this.$api.call.rawg.getGameDetails(this.$route.params.slug, (response) => {
-      this.$store.dispatch("setGameDetails", {
-        data: response.data,
-        isLoading: false,
-      });
-      let gd = this.$store.state.gameDetails;
+      // this.$store.dispatch("setGameDetails", {
+      //   data: response.data,
+      //   isLoading: false,
+      // });
+      this.gameDetails = { data: response.data, isLoading: false };
+      let gd = this.gameDetails;
       // this.game = gd;
       this.$global.sorting.sortAsc(gd.data.platforms, "platform.name");
     });

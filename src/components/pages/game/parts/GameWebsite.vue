@@ -63,11 +63,14 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+// import { mapState } from "vuex";
 export default {
-  computed: {
-    ...mapState(["gameDetails"]),
+  props:{
+    gameDetails : Object
   },
+  // computed: {
+  //   ...mapState(["gameDetails"]),
+  // },
   methods: {
     websiteUrlHandler(website, query) {
       return website || "https://www.google.com/search?q=" + query;

@@ -4,6 +4,7 @@
     hide-delimiter-background
     interval="4800"
     progress
+    progress-color="deep-orange"
     hide-delimiters
     show-arrows-on-hover
     height="500p"
@@ -75,12 +76,15 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+// import { mapState } from "vuex";
 import MainVideoPlayer from "../../../miscs/MainVideoPlayer.vue";
 export default {
   components: { MainVideoPlayer },
+   props:{
+    gameDetails : Object
+  },
   computed: {
-    ...mapState(["gameDetails"]),
+    // ...mapState(["gameDetails"]),
     vid() {
       let video = this.$refs["vid-preview"];
       let vidPrev = this.videoPreview;
@@ -119,7 +123,7 @@ export default {
     },
     videoOptions() {
       return {
-        autoplay: true,
+        autoplay: false,
         controls: true,
         fluid: true,
         sources: [
