@@ -37,7 +37,7 @@
     <main-nav-drawer />
     <v-main>
       <!-- main nav pages -->
-      <router-view class="c-vh100"> </router-view>
+      <router-view class="c-vh100 animate__animated animate__fadeIn"> </router-view>
     </v-main>
     <!-- prompts containers -->
     <snackbars />

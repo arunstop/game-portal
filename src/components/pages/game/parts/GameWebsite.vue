@@ -27,7 +27,7 @@
               {{ gameDetails.data.website }}
             </u>
             <span v-else>
-              {{ "More Information on Google" }}
+              {{ "More information on Google" }}
             </span>
           </span>
         </v-btn>

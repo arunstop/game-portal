@@ -11,21 +11,29 @@
       <span class="text-h4">Hot Games</span>
     </v-btn>
     <!-- item cards -->
-    <div class="py-6 c-scroll-y">
-      <v-row class="ma-0 mt-16 pa-0 justify-center" v-if="gameList.isLoading">
-        <v-progress-circular indeterminate size="120" width="6" />
-      </v-row>
-      <item-card
-        v-else
-        v-for="game in gameList.data.results"
-        :key="game.slug"
-        :gameData="game"
-      />
-    </div>
+    <main-container :isLoading="gameList.isLoading">
+      <template v-slot:content>
+        <div class="py-6 c-scroll-y">
+          <v-row
+            class="ma-0 mt-16 pa-0 justify-center"
+            v-if="gameList.isLoading"
+          >
+            <v-progress-circular indeterminate size="120" width="6" />
+          </v-row>
+          <item-card
+            v-else
+            v-for="game in gameList.data.results"
+            :key="game.slug"
+            :gameData="game"
+          />
+        </div>
+      </template>
+    </main-container>
   </v-col>
 </template>
 
 <script>
+import MainContainer from '../../miscs/MainContainer.vue';
 // @ is an alias to project root
 // import HelloWorld from "@/components/HelloWorld.vue";
 import ItemCard from "./ItemCard.vue";
@@ -37,6 +45,7 @@ export default {
     // HelloWorld,
     ItemCard,
     SearchSection,
+    MainContainer,
   },
   data: () => ({
     gameList: { data: [], isLoading: true },

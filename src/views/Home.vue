@@ -1,8 +1,6 @@
 <template>
-  <div class="home">
     <!-- <HelloWorld msg="Welcome to Your Vue.js App" /> -->
     <hot-section />
-  </div>
 </template>
 
 <script>
