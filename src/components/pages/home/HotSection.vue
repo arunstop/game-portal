@@ -11,9 +11,18 @@
       <span class="text-h4">Hot Games</span>
     </v-btn>
     <!-- item cards -->
+
     <main-container :isLoading="gameList.isLoading">
       <template v-slot:content>
-        <div class="py-6 c-scroll-y">
+        <div class="c-grid-list pa-4">
+          <home-game-card
+            class="c-grid-item"
+            v-for="game in gameList.data.results"
+            :key="game.slug"
+            :gameData="game"
+          />
+        </div>
+        <!-- <div class="py-6 c-scroll-y">
           <v-row
             class="ma-0 mt-16 pa-0 justify-center"
             v-if="gameList.isLoading"
@@ -26,26 +35,28 @@
             :key="game.slug"
             :gameData="game"
           />
-        </div>
+        </div> -->
       </template>
     </main-container>
   </v-col>
 </template>
 
 <script>
-import MainContainer from '../../miscs/MainContainer.vue';
+import MainContainer from "../../miscs/MainContainer.vue";
+import HomeGameCard from "./HomeGameCard.vue";
 // @ is an alias to project root
 // import HelloWorld from "@/components/HelloWorld.vue";
-import ItemCard from "./ItemCard.vue";
+// import ItemCard from "./ItemCard.vue";
 import SearchSection from "./SearchSection.vue";
 
 export default {
   name: "HotSection",
   components: {
     // HelloWorld,
-    ItemCard,
+    // ItemCard,
     SearchSection,
     MainContainer,
+    HomeGameCard,
   },
   data: () => ({
     gameList: { data: [], isLoading: true },
@@ -94,6 +105,7 @@ export default {
       },
       (response) => {
         this.gameList = { data: response.data, isLoading: false };
+        console.log(this.gameList.data.results)
       }
     );
   },
@@ -131,4 +143,24 @@ export default {
   border: solid 3px transparent;
   border-radius: 12px;
 }
+
+/* GRID STYLE */
+.c-grid-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 1rem;
+  grid-template-rows: repeat(6, minmax(300px, 1fr));
+  grid-auto-flow: dense;
+}
+
+/* first child and child number 5*n become big */
+/* .c-grid-list > .c-grid-item:nth-child(5n),
+.c-grid-item:first-child { */
+.c-grid-list > .c-big{
+  /* Spans two columns */
+  grid-column: span 2; 
+   /* Spans two rows */
+  grid-row: span 1;
+}
+
 </style>

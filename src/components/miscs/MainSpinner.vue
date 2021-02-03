@@ -4,7 +4,7 @@
     <spring-spinner
       class="ma-auto"
       :animation-duration="2000"
-      :size="90"
+      :size="size"
       color="#2196f3"
     />
   </v-col>
@@ -13,6 +13,9 @@
 <script>
 import { SpringSpinner } from "epic-spinners";
 export default {
+  props:{
+    size: {type: Number, default:90}
+  },
   components: {
     SpringSpinner,
   },
