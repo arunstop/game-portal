@@ -4,9 +4,12 @@
     :class="gameData.added >= 12000 ? 'c-big' : ''"
     ripple
   >
-    <router-link :to="'game/' + gameData.slug" class="d-flex flex-column text-decoration-none fill-height">
-      <!-- PREVIEW -->
-      <v-hover v-slot="{ hover }">
+    <v-hover v-slot="{ hover }">
+      <router-link
+        :to="'game/' + gameData.slug"
+        class="d-flex flex-column text-decoration-none fill-height"
+      >
+        <!-- PREVIEW -->
         <v-card class="rounded-t-lg" flat tile>
           <v-img
             class="align-end"
@@ -17,7 +20,7 @@
             <!-- loader when image is loading -->
             <template v-slot:placeholder>
               <v-row class="fill-height ma-0" align="center" justify="center">
-                <main-spinner :size="30" />
+                <main-spinner :size="60" />
               </v-row>
             </template>
             <!-- image bottom props -->
@@ -64,74 +67,76 @@
             </v-row>
           </v-img>
         </v-card>
-      </v-hover>
-      <v-card-title class="c-card-item-text c-card-item-title text-break">
-        <v-list-item class="ma-0 pa-0">
-          {{ gameData.name }}
-        </v-list-item>
-      </v-card-title>
-      <!-- GAME GENRES -->
-      <v-card-subtitle class="c-cards-item-chips white--text font-weight-bold">
-        <v-chip
-          :color="$global.pickers.scoreColor(gameData.metacritic)"
-          class="c-chip-text me-1 mt-1 font-weight-black"
-          outlined
-          small
+        <v-card-title class="c-card-item-text c-card-item-title text-break">
+          <v-list-item class="ma-0 pa-0">
+            {{ gameData.name }}
+          </v-list-item>
+        </v-card-title>
+        <!-- GAME GENRES -->
+        <v-card-subtitle
+          class="c-cards-item-chips white--text font-weight-bold"
         >
-          <div class="align-center d-inline-flex" v-if="gameData.metacritic">
-            <v-icon
-              class="me-1"
-              :color="$global.pickers.scoreColor(gameData.metacritic)"
-              small
-            >
-              mdi-star
-            </v-icon>
-            {{ gameData.metacritic }}
-          </div>
-          <span v-else> Not scored </span>
-        </v-chip>
-        <v-chip
-          class="c-chip-text me-1 mt-1 font-weight-regular"
-          v-for="genre in gameData.genres"
-          :key="genre.id"
-          small
-        >
-          <span>{{ genre.name }}</span>
-        </v-chip>
-      </v-card-subtitle>
-      <!-- MENU ACTIONS -->
-      <v-spacer />
-      <v-card-actions>
-        <v-menu>
-          <template v-slot:activator="{ on: menu, attrs }">
-            <v-btn
-              class="pa-2 ms-auto rounded-lg"
-              color="primary lighten-1"
-              depressed
-              small
-              v-bind="attrs"
-              v-on="{ ...menu }"
-              @click.prevent
-            >
-              <v-icon>mdi-dots-horizontal</v-icon>
-            </v-btn>
-          </template>
-          <v-list>
-            <v-list-item
-              link
-              v-for="(menu, index) in menuList"
-              :key="index"
-              @click="menu.action()"
-            >
-              <b>
-                <v-icon class="me-2">{{ menu.icon }}</v-icon>
-                {{ menu.title }}
-              </b>
-            </v-list-item>
-          </v-list>
-        </v-menu>
-      </v-card-actions>
-    </router-link>
+          <v-chip
+            :color="$global.pickers.scoreColor(gameData.metacritic)"
+            class="c-chip-text me-1 mt-1 font-weight-black"
+            outlined
+            small
+          >
+            <div class="align-center d-inline-flex" v-if="gameData.metacritic">
+              <v-icon
+                class="me-1"
+                :color="$global.pickers.scoreColor(gameData.metacritic)"
+                small
+              >
+                mdi-star
+              </v-icon>
+              {{ gameData.metacritic }}
+            </div>
+            <span v-else> Not scored </span>
+          </v-chip>
+          <v-chip
+            class="c-chip-text me-1 mt-1 font-weight-regular"
+            v-for="genre in gameData.genres"
+            :key="genre.id"
+            small
+          >
+            <span>{{ genre.name }}</span>
+          </v-chip>
+        </v-card-subtitle>
+        <!-- MENU ACTIONS -->
+        <v-spacer />
+        <v-card-actions>
+          <v-menu>
+            <template v-slot:activator="{ on: menu, attrs }">
+              <v-btn
+                class="pa-2 ms-auto rounded-lg"
+                color="primary lighten-1"
+                depressed
+                small
+                v-bind="attrs"
+                v-on="{ ...menu }"
+                @click.prevent
+              >
+                <v-icon>mdi-dots-horizontal</v-icon>
+              </v-btn>
+            </template>
+            <v-list>
+              <v-list-item
+                link
+                v-for="(menu, index) in menuList"
+                :key="index"
+                @click="menu.action()"
+              >
+                <b>
+                  <v-icon class="me-2">{{ menu.icon }}</v-icon>
+                  {{ menu.title }}
+                </b>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+        </v-card-actions>
+      </router-link>
+    </v-hover>
   </v-card>
 </template>
 
