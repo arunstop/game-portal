@@ -1,14 +1,22 @@
 <template>
   <!-- item cards -->
   <!-- showing nothing if wishlist is empty -->
-  <layout-empty
+  <!-- <layout-empty
     v-if="wishList.length == 0"
     :message="'Your wish list is empty...'"
   >
     <template v-slot:action>
       <button-navigation :message="`Let's add some games`" />
     </template>
-  </layout-empty>
+  </layout-empty> -->
+
+  <main-empty-layout
+    v-if="wishList.length == 0"
+    :message="'Your wish list is empty...'"
+    :action="()=> $router.push('/')"
+    :actionMessage="'Go back Home'"
+    :actionIcon="'mdi-arrow-left'"
+  />
 
   <div v-else>
     <library-action-section />
@@ -19,7 +27,7 @@
           :message="'No results found'"
           :icon="''"
         />
-        <v-row justify="center" >
+        <v-row justify="center">
           <library-item-card
             v-for="game in wishListSearchResult"
             :key="game.slug"
@@ -33,8 +41,9 @@
 
 <script>
 import { mapState } from "vuex";
-import ButtonNavigation from "../../miscs/ButtonNavigation.vue";
-import LayoutEmpty from "../../miscs/LayoutEmpty.vue";
+// import ButtonNavigation from "../../miscs/ButtonNavigation.vue";
+// import LayoutEmpty from "../../miscs/LayoutEmpty.vue";
+import MainEmptyLayout from "../../miscs/MainEmptyLayout.vue";
 import LibraryActionSection from "./LibraryActionSection.vue";
 // @ is an alias to project root
 // import HelloWorld from "@/components/HelloWorld.vue";
@@ -45,8 +54,9 @@ export default {
   components: {
     LibraryItemCard,
     LibraryActionSection,
-    LayoutEmpty,
-    ButtonNavigation,
+    // LayoutEmpty,
+    // ButtonNavigation,
+    MainEmptyLayout,
   },
   computed: {
     ...mapState("auth/wishList", ["wishList", "searchQ"]),

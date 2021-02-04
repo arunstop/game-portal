@@ -29,9 +29,9 @@ export default new Vuex.Store({
   actions: {
     setGameDetails({ commit, dispatch }, gameDetails) {
       commit('SET_GAME_DETAILS', gameDetails)
-      dispatch("docTitle", gameDetails.data.name);
+      dispatch("setDocTitle", gameDetails.data.name);
     },
-    docTitle({ state }, title) {
+    setDocTitle({ state }, title) {
       document.title = title + ' — ' + state.appName
     }
   },

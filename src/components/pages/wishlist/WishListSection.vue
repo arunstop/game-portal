@@ -1,15 +1,13 @@
 <template>
   <!-- item cards -->
   <!-- showing nothing if wishlist is empty -->
-  <layout-empty
+ <main-empty-layout
     v-if="wishList.length == 0"
     :message="'Your wish list is empty...'"
-  >
-    <template v-slot:action>
-      <button-navigation :message="`Let's add some games`" />
-    </template>
-  </layout-empty>
-
+    :action="()=> $router.push('/')"
+    :actionMessage="'Go back Home'"
+    :actionIcon="'mdi-arrow-left'"
+  />
   <div v-else>
     <wish-list-action-section />
     <v-row class="ma-0 py-6 justify-center">
@@ -33,8 +31,7 @@
 
 <script>
 import { mapState } from "vuex";
-import ButtonNavigation from "../../miscs/ButtonNavigation.vue";
-import LayoutEmpty from "../../miscs/LayoutEmpty.vue";
+import MainEmptyLayout from '../../miscs/MainEmptyLayout.vue';
 import WishListActionSection from "./WishListActionSection.vue";
 // @ is an alias to project root
 // import HelloWorld from "@/components/HelloWorld.vue";
@@ -45,8 +42,7 @@ export default {
   components: {
     WishListItemCard,
     WishListActionSection,
-    LayoutEmpty,
-    ButtonNavigation,
+    MainEmptyLayout,
   },
   computed: {
     ...mapState("auth/wishList", ["wishList", "searchQ"]),

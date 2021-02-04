@@ -1,10 +1,10 @@
 <template>
   <v-card
-    class="c-card-item rounded-lg d-flex flex-column"
+    class="c-card-item rounded-lg"
     :class="gameData.added >= 12000 ? 'c-big' : ''"
     ripple
   >
-    <router-link :to="'game/' + gameData.slug" class="text-decoration-none">
+    <router-link :to="'game/' + gameData.slug" class="d-flex flex-column text-decoration-none fill-height">
       <!-- PREVIEW -->
       <v-hover v-slot="{ hover }">
         <v-card class="rounded-t-lg" flat tile>

@@ -12,7 +12,11 @@
     </v-btn>
     <!-- item cards -->
 
-    <main-container :isLoading="gameList.isLoading">
+    <main-container
+      :isLoading="gameList.isLoading"
+      :isError="gameList.isError"
+      :actionReload="loadGameList"
+    >
       <template v-slot:content>
         <div class="c-grid-list pa-4">
           <home-game-card
@@ -59,9 +63,27 @@ export default {
     HomeGameCard,
   },
   data: () => ({
-    gameList: { data: [], isLoading: true },
-    krappa: "krappa",
+    gameList: { data: [], isLoading: true, isError: false },
   }),
+  methods: {
+    loadGameList() {
+      this.gameList =  { data: [], isLoading: true, isError: false }
+      let now = this.$store.getters.dateNow;
+      let ymdNow = now.y + "-" + now.mm + "-" + now.dd;
+      this.$api.call.rawg.getRecentGames(
+        {
+          dates: "2020-12-01," + ymdNow,
+          platforms: "18,1,7",
+        },
+        (response) => {
+          // console.log(response)
+          this.gameList = response;
+          window.scrollTo(0, 0);
+          // console.log(this.gameList.data.results)
+        }
+      );
+    },
+  },
   created() {
     // console.log(this.gameList);
   },
@@ -74,8 +96,8 @@ export default {
     //       platforms: '18,1,7'
     //     }
     //   })
-    let now = this.$store.getters.dateNow;
-    let ymdNow = now.y + "-" + now.mm + "-" + now.dd;
+    // let now = this.$store.getters.dateNow;
+    // let ymdNow = now.y + "-" + now.mm + "-" + now.dd;
     // let getRecentGames = async (attempt) => {
     //   if (attempt <= 0) return;
     //   this.$api.rawg
@@ -98,17 +120,7 @@ export default {
     // };
     // getRecentGames(3);
 
-    this.$api.call.rawg.getRecentGames(
-      {
-        dates: "2020-12-01," + ymdNow,
-        platforms: "18,1,7",
-      },
-      (response) => {
-        this.gameList = { data: response.data, isLoading: false };
-        window.scrollTo(0, 0)
-        console.log(this.gameList.data.results)
-      }
-    );
+    this.loadGameList();
   },
 };
 </script>
@@ -157,11 +169,10 @@ export default {
 /* first child and child number 5*n become big */
 /* .c-grid-list > .c-grid-item:nth-child(5n),
 .c-grid-item:first-child { */
-.c-grid-list > .c-big{
+.c-grid-list > .c-big {
   /* Spans two columns */
-  grid-column: span 2; 
-   /* Spans two rows */
+  grid-column: span 2;
+  /* Spans two rows */
   grid-row: span 1;
 }
-
 </style>

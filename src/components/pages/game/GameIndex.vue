@@ -70,23 +70,32 @@ export default {
   props: {},
   data: function () {
     return {
-      gameDetails: { data: {}, isLoading: true },
+      gameDetails: { data: {}, isLoading: true, isError: false },
     };
   },
-  methods: {},
+  methods: {
+    loadGameDetails() {
+      this.gameDetails = { data: {}, isLoading: true, isError: false }
+      // calling API
+      this.$api.call.rawg.getGameDetails(
+        this.$route.params.slug,
+        (response) => {
+          // this.$store.dispatch("setGameDetails", {
+          //   data: response.data,
+          //   isLoading: false,
+          // });
+          this.gameDetails = response;
+          this.$store.dispatch('setDocTitle', this.gameDetails.data.name)
+          let gd = this.gameDetails;
+          // this.game = gd;
+          this.$global.sorting.ascending(gd.data.platforms, "platform.name");
+          window.scrollTo(0, 0);
+        }
+      );
+    },
+  },
   created() {
-    // calling API
-    this.$api.call.rawg.getGameDetails(this.$route.params.slug, (response) => {
-      // this.$store.dispatch("setGameDetails", {
-      //   data: response.data,
-      //   isLoading: false,
-      // });
-      this.gameDetails = { data: response.data, isLoading: false };
-      let gd = this.gameDetails;
-      // this.game = gd;
-      this.$global.sorting.sortAsc(gd.data.platforms, "platform.name");
-      window.scrollTo(0, 0)
-    });
+    this.loadGameDetails()
   },
 };
 </script>

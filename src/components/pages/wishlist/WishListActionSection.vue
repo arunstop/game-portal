@@ -73,17 +73,17 @@ export default {
     sortList() {
       return {
         byName: () => {
-          this.$global.sorting.sortAsc(this.wishList, "name");
+          this.$global.sorting.ascending(this.wishList, "name");
         },
         byRating: () => {
-          this.$global.sorting.sortAsc(this.wishList, "rating");
+          this.$global.sorting.ascending(this.wishList, "rating");
         },
         byPopularity: () => {
           //based on how many user added this to their libraries
-          this.$global.sorting.sortAsc(this.wishList, "added");
+          this.$global.sorting.ascending(this.wishList, "added");
         },
         byReleaseDate: () => {
-          this.$global.sorting.sortAsc(this.wishList, "released");
+          this.$global.sorting.ascending(this.wishList, "released");
         },
       };
     },

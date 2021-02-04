@@ -32,10 +32,17 @@ export default {
         }
         // handling the promise event
         let handler = async (apiCall, container, attempt) => {
+            let finalResponse = {
+                data:null,
+                isLoading: false,
+                isError: false
+            }
             // attempting 3 API CALLS
             // if all attempts are used, nothing happened
             if (attempt <= 0) {
                 console.log('All attempts are used, try to reload the page');
+                finalResponse.isError = true
+                container(finalResponse)
                 return;
             }
             // if there are attempts left
@@ -44,7 +51,8 @@ export default {
                 .then((response) => {
                     //if success
                     //filling container with response data
-                    container(response)
+                    finalResponse.data = response.data
+                    container(finalResponse)
                     console.log("Getting requested data, attempt #" + attempt + ' has succeeded')
                     console.log('The data has been parsed')
                 })

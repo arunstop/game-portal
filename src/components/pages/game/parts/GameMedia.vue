@@ -126,6 +126,7 @@ export default {
         autoplay: false,
         controls: true,
         fluid: true,
+        // muted: true,
         sources: [
           {
             src: this.gameDetails.data.clip.clips["640"],

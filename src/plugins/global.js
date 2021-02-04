@@ -6,7 +6,7 @@ var getObjectKey = (object, path) => {
     return getObjectKey(object[properties.shift()], properties.join("."));
 }
 let sorting = {
-    sortAsc(list, path) {
+    ascending(list, path) {
         list.sort((a, b) => {
             let nameA = getObjectKey(a, path);
             let nameB = getObjectKey(b, path);
@@ -19,7 +19,7 @@ let sorting = {
             return 0;
         });
     },
-    sortDesc(list, path) {
+    descending(list, path) {
         list.sort((a, b) => {
             let nameA = getObjectKey(a, path);
             let nameB = getObjectKey(b, path);
