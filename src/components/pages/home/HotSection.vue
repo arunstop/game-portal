@@ -105,6 +105,7 @@ export default {
       },
       (response) => {
         this.gameList = { data: response.data, isLoading: false };
+        window.scrollTo(0, 0)
         console.log(this.gameList.data.results)
       }
     );
@@ -149,7 +150,7 @@ export default {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-gap: 1rem;
-  grid-template-rows: repeat(6, minmax(300px, 1fr));
+  grid-template-rows: repeat(auto-fit, minmax(300px, 1fr));
   grid-auto-flow: dense;
 }
 

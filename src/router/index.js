@@ -54,8 +54,12 @@ const routes = [
 ]
 
 const router = new VueRouter({
+  routes,
   mode: 'history',
-  routes
+  //sroll to top on router change
+  scrollBehavior(){
+    return {x:0,y:0}
+  }
 })
 
 export default router

@@ -31,12 +31,12 @@ let sorting = {
             }
             return 0;
         });
-    }
+    },
 }
 
 // =================PLATFORM ICON GETTERS=================
-let iconGetters = {
-    platform(platformName) {
+let pickers = {
+    platformIcon(platformName) {
         // getting icon by platform name
         platformName = platformName.toLowerCase();
         let icon = "";
@@ -75,12 +75,22 @@ let iconGetters = {
         }
         return icon;
     },
+    scoreColor(score) {
+        let color = "";
+  
+        if (score >= 75) color = "green";
+        else if (score >= 50) color = "orange";
+        else if (score >= 25) color = "red";
+        else color = "grey";
+  
+        return color;
+      },
 }
 
 export default {
     install(Vue) {
         Vue.prototype.$global = {
-            sorting, iconGetters
+            sorting, pickers
         }
     }
 }

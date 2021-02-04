@@ -85,6 +85,7 @@ export default {
       let gd = this.gameDetails;
       // this.game = gd;
       this.$global.sorting.sortAsc(gd.data.platforms, "platform.name");
+      window.scrollTo(0, 0)
     });
   },
 };

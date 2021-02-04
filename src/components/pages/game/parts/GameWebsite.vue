@@ -23,9 +23,9 @@
         >
           <v-icon left>mdi-web</v-icon>
           <span style="white-space: normal">
-            <u v-if="gameDetails.data.website">
-              {{ gameDetails.data.website }}
-            </u>
+            <span v-if="gameDetails.data.website">
+              {{ "Official website" }}
+            </span>
             <span v-else>
               {{ "More information on Google" }}
             </span>
