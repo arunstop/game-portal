@@ -66,7 +66,7 @@
         </v-card>
       </v-hover>
       <v-card-title class="c-card-item-text c-card-item-title text-break">
-        <v-list-item class="ma-0">
+        <v-list-item class="ma-0 pa-0">
           {{ gameData.name }}
         </v-list-item>
       </v-card-title>
