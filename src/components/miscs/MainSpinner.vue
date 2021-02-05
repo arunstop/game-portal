@@ -1,6 +1,6 @@
 <template>
   <!-- <v-progress-circular indeterminate size="120" width="6" /> -->
-  <v-col class="d-flex" cols="12">
+  <v-col class="d-flex" cols="12" :class="animated && 'animate__animated animate__fadeInUpBig'">
     <spring-spinner
       class="ma-auto"
       :animation-duration="2000"
@@ -13,8 +13,9 @@
 <script>
 import { SpringSpinner } from "epic-spinners";
 export default {
-  props:{
-    size: {type: Number, default:90}
+  props: {
+    size: { type: Number, default: 90 },
+    animated: { type: Boolean, default: false },
   },
   components: {
     SpringSpinner,

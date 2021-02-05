@@ -8,12 +8,14 @@ import api from './plugins/api';
 import global from './plugins/global';
 // animate.css
 import 'animate.css'
+import VueYouTubeEmbed from 'vue-youtube-embed'
 
 
 
 Vue.config.productionTip = false
 Vue.use(api)
 Vue.use(global)
+Vue.use(VueYouTubeEmbed)
 
 new Vue({
   router,

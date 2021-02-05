@@ -2,7 +2,7 @@
   <v-card
     class="c-card-item rounded-lg"
     :class="gameData.added >= 12000 ? 'c-big' : ''"
-    ripple
+    @click.self="null"
   >
     <v-hover v-slot="{ hover }">
       <router-link
@@ -25,8 +25,9 @@
             </template>
             <!-- image bottom props -->
             <!-- clip -->
-            <div v-if="gameData.clip && hover">
+            <div v-if="gameData.clip">
               <video
+                v-show="hover"
                 class="c-clip animate__animated animate__fadeInUp animate__faster"
                 autoplay
                 muted
@@ -51,7 +52,7 @@
               >
                 <v-icon x-large>mdi-youtube</v-icon>
               </v-btn>
-              <!-- platformt -->
+              <!-- platforms -->
               <v-sheet
                 class="ms-auto mt-auto px-1 rounded-tl-lg"
                 style="z-index: 1"
@@ -60,6 +61,7 @@
                   class="ma-1"
                   v-for="pp in gameData.parent_platforms"
                   :key="pp.platform.slug"
+                  :color="hover ? 'primary' : ''"
                 >
                   {{ $global.pickers.platformIcon(pp.platform.slug) }}
                 </v-icon>
@@ -67,9 +69,11 @@
             </v-row>
           </v-img>
         </v-card>
-        <v-card-title class="c-card-item-text c-card-item-title text-break">
+        <v-card-title class="c-card-item-text c-card-item-title text-break font-weight-black">
           <v-list-item class="ma-0 pa-0">
-            {{ gameData.name }}
+            <span :class="hover ? 'primary--text' : ''">
+              {{ gameData.name }}
+            </span>
           </v-list-item>
         </v-card-title>
         <!-- GAME GENRES -->
@@ -95,10 +99,12 @@
             <span v-else> Not scored </span>
           </v-chip>
           <v-chip
-            class="c-chip-text me-1 mt-1 font-weight-regular"
+            class="c-chip-text me-1 mt-1 font-weight-regular font-weight-bold"
             v-for="genre in gameData.genres"
             :key="genre.id"
+            :color="hover ? 'primary' : ''"
             small
+            pill
           >
             <span>{{ genre.name }}</span>
           </v-chip>
@@ -109,15 +115,18 @@
           <v-menu>
             <template v-slot:activator="{ on: menu, attrs }">
               <v-btn
-                class="pa-2 ms-auto rounded-lg"
-                color="primary lighten-1"
-                depressed
+                class="pa-2 ms-auto rounded-lg font-weight-bold"
+                :color="hover ? 'primary' : ''"
                 small
+                outlined
                 v-bind="attrs"
                 v-on="{ ...menu }"
                 @click.prevent
               >
                 <v-icon>mdi-dots-horizontal</v-icon>
+                <v-expand-x-transition>
+                  <span v-if="hover">More</span>
+                </v-expand-x-transition>
               </v-btn>
             </template>
             <v-list>
@@ -202,7 +211,7 @@ export default {
   /* display: inline-flex; */
   vertical-align: top;
 }
-.c-card-item:hover {
+.c-card-item:hover, .c-card-item:active {
   transform: scale(1.06) !important;
   /* z-index : 2 to make the hovered item not overlapped by the next items */
   z-index: 2;
@@ -235,6 +244,7 @@ export default {
   position: absolute;
   right: 0;
   bottom: 0;
+  background-color: #000000;
   /* min-width: 100%;
   min-height: 100%; */
   width: 100%;

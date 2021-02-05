@@ -16,6 +16,9 @@
       :isLoading="gameList.isLoading"
       :isError="gameList.isError"
       :actionReload="loadGameList"
+      :infiniteLoad="true"
+      :isLoadingNext="isLoadingNext"
+      :actionNext="loadGameList"
     >
       <template v-slot:content>
         <div class="c-grid-list pa-4">
@@ -26,20 +29,6 @@
             :gameData="game"
           />
         </div>
-        <!-- <div class="py-6 c-scroll-y">
-          <v-row
-            class="ma-0 mt-16 pa-0 justify-center"
-            v-if="gameList.isLoading"
-          >
-            <v-progress-circular indeterminate size="120" width="6" />
-          </v-row>
-          <item-card
-            v-else
-            v-for="game in gameList.data.results"
-            :key="game.slug"
-            :gameData="game"
-          />
-        </div> -->
       </template>
     </main-container>
   </v-col>
@@ -53,6 +42,9 @@ import HomeGameCard from "./HomeGameCard.vue";
 // import ItemCard from "./ItemCard.vue";
 import SearchSection from "./SearchSection.vue";
 
+import moment from "moment";
+// import MainSpinner from "../../miscs/MainSpinner.vue";
+
 export default {
   name: "HotSection",
   components: {
@@ -61,32 +53,52 @@ export default {
     SearchSection,
     MainContainer,
     HomeGameCard,
+    // MainSpinner,
   },
   data: () => ({
     gameList: { data: [], isLoading: true, isError: false },
+    currentPage: 1,
+    isLoadingNext: false,
   }),
   methods: {
     loadGameList() {
-      this.gameList =  { data: [], isLoading: true, isError: false }
-      let now = this.$store.getters.dateNow;
-      let ymdNow = now.y + "-" + now.mm + "-" + now.dd;
+      let page = this.currentPage;
+      if (page === 1) {
+        this.gameList = { data: [], isLoading: true, isError: false };
+      } else {
+        this.isLoadingNext = true;
+      }
+      let dNow = moment().add(1, "M").format("YYYY-MM-DD");
+      let dLastYear = moment().subtract(6, "M").format("YYYY-MM-DD");
+
       this.$api.call.rawg.getRecentGames(
         {
-          dates: "2020-12-01," + ymdNow,
-          platforms: "18,1,7",
+          dates: dLastYear + "," + dNow,
+          // platforms: "18,1,7",
+          page,
         },
         (response) => {
-          // console.log(response)
-          this.gameList = response;
-          window.scrollTo(0, 0);
           // console.log(this.gameList.data.results)
+          if (page === 1) {
+            this.gameList = response;
+            window.scrollTo(0, 0);
+          } else {
+            var moreResults = [].concat(
+              this.gameList.data.results,
+              response.data.results
+            );
+            this.gameList.data.results = moreResults;
+            console.log(this.gameList.data.results);
+            this.isLoadingNext = false;
+          }
+          if (!this.gameList.isError) {
+            this.currentPage++;
+          }
         }
       );
     },
   },
-  created() {
-    // console.log(this.gameList);
-  },
+  created() {},
   mounted() {
     // console.log(this.$store.getters.dateNow);
     // this.$api.rawg

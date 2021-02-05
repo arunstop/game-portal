@@ -52,7 +52,7 @@
         <!-- GAME LABELS -->
         <div class="mt-auto ma-4 pa-0">
           <!-- GAME TITLE -->
-          <!-- text-break class to make text go to the next line if it -->
+          <!-- text-break class to make text go to the next line if text is too long -->
           <v-card-title
             class="ma-0 pa-0 c-card-item-text c-card-item-title white--text text-break"
           >
