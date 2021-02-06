@@ -81,6 +81,8 @@ export default {
           // console.log(this.gameList.data.results)
           if (page === 1) {
             this.gameList = response;
+            //setting game list for search bar
+            // this.$store.dispatch('setGameListInit', response)
             window.scrollTo(0, 0);
           } else {
             var moreResults = [].concat(
@@ -88,7 +90,7 @@ export default {
               response.data.results
             );
             this.gameList.data.results = moreResults;
-            console.log(this.gameList.data.results);
+            // console.log(this.gameList.data.results);
             this.isLoadingNext = false;
           }
           if (!this.gameList.isError) {

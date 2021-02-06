@@ -19,11 +19,15 @@ export default new Vuex.Store({
     ],
     countryList: "https://gist.githubusercontent.com/DmytroLisitsyn/1c31186e5b66f1d6c52da6b5c70b12ad/raw/01b1af9b267471818f4f8367852bd4a2814cbae6/country_dial_info.json",
     gameDetails: { data: {}, isLoading: true },
+    gameListInit: { data: [] }
   },
   mutations: {
     SET_GAME_DETAILS(state, gameDetails) {
       state.gameDetails = gameDetails
       // console.log(state.gameDetails)
+    },
+    SET_GAME_LIST_INIT(state, gameList) {
+      state.gameListInit = gameList
     }
   },
   actions: {
@@ -33,6 +37,10 @@ export default new Vuex.Store({
     },
     setDocTitle({ state }, title) {
       document.title = title + ' — ' + state.appName
+    },
+    setGameListInit({ commit }, gameList) {
+      alert('setGameListInit')
+      commit('SET_GAME_LIST_INIT', gameList)
     }
   },
   getters: {

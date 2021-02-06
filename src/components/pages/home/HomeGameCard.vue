@@ -18,11 +18,11 @@
             :aspect-ratio="16 / 9"
           >
             <!-- loader when image is loading -->
-            <template v-slot:placeholder>
+            <!-- <template v-slot:placeholder>
               <v-row class="fill-height ma-0" align="center" justify="center">
                 <main-spinner :size="60" />
               </v-row>
-            </template>
+            </template> -->
             <!-- image bottom props -->
             <!-- clip -->
             <div v-if="gameData.clip">
@@ -150,9 +150,9 @@
 </template>
 
 <script>
-import MainSpinner from "../../miscs/MainSpinner.vue";
+// import MainSpinner from "../../miscs/MainSpinner.vue";
 export default {
-  components: { MainSpinner },
+  // components: { MainSpinner },
   data() {
     return {
       menuList: [
@@ -233,12 +233,12 @@ export default {
   max-height: 90px !important;
 }
 /* elli */
-.c-chip-text span {
+/* .c-chip-text span {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 114px !important;
-}
+} */
 
 .c-clip {
   position: absolute;
