@@ -21,8 +21,8 @@
               dialog.showing = false;
             "
           >
-            OK</v-btn
-          >
+            OK
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -35,8 +35,7 @@ export default {
   computed: {
     ...mapState("ui", ["dialogSet"]),
   },
-  methods: {
-  },
+  methods: {},
 };
 </script>
 

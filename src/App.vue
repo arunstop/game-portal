@@ -35,7 +35,7 @@
     </v-app-bar>
     <!-- navdrawer -->
     <main-nav-drawer />
-    <v-main>
+    <v-main class="c-scrollbar">
       <!-- main nav pages -->
       <router-view class="c-vh100 animate__animated animate__fadeIn"> </router-view>
     </v-main>
@@ -89,7 +89,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 /* 100% viewport height */
 .c-vh100 {
   min-height: 100vh;
@@ -98,20 +98,60 @@ export default {
 /* scrollbar */
 /* width */
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 18px !important;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  /* box-shadow: inset 0 0 10px 10px transparent;
-  border: solid 3px transparent; */
-  background-color: transparent;
+  box-shadow: inset 0 0 10px 10px transparent;
+  border: solid 3px transparent;
+  background-color: transparent !important;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  box-shadow: inset 0 0 10px 10px #d63b30;
-  border: solid 3px transparent;
-  border-radius: 12px;
+  box-shadow: inset 0 0 10px 10px #2196f3 !important;
+  border: solid 4px transparent !important;
+  border-radius: 12px !important;
 }
+
+/* 
+.theme--light::-webkit-scrollbar {
+  width: 15px;
+}
+
+.theme--light::-webkit-scrollbar-track {
+  background: #e6e6e6;
+  border-left: 1px solid #dadada;
+}
+
+.theme--light::-webkit-scrollbar-thumb {
+  background: #b0b0b0;
+  border: solid 3px #e6e6e6;
+  border-radius: 7px;
+}
+
+.theme--light::-webkit-scrollbar-thumb:hover {
+  background: black;
+}
+
+.theme--dark::-webkit-scrollbar {
+  width: 15px;
+}
+
+.theme--dark::-webkit-scrollbar-track {
+  background: #202020;
+  border-left: 1px solid #2c2c2c;
+}
+
+.theme--dark::-webkit-scrollbar-thumb {
+  background: #3e3e3e;
+  border: solid 3px #202020;
+  border-radius: 7px;
+}
+
+.theme--dark::-webkit-scrollbar-thumb:hover {
+  background: white;
+/* }  */
+
 </style>

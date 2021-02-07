@@ -11,7 +11,6 @@
       <span class="text-h4">Hot Games</span>
     </v-btn>
     <!-- item cards -->
-
     <main-container
       :isLoading="gameList.isLoading"
       :isError="gameList.isError"
@@ -178,6 +177,7 @@ export default {
   grid-gap: 1rem;
   grid-template-rows: repeat(auto-fit, minmax(300px, 1fr));
   grid-auto-flow: dense;
+  position: relative;
 }
 
 /* first child and child number 5*n become big */

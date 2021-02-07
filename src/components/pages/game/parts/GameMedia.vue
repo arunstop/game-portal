@@ -6,13 +6,27 @@
     progress
     progress-color="deep-orange"
     hide-delimiters
-    height="500px"
   >
     <v-carousel-item v-if="gameDetails.data.clip.video">
-      <!-- <main-video-player :options="videoOptions" :elementRef="'videoPreview'" /> -->
-      <youtube :videoId="gameDetails.data.clip.video" :player-width="'100%'" :player-height="'500px'"></youtube>
+    <!-- <main-video-player :options="videoOptions" :elementRef="'videoPreview'" /> -->
+    <youtube
+        :videoId="gameDetails.data.clip.video"
+        :player-width="'100%'"
+        :player-height="'500px'"
+      ></youtube>
     </v-carousel-item>
-    <v-carousel-item :src="gameDetails.data.background_image">
+    <v-carousel-item>
+      <v-img
+        class="fill-height"
+        :src="gameDetails.data.background_image"
+        :lazy-src="gameDetails.data.background_image"
+      >
+        <template v-slot:placeholder>
+          <v-row class="fill-height ma-0" align="center" justify="center">
+            <v-progress-circular indeterminate color="grey lighten-4" />
+          </v-row>
+        </template>
+      </v-img>
     </v-carousel-item>
     <v-carousel-item :src="gameDetails.data.background_image_additional" />
   </v-carousel>
@@ -43,9 +57,7 @@ export default {
     },
   },
   data: function () {
-    return {
-      
-    };
+    return {};
   },
   methods: {},
 };
