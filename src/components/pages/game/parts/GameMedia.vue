@@ -7,7 +7,7 @@
     progress-color="deep-orange"
     hide-delimiters
   >
-    <v-carousel-item v-if="gameDetails.data.clip.video">
+    <v-carousel-item v-if="gameDetails.data.clip">
     <!-- <main-video-player :options="videoOptions" :elementRef="'videoPreview'" /> -->
     <youtube
         :videoId="gameDetails.data.clip.video"

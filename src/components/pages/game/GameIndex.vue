@@ -8,6 +8,7 @@
         </v-row>
         <!-- GAME NAME -->
         <h1 class="my-4">{{ gameDetails.data.name }}</h1>
+        <p class="font-weight-bold">Release Date : {{ releaseDate }}</p>
         <!-- RATINGS -->
         <v-row class="my-2 ps-2 pe-3" no-gutters>
           <game-score :gameDetails="gameDetails" />
@@ -33,6 +34,11 @@
         </v-row>
         <game-description :gameDetails="gameDetails" />
         <game-sys-req :gameDetails="gameDetails" />
+        <game-similar-list
+          v-if="gameSimilarList.data"
+          :gameSimilarList="gameSimilarList"
+          :loadGameSimilarList="loadGameSimilarList"
+        />
       </v-col>
     </template>
   </main-container>
@@ -49,9 +55,10 @@ import GamePlatform from "./parts/GamePlatform.vue";
 import GamePublisher from "./parts/GamePublisher.vue";
 import GameRating from "./parts/GameRating.vue";
 import GameScore from "./parts/GameScore.vue";
+import GameSimilarList from "./parts/GameSimilarList.vue";
 import GameStore from "./parts/GameStore.vue";
 import GameSysReq from "./parts/GameSysReq.vue";
-import GameTag from './parts/GameTag.vue';
+import GameTag from "./parts/GameTag.vue";
 import GameWebsite from "./parts/GameWebsite.vue";
 export default {
   components: {
@@ -68,7 +75,7 @@ export default {
     GameDescription,
     GameSysReq,
     MainContainer,
-
+    GameSimilarList,
   },
   computed: {
     // ...mapState(["gameDetails"]),
@@ -77,6 +84,8 @@ export default {
   data: function () {
     return {
       gameDetails: { data: {}, isLoading: true, isError: false },
+      gameSimilarList: { data: [], isLoading: true, isError: false },
+      releaseDate: "",
     };
   },
   methods: {
@@ -90,12 +99,38 @@ export default {
           //   data: response.data,
           //   isLoading: false,
           // });
+
+          // getting response data
           this.gameDetails = response;
+          // setting document title
           this.$store.dispatch("setDocTitle", this.gameDetails.data.name);
+          // giving alias
           let gd = this.gameDetails;
-          // this.game = gd;
+          // formatting release date
+          this.releaseDate = this.$global
+            .moment(gd.data.released, "YYYY-MM-DD")
+            .format("D MMMM YYYY");
+          // sorting platform name
           this.$global.sorting.ascending(gd.data.platforms, "platform.name");
+          // getting similar games
+          this.loadGameSimilarList();
+          // scroll to top
           window.scrollTo(0, 0);
+        }
+      );
+    },
+    loadGameSimilarList() {
+      this.gameSimilarList = { data: [], isLoading: true, isError: false };
+      this.$api.call.rawg.getSimilarGames(
+        this.$route.params.slug,
+        (response) => {
+          // getting response data
+          this.gameSimilarList = response;
+          console.log(response);
+          // console.log(this.gameSimilarList.data)
+          let gls = this.gameSimilarList;
+          // sort by popular game
+          this.$global.sorting.descending(gls.data.results, "added");
         }
       );
     },
@@ -103,8 +138,38 @@ export default {
   created() {
     this.loadGameDetails();
   },
+  // update on route change
+  watch: {
+    // '$route'{
+    //   handler: 'loadGameDetails',
+    //   immediate: true
+    // }
+    $route() {
+      // alert('krappa')
+      this.loadGameDetails();
+    },
+  },
 };
 </script>
 
 <style>
+/* GRID STYLE */
+.c-grid-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 1rem;
+  grid-template-rows: repeat(auto-fit, minmax(300px, 1fr));
+  grid-auto-flow: dense;
+  position: relative;
+}
+
+/* first child and child number 5*n become big */
+/* .c-grid-list > .c-grid-item:nth-child(5n),
+.c-grid-item:first-child { */
+.c-grid-list > .c-big {
+  /* Spans two columns */
+  grid-column: span 2;
+  /* Spans two rows */
+  grid-row: span 1;
+}
 </style>

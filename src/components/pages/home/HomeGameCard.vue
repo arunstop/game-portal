@@ -8,7 +8,10 @@
         class="c-card-item rounded-lg fill-height d-flex flex-column"
         :class="gameData.added >= 12000 ? 'c-big' : ''"
       >
-        <router-link :to="'game/' + gameData.slug" class="text-decoration-none">
+        <router-link
+          :to="'/game/' + gameData.slug"
+          class="text-decoration-none"
+        >
           <!-- PREVIEW -->
           <v-card class="rounded-t-lg" flat tile>
             <v-img
@@ -88,12 +91,11 @@
         </router-link>
 
         <!-- NAME -->
-
         <v-card-title
           class="c-card-item-text c-card-item-title pt-3 text-break font-weight-black"
         >
           <router-link
-            :to="'game/' + gameData.slug"
+            :to="'/game/' + gameData.slug"
             class="text-decoration-none"
           >
             <v-list-item class="ma-0 pa-0" dense>
@@ -104,7 +106,7 @@
           </router-link>
         </v-card-title>
         <!-- GAME SCORE & GENRES -->
-        <v-card-subtitle class="c-cards-item-chips py-2 font-weight-bold">
+        <v-card-subtitle class="c-cards-item-chips font-weight-bold">
           <v-chip
             :color="$global.pickers.scoreColor(gameData.metacritic)"
             class="c-chip-text me-1 mt-1 font-weight-black"

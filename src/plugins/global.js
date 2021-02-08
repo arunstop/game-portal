@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 //getting nested object key using recursive function
 // =================SORTING=================
 var getObjectKey = (object, path) => {
@@ -77,20 +79,22 @@ let pickers = {
     },
     scoreColor(score) {
         let color = "";
-  
+
         if (score >= 75) color = "green";
         else if (score >= 50) color = "orange";
         else if (score >= 25) color = "red";
         else color = "grey";
-  
+
         return color;
-      },
+    },
 }
+
+// let now = moment;
 
 export default {
     install(Vue) {
         Vue.prototype.$global = {
-            sorting, pickers
+            sorting, pickers, moment,
         }
     }
 }

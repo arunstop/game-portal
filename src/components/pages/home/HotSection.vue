@@ -41,7 +41,6 @@ import HomeGameCard from "./HomeGameCard.vue";
 // import ItemCard from "./ItemCard.vue";
 import SearchSection from "./SearchSection.vue";
 
-import moment from "moment";
 // import MainSpinner from "../../miscs/MainSpinner.vue";
 
 export default {
@@ -67,8 +66,8 @@ export default {
       } else {
         this.isLoadingNext = true;
       }
-      let dNow = moment().add(1, "M").format("YYYY-MM-DD");
-      let dLastYear = moment().subtract(6, "M").format("YYYY-MM-DD");
+      let dNow = this.$global.moment().add(1, "M").format("YYYY-MM-DD");
+      let dLastYear = this.$global.moment().subtract(6, "M").format("YYYY-MM-DD");
 
       this.$api.call.rawg.getRecentGames(
         {
@@ -101,38 +100,6 @@ export default {
   },
   created() {},
   mounted() {
-    // console.log(this.$store.getters.dateNow);
-    // this.$api.rawg
-    //   .get("",{
-    //     params:{
-    //       dates: '2019-09-01,2019-09-30',
-    //       platforms: '18,1,7'
-    //     }
-    //   })
-    // let now = this.$store.getters.dateNow;
-    // let ymdNow = now.y + "-" + now.mm + "-" + now.dd;
-    // let getRecentGames = async (attempt) => {
-    //   if (attempt <= 0) return;
-    //   this.$api.rawg
-    //     .getRecentGames({
-    //       dates: "2020-12-01," + ymdNow,
-    //       platforms: "18,1,7",
-    //     })
-    //     .then((response) => {
-    //       this.gameList = response.data;
-    //       console.log(
-    //         "Getting recent games, attempt #" + attempt + " has succeded"
-    //       );
-    //       console.log("The data has been parsed");
-    //     })
-    //     .catch((error) => {
-    //       console.log("Attempt #" + attempt + " has failed : \n" + error);
-    //       console.log("Executing next attempt....");
-    //       getRecentGames(attempt - 1);
-    //     });
-    // };
-    // getRecentGames(3);
-
     this.loadGameList();
   },
 };

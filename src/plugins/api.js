@@ -21,6 +21,7 @@ export default {
         let rawg = {
             getRecentGames: (params) => init(baseUrlSet.rawg('games')).get('', { params }),
             getGameDetails: (params) => init(baseUrlSet.rawg(`games/${params}`)).get(''),
+            getSimilarGames: (params) => init(baseUrlSet.rawg(`games/${params}/suggested`)).get(''),
         }
         let github = {
             getCountryList: init(baseUrlSet.github.countryList).get(''),
@@ -73,7 +74,8 @@ export default {
             },
             rawg: {
                 getRecentGames: (params, container) => (handler(apis.rawg.getRecentGames(params), container, attemptCount)),
-                getGameDetails: (params, container) => (handler(apis.rawg.getGameDetails(params), container, attemptCount))
+                getGameDetails: (params, container) => (handler(apis.rawg.getGameDetails(params), container, attemptCount)),
+                getSimilarGames: (params, container) => (handler(apis.rawg.getSimilarGames(params), container, attemptCount))
             }
         }
 
