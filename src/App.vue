@@ -98,7 +98,7 @@ export default {
 /* scrollbar */
 /* width */
 ::-webkit-scrollbar {
-  width: 18px !important;
+  width: 12px !important;
 }
 
 /* Track */
@@ -111,8 +111,8 @@ export default {
 /* Handle */
 ::-webkit-scrollbar-thumb {
   box-shadow: inset 0 0 10px 10px #2196f3 !important;
-  border: solid 4px transparent !important;
-  border-radius: 12px !important;
+  border: solid 4px transparent #2196f3 !important;
+  border-radius: 4px !important;
 }
 
 /* 

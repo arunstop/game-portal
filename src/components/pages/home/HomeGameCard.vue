@@ -199,6 +199,7 @@
       v-if="gameData.clip && openVideoOverlay"
       v-model="openVideoOverlay"
       persistent
+      :overlay-opacity="0.6"
       max-width="640px"
     >
       <!-- <v-btn icon absolute x-large right top @click="openVideoOverlay = false">
@@ -223,14 +224,31 @@
       v-if="gameData.short_screenshots && openScreenshotOverlay"
       v-model="openScreenshotOverlay"
       persistent
+      :overlay-opacity="0.6"
+      max-width="960px"
     >
       <v-card class="rounded-lg">
         <v-carousel class="mb-2" cycle show-arrows-on-hover>
+          <!-- <template v-slot:prev="{ on, attrs }">
+            <v-btn v-bind="attrs" v-on="on" icon x-large color="primary lighten-2">
+              <v-icon size="60">mdi-chevron-left-circle</v-icon>
+            </v-btn>
+          </template>
+          <template v-slot:next="{ on, attrs }">
+            <v-btn v-bind="attrs" v-on="on" icon x-large color="primary lighten-2">
+              <v-icon size="60">mdi-chevron-right-circle</v-icon>
+            </v-btn>
+          </template> -->
           <v-carousel-item
             v-for="ss in gameData.short_screenshots"
             :key="ss.id"
           >
-            <v-img :src="ss.image" :lazy-src="ss.image">
+            <v-img
+              :src="ss.image"
+              :lazy-src="ss.image"
+              :aspect-ratio="16 / 9"
+              height="100%"
+            >
               <template v-slot:placeholder>
                 <v-row class="fill-height ma-0" align="center" justify="center">
                   <v-progress-circular indeterminate color="grey lighten-4" />

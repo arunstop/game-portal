@@ -18,6 +18,9 @@
           <game-platform :gameDetails="gameDetails" />
           <game-genre :gameDetails="gameDetails" />
         </v-row>
+        <v-row class="my-2 ps-2 pe-3" v-if="gameDetails.data.tags" no-gutters>
+          <game-tag :gameDetails="gameDetails" />
+        </v-row>
         <!-- DEVELOPERS AND PUBLISHERS -->
         <v-row class="my-2 ps-2 pe-3" no-gutters>
           <game-developer :gameDetails="gameDetails" />
@@ -48,6 +51,7 @@ import GameRating from "./parts/GameRating.vue";
 import GameScore from "./parts/GameScore.vue";
 import GameStore from "./parts/GameStore.vue";
 import GameSysReq from "./parts/GameSysReq.vue";
+import GameTag from './parts/GameTag.vue';
 import GameWebsite from "./parts/GameWebsite.vue";
 export default {
   components: {
@@ -56,6 +60,7 @@ export default {
     GameRating,
     GamePlatform,
     GameGenre,
+    GameTag,
     GameDeveloper,
     GamePublisher,
     GameStore,
@@ -63,6 +68,7 @@ export default {
     GameDescription,
     GameSysReq,
     MainContainer,
+
   },
   computed: {
     // ...mapState(["gameDetails"]),
@@ -75,7 +81,7 @@ export default {
   },
   methods: {
     loadGameDetails() {
-      this.gameDetails = { data: {}, isLoading: true, isError: false }
+      this.gameDetails = { data: {}, isLoading: true, isError: false };
       // calling API
       this.$api.call.rawg.getGameDetails(
         this.$route.params.slug,
@@ -85,7 +91,7 @@ export default {
           //   isLoading: false,
           // });
           this.gameDetails = response;
-          this.$store.dispatch('setDocTitle', this.gameDetails.data.name)
+          this.$store.dispatch("setDocTitle", this.gameDetails.data.name);
           let gd = this.gameDetails;
           // this.game = gd;
           this.$global.sorting.ascending(gd.data.platforms, "platform.name");
@@ -95,7 +101,7 @@ export default {
     },
   },
   created() {
-    this.loadGameDetails()
+    this.loadGameDetails();
   },
 };
 </script>

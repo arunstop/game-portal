@@ -2,7 +2,7 @@
   <v-col cols="12" md="6">
     <v-alert
       class="mx-3 ps-6 rounded-lg"
-      border="right"
+      border="left"
       colored-border
       color="primary lighten-4"
       elevation="2"
