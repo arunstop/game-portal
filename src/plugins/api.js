@@ -4,7 +4,7 @@ export default {
     install(Vue) {
         let init = (baseURL, options) => axios.create({
             baseURL,
-            timeout: 10000,
+            timeout: 10000, // milliseconds
             ...options
         })
         let baseUrlSet = {
@@ -22,6 +22,7 @@ export default {
             getRecentGames: (params) => init(baseUrlSet.rawg('games')).get('', { params }),
             getGameDetails: (params) => init(baseUrlSet.rawg(`games/${params}`)).get(''),
             getSimilarGames: (params) => init(baseUrlSet.rawg(`games/${params}/suggested`)).get(''),
+            getGameRedditPosts: (params) => init(baseUrlSet.rawg(`games/${params.path}/reddit`)).get('', { params: params.query }),
         }
         let github = {
             getCountryList: init(baseUrlSet.github.countryList).get(''),
@@ -34,7 +35,7 @@ export default {
         // handling the promise event
         let handler = async (apiCall, container, attempt) => {
             let finalResponse = {
-                data:null,
+                data: null,
                 isLoading: false,
                 isError: false
             }
@@ -52,6 +53,7 @@ export default {
                 .then((response) => {
                     //if success
                     //filling container with response data
+                    console.log(response.config.baseURL)
                     finalResponse.data = response.data
                     container(finalResponse)
                     console.log("Getting requested data, attempt #" + attempt + ' has succeeded')
@@ -75,7 +77,8 @@ export default {
             rawg: {
                 getRecentGames: (params, container) => (handler(apis.rawg.getRecentGames(params), container, attemptCount)),
                 getGameDetails: (params, container) => (handler(apis.rawg.getGameDetails(params), container, attemptCount)),
-                getSimilarGames: (params, container) => (handler(apis.rawg.getSimilarGames(params), container, attemptCount))
+                getSimilarGames: (params, container) => (handler(apis.rawg.getSimilarGames(params), container, attemptCount)),
+                getGameRedditPosts: (params, container) => (handler(apis.rawg.getGameRedditPosts(params), container, attemptCount)),
             }
         }
 

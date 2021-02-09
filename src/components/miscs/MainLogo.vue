@@ -11,7 +11,7 @@
 <script>
 export default {
   props: {
-    mw: Number,
+    mw: {type:Number, default:60},
   },
 };
 </script>

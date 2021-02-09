@@ -1,5 +1,7 @@
 <template>
-  <main-container :isLoading="gameDetails.isLoading">
+  <main-container :isLoading="gameDetails.isLoading"
+      :isError="gameDetails.isError"
+      :actionReload="loadGameDetails">
     <template v-slot:content>
       <v-col>
         <!-- GAME MEDIAS -->
@@ -39,6 +41,7 @@
           :gameSimilarList="gameSimilarList"
           :loadGameSimilarList="loadGameSimilarList"
         />
+        <game-reddit-posts />
       </v-col>
     </template>
   </main-container>
@@ -54,6 +57,7 @@ import GameMedia from "./parts/GameMedia.vue";
 import GamePlatform from "./parts/GamePlatform.vue";
 import GamePublisher from "./parts/GamePublisher.vue";
 import GameRating from "./parts/GameRating.vue";
+import GameRedditPosts from './parts/GameRedditPosts.vue';
 import GameScore from "./parts/GameScore.vue";
 import GameSimilarList from "./parts/GameSimilarList.vue";
 import GameStore from "./parts/GameStore.vue";
@@ -76,6 +80,9 @@ export default {
     GameSysReq,
     MainContainer,
     GameSimilarList,
+    // lazy loading
+    GameRedditPosts,
+    // GameRedditPosts : ()=>import(/* webpackChunkName: "GameRedditPosts" */  './parts/GameRedditPosts.vue')
   },
   computed: {
     // ...mapState(["gameDetails"]),
@@ -85,6 +92,7 @@ export default {
     return {
       gameDetails: { data: {}, isLoading: true, isError: false },
       gameSimilarList: { data: [], isLoading: true, isError: false },
+      gameRedditPosts: { data: [], isLoading: true, isError: false },
       releaseDate: "",
     };
   },
@@ -99,21 +107,27 @@ export default {
           //   data: response.data,
           //   isLoading: false,
           // });
-
+          
           // getting response data
           this.gameDetails = response;
+          // giving alias for shorter code
+          let gd = this.gameDetails;
           // setting document title
           this.$store.dispatch("setDocTitle", this.gameDetails.data.name);
-          // giving alias
-          let gd = this.gameDetails;
-          // formatting release date
-          this.releaseDate = this.$global
-            .moment(gd.data.released, "YYYY-MM-DD")
-            .format("D MMMM YYYY");
-          // sorting platform name
-          this.$global.sorting.ascending(gd.data.platforms, "platform.name");
-          // getting similar games
-          this.loadGameSimilarList();
+
+          // if call is not error
+          if (!gd.isError) {
+            // formatting release date
+            this.releaseDate = this.$global
+              .moment(gd.data.released, "YYYY-MM-DD")
+              .format("D MMMM YYYY");
+            // sorting platform name
+            this.$global.sorting.ascending(gd.data.platforms, "platform.name");
+            // getting similar games
+            this.loadGameSimilarList();
+            // getting reddit posts
+            // this.loadGameRedditPosts();
+          }
           // scroll to top
           window.scrollTo(0, 0);
         }
@@ -126,7 +140,6 @@ export default {
         (response) => {
           // getting response data
           this.gameSimilarList = response;
-          console.log(response);
           // console.log(this.gameSimilarList.data)
           let gls = this.gameSimilarList;
           // sort by popular game
@@ -134,6 +147,7 @@ export default {
         }
       );
     },
+    
   },
   created() {
     this.loadGameDetails();
