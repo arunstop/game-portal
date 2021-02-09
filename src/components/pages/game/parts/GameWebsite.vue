@@ -51,7 +51,7 @@
           class="mb-2 me-2 font-weight-bold text-none"
           outlined
           target="_blank"
-          color="#ff4500"
+          color="reddit"
           link
         >
           <v-icon left>mdi-reddit</v-icon>

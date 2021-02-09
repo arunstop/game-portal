@@ -1,10 +1,11 @@
 <template>
   <v-col>
-     <span class="text-h6">Similar games :</span>
+    <span class="text-h6">Similar games :</span>
     <main-container
       :isLoading="gameSimilarList.isLoading"
       :isError="gameSimilarList.isError"
       :actionReload="loadGameSimilarList"
+      :isEmpty="gameSimilarList.data.count === 0 ? true : false"
     >
       <template v-slot:content>
         <div class="c-grid-list pa-4">
@@ -21,8 +22,8 @@
 </template>
 
 <script>
-import MainContainer from '../../../miscs/MainContainer.vue';
-import HomeGameCard from '../../home/HomeGameCard.vue';
+import MainContainer from "../../../miscs/MainContainer.vue";
+import HomeGameCard from "../../home/HomeGameCard.vue";
 export default {
   components: { MainContainer, HomeGameCard },
   props: {

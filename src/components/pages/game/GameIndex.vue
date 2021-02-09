@@ -1,7 +1,9 @@
 <template>
   <main-container :isLoading="gameDetails.isLoading"
       :isError="gameDetails.isError"
-      :actionReload="loadGameDetails">
+      :actionReload="loadGameDetails"
+      :isEmpty="!gameDetails.data ? true : false"
+      >
     <template v-slot:content>
       <v-col>
         <!-- GAME MEDIAS -->

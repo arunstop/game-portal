@@ -5,68 +5,76 @@
     }"
     transition="fade-transition"
   >
-    <main-container
-      :isLoading="gameRedditPosts.isLoading"
-      :isError="gameRedditPosts.isError"
-      :actionReload="loadGameRedditPosts"
-      :infiniteLoad="true"
-      :isLoadingNext="gameRedditPosts.isLoadingNext"
-      :actionNext="loadGameRedditPosts"
-    >
-      <template v-slot:content>
-        <v-col>
-          <p class="text-h6">Community posts :</p>
-          <v-row
-            no-gutters
-            class="c-grid-list-reddit-posts d-flex justify-space-around"
-          >
-            <v-hover
-              v-slot="{ hover }"
-              v-for="post in gameRedditPosts.data.results"
-              :key="post.id"
+    <v-col class="ma-0 pa-0">
+      <p class="text-h6">Community posts :</p>
+      <main-container
+        :isLoading="gameRedditPosts.isLoading"
+        :isError="gameRedditPosts.isError"
+        :actionReload="loadGameRedditPosts"
+        :infiniteLoad="true"
+        :isLoadingNext="gameRedditPosts.isLoadingNext"
+        :actionNext="loadGameRedditPosts"
+        :isEmpty="gameRedditPosts.data.count === 0 ? true : false"
+      >
+        <template v-slot:content>
+          <v-col>
+            <v-row
+              no-gutters
+              class="c-grid-list-reddit-posts d-flex justify-space-around"
             >
-              <a
-                class="text-decoration-none primary--text"
-                :href="post.url"
-                target="_blank"
+              <v-hover
+                v-slot="{ hover }"
+                v-for="post in gameRedditPosts.data.results"
+                :key="post.id"
               >
-                <v-alert
-                  class="ms-2 c-reddit-post"
-                  border="left"
-                  text
-                  colored-border
-                  :color="hover ? 'primary' : '#ff4500'"
-                  elevation="2"
+                <a
+                  class="text-decoration-none primary--text"
+                  style="height: min-content"
+                  :href="post.url"
+                  target="_blank"
                 >
-                  <v-list-item>
-                    <v-list-item-avatar
-                      v-if="post.image"
-                      class="rounded-lg"
-                      size="auto"
-                      tile
-                    >
-                      <v-img :src="post.image"> </v-img>
-                    </v-list-item-avatar>
-                    <v-list-item-content>
-                      <p
-                        class="font-weight-black text-h6"
-                        :class="hover ? 'primary--text' : ''"
+                  <v-alert
+                    class="ms-2 c-reddit-post"
+                    border="left"
+                    text
+                    colored-border
+                    :color="hover ? 'primary' : 'reddit'"
+                    elevation="2"
+                    max-width="600px"
+                  >
+                    <v-list-item>
+                      <v-list-item-avatar
+                        v-if="post.image"
+                        class="rounded-lg"
+                        size="auto"
+                        tile
                       >
-                        {{ post.name }}
-                      </p>
-                      <p
-                        class="mt-2 text-body-2"
-                        :class="hover ? 'primary--text' : ''"
-                      >
-                        Posted
-                        <strong>{{ countCreatedTime(post.created) }}</strong> by
-                        <u>{{ post.username }}</u>
-                      </p>
-                      <!-- <p class="font-weight-bold text-h6"></p>
+                        <v-img :src="post.image"> </v-img>
+                      </v-list-item-avatar>
+                      <v-list-item-content>
+                        <p
+                          class="font-weight-black text-h6"
+                          :class="hover ? 'primary--text' : ''"
+                        >
+                          {{ post.name }}
+                        </p>
+                        <p
+                          class="mt-2 text-body-2"
+                          :class="hover ? 'primary--text' : ''"
+                        >
+                          <v-icon :color="hover ? 'primary' : 'reddit'" large>
+                            mdi-reddit
+                          </v-icon>
+                          Posted
+                          <strong>{{ countCreatedTime(post.created) }}</strong>
+                          by
+                          <u>{{ post.username }}</u>
+                        </p>
+                        <!-- <p class="font-weight-bold text-h6"></p>
                     <p class=""></p> -->
-                    </v-list-item-content>
-                  </v-list-item>
-                  <!-- <v-img
+                      </v-list-item-content>
+                    </v-list-item>
+                    <!-- <v-img
             v-if="post.image"
             :src="post.image"
             class="rounded-md"
@@ -75,13 +83,14 @@
           >
           </v-img>
           <p v-if="post.text" v-html="post.text"></p> -->
-                </v-alert>
-              </a>
-            </v-hover>
-          </v-row>
-        </v-col>
-      </template>
-    </main-container>
+                  </v-alert>
+                </a>
+              </v-hover>
+            </v-row>
+          </v-col>
+        </template>
+      </main-container>
+    </v-col>
   </v-lazy>
 </template>
 
@@ -125,6 +134,7 @@ export default {
               page: this.gameRedditPosts.page,
               isLoadingNext: false,
             };
+            // console.log(this.gameRedditPosts.data.results.length===0 ? true : false)
           }
           //   if not first page, get data and set page +1
           else {
@@ -141,8 +151,8 @@ export default {
               isLoadingNext: false,
             };
           }
-           //   adding page + 1
-            this.gameRedditPosts.page++;
+          //   adding page + 1
+          this.gameRedditPosts.page++;
 
           //   this.$global.sorting;
           // alias for shorter code
@@ -156,7 +166,7 @@ export default {
       let fromNow = this.$global.moment(redditTime).calendar(null, {
         lastDay: "[yesterday at] HH:mm",
         sameDay: "[today at] HH:mm",
-        nextDay: "[tomorrow at] HH:mm",
+        nextDay: "[omorrow at] HH:mm",
         lastWeek: "[last] dddd [at] HH:mm",
         nextWeek: "dddd [at] HH:mm",
         lastMonth: "[]",
@@ -171,7 +181,7 @@ export default {
       //   } else if (fromNow === "a year ago") {
       //     fromNow = "last year";
       //   }
-      return fromNow;
+      return fromNow.toLowerCase();
     },
   },
   created() {
@@ -181,10 +191,10 @@ export default {
 </script>
 
 <style>
-.c-grid-list-reddit-posts {
+/* .c-grid-list-reddit-posts {
   position: relative;
 }
 .c-reddit-post:hover {
-  /* position: absolute ; */
-}
+  position: absolute ; 
+} */
 </style>

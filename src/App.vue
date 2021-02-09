@@ -35,13 +35,31 @@
     </v-app-bar>
     <!-- navdrawer -->
     <main-nav-drawer />
+    <!-- main content -->
     <v-main class="c-scrollbar">
       <!-- main nav pages -->
-      <router-view class="c-vh100 animate__animated animate__fadeIn"> </router-view>
+      <router-view class="c-vh100 animate__animated animate__fadeIn">
+      </router-view>
     </v-main>
     <!-- prompts containers -->
+    <!-- snackbars -->
     <snackbars />
+    <!-- dialogs -->
     <dialogs />
+    <!-- scroll to top button -->
+    <v-btn
+      fixed
+      bottom
+      right
+      color="primary"
+      v-show="btnScrollToTop"
+      class="animate__animated animate__slideInUp animate__faster rounded-t-pill"
+      style="z-index:666;"
+      v-scroll="onScroll"
+      @click="scrollToTop()"
+    >
+      <v-icon x-large>mdi-chevron-up</v-icon>
+    </v-btn>
     <!-- footer -->
     <main-footer />
   </v-app>
@@ -68,7 +86,9 @@ export default {
     // HelloWorld,
   },
   data: function () {
-    return {};
+    return {
+      btnScrollToTop: false,
+    };
   },
   computed: {
     ...mapGetters(["notificationCount"]),
@@ -78,6 +98,16 @@ export default {
     toggleDrawer() {
       // console.log(this.drawer)
       this.$store.dispatch("ui/toggleDrawer");
+    },
+    // calculate the scroll Y
+    onScroll(e) {
+      if (typeof window === "undefined") return;
+      const top = window.pageYOffset || e.target.scrollTop || 0;
+      this.btnScrollToTop = top > 480;
+    },
+    // scroll to top
+    scrollToTop() {
+      this.$vuetify.goTo(0);
     },
   },
   beforeCreate() {
@@ -153,5 +183,4 @@ export default {
 .theme--dark::-webkit-scrollbar-thumb:hover {
   background: white;
 /* }  */
-
 </style>

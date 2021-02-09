@@ -8,7 +8,8 @@
       :message="'Something went wrong...'"
       :action="actionReload"
     />
-    <v-col class="ma-0 pa-0 py-4" v-else>
+    <main-empty-layout v-if="isEmpty" :message="'No data found...'" />
+    <v-col v-else class="ma-0 pa-0 py-4">
       <slot name="content" />
       <!-- navigator -->
       <!-- infinite load -->
@@ -22,8 +23,8 @@
             color="primary"
             @click="actionNext"
           >
+            <v-icon large left>mdi-chevron-down</v-icon>
             Load More
-            <v-icon large right>mdi-chevron-down</v-icon>
           </v-btn>
           <v-divider />
         </v-row>
@@ -40,10 +41,11 @@ export default {
   props: {
     isLoading: { type: Boolean, default: true, required: true },
     isError: { type: Boolean, default: false, required: true },
-    actionReload: { type: Function, default: ()=>{}, required: true },
+    actionReload: { type: Function, default: () => {}, required: true },
     infiniteLoad: { type: Boolean, default: false },
     isLoadingNext: Boolean,
     actionNext: Function,
+    isEmpty: { type: Boolean, default: false },
   },
   methods: {
     kappa() {

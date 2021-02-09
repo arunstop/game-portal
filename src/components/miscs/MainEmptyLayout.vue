@@ -8,6 +8,7 @@
         {{ message }}
       </p>
       <v-btn
+        v-if="action"
         class="mt-6 font-weight-black"
         outlined
         color="primary"
@@ -26,7 +27,7 @@ export default {
   props: {
     icon: { type: String, default: "mdi-robot-confused" },
     message: { type: String, default: "Nothing is here...." },
-    action: { type: Function, default: () => {} },
+    action: { type: Function },
     actionIcon: { type: String, default: "mdi-refresh" },
     actionMessage: { type: String, default: "Try Again" },
   },
