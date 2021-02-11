@@ -13,42 +13,63 @@
           max-width="60"
         />
         <v-expand-transition>
+          <!-- login form -->
           <login-form v-if="form === 'login'" />
+          <!-- register form -->
           <register-form v-if="form === 'register'" />
+          <!-- reset password form -->
           <reset-form v-if="form === 'reset'" />
         </v-expand-transition>
-        <v-col class="mt-4">
+        <v-col>
+          <!-- 'OR' divider -->
           <v-btn
-            class="font-weight-bold"
+            class="my-4 font-weight-bold text-h5"
             text
             block
             large
+            disabled
+          >
+            <v-divider/>
+            <span class="mx-2">OR</span>
+            <v-divider/>
+          </v-btn>
+          <!-- login form button -->
+          <v-btn
+            class="font-weight-bold text-none text-body-1"
+            text
+            large
+            link
             v-if="form != 'login'"
             @click="showForm('login')"
           >
-            login here
+            <v-icon class="me-2">mdi-login</v-icon>
+            Already have an account ? Login here
           </v-btn>
-          <v-divider class="my-2" v-if="form != 'login'" />
+          <!-- <v-divider class="my-4" v-if="form != 'login'" /> -->
+          <!-- register form button -->
           <v-btn
-            class="font-weight-bold"
+            class="font-weight-bold text-none text-body-1"
             text
-            block
             large
+            link
             v-if="form != 'register'"
             @click="showForm('register')"
           >
-            Register here
+            <v-icon class="me-2">mdi-account-plus</v-icon>
+            Do not have account ? Register here
           </v-btn>
-          <v-divider class="my-2" v-if="form === 'login'" />
+          <!-- <v-divider class="my-4" v-if="form === 'login'" /> -->
+          <!-- reset password form button -->
           <v-btn
-            class="font-weight-bold"
+            class="font-weight-bold text-none text-body-1"
             text
-            block
             large
+            link
             v-if="form != 'reset'"
             @click="showForm('reset')"
           >
-            Reset password
+            <v-icon class="me-2">mdi-lock-reset</v-icon>
+            Forgot your password? Reset password here
           </v-btn>
         </v-col>
       </v-col>
@@ -57,12 +78,25 @@
 </template>
 
 <script>
-import LoginForm from "../components/pages/auth/LoginForm.vue";
-import RegisterForm from "../components/pages/auth/RegisterForm.vue";
-import ResetForm from "../components/pages/auth/ResetForm.vue";
+// import LoginForm from "../components/pages/auth/LoginForm.vue";
+// import RegisterForm from "../components/pages/auth/RegisterForm.vue";
+// import ResetForm from "../components/pages/auth/ResetForm.vue";
 
 export default {
-  components: { LoginForm, RegisterForm, ResetForm },
+  components: {
+    LoginForm: () =>
+      import(
+        /*webpackChunkName: "LoginForm" */ "../components/pages/auth/LoginForm.vue"
+      ),
+    RegisterForm: () =>
+      import(
+        /*webpackChunkName: "RegisterForm" */ "../components/pages/auth/RegisterForm.vue"
+      ),
+    ResetForm: () =>
+      import(
+        /*webpackChunkName: "ResetForm" */ "../components/pages/auth/ResetForm.vue"
+      ),
+  },
 
   name: "Auth",
   data: () => ({

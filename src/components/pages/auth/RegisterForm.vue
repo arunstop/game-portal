@@ -64,17 +64,23 @@
       auto-select-first
     >
       <template v-slot:selection="data">
-        <v-list-item-avatar class="mx-0 me-2 rounded-xl">
-          <v-img max-width="32" :src="$api.countryFlag(data.item.code)" />
-        </v-list-item-avatar>
+        <v-img
+          class="mx-0 me-2 rounded-sm"
+          max-height="min-content"
+          max-width="min-content"
+          :src="countryFlagUrl(data.item.code)"
+        />
         <strong class="me-1">{{
           data.item.name + " (" + data.item.dial_code + ")"
         }}</strong>
       </template>
       <template v-slot:item="data">
-        <v-list-item-avatar class="rounded-xl">
-          <v-img max-width="32" :src="$api.countryFlag(data.item.code)" />
-        </v-list-item-avatar>
+        <v-img
+          class="mx-0 me-2 rounded-sm"
+          max-height="min-content"
+          max-width="min-content"
+          :src="countryFlagUrl(data.item.code)"
+        />
         <v-list-item-content>
           <v-list-item-title>
             <b>{{ data.item.name }}</b>
@@ -90,7 +96,7 @@
       outlined
       required
       label="Phone Number"
-      :prefix="dialCode.value.slice(2) /*slicing the country code out*/"
+      :prefix="(dialCode.value||'').slice(2) /*slicing the country code out*/"
       placeholder="81234567890"
       v-model="phone.value"
       :rules="phone.rules"
@@ -134,8 +140,7 @@ export default {
       value: "",
       rules: [
         (v) => !!v || "Phone is required",
-        (v) =>
-          (v && v.length) >= 10 || "Phone requires at least 10 characters",
+        (v) => (v && v.length) >= 10 || "Phone requires at least 10 characters",
       ],
     },
     // countryList: require('../../assets/country_dial_info.json'),
@@ -155,6 +160,9 @@ export default {
     },
     resetForm() {
       this.$refs["register-form"].reset();
+    },
+    countryFlagUrl(code) {
+      return this.$api.call.extra.getCountryFlag(code);
     },
   },
   computed: {
@@ -189,19 +197,16 @@ export default {
     // },
   },
   mounted() {
-    this.$api.github.getCountryList
-      .then((response) => {
-        this.countryList = response.data.filter(
-          //creating new unique code
-          (v) => (v.unique_code = v.code + v.dial_code)
-        );
-        // console.log(this.countryList);
-      })
-      .catch((error) => console.log(error));
     this.$api.call.github.getCountryList((response) => {
-      this.countryList = response.data.filter(
-        //creating new unique code
-        (v) => (v.unique_code = v.code + v.dial_code)
+      this.countryList = response.data;
+      this.countryList.filter(
+        //anoher filter
+        (v) => {
+          v.unique_code = v.code + v.dial_code;
+          if (v.code === "PS") {
+            return (v.name = "State of Palestine");
+          }
+        }
       );
     });
   },

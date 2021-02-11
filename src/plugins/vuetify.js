@@ -8,9 +8,11 @@ export default new Vuetify({
     themes: {
       light: {
          reddit: '#ff4500',
+         background: '#ff3333'
       },
       dark: {
          reddit: '#ff4500',
+         background: '#ff3333'
       },
     },
   },

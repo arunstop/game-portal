@@ -2,9 +2,9 @@
   <v-img
     :src="require('@/assets/logo.svg')"
     :max-width="mw"
-    alt="Vuetify Logo"
+    alt="Main Logo"
     contain
-    transition="scale-transition"
+    transition="fade-transition"
   />
 </template>
 

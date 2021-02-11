@@ -46,6 +46,8 @@
     <snackbars />
     <!-- dialogs -->
     <dialogs />
+    <!-- footer -->
+    <main-footer />
     <!-- scroll to top button -->
     <v-btn
       fixed
@@ -54,34 +56,44 @@
       color="primary"
       v-show="btnScrollToTop"
       class="animate__animated animate__slideInUp animate__faster rounded-t-pill"
-      style="z-index:666;"
       v-scroll="onScroll"
       @click="scrollToTop()"
     >
       <v-icon x-large>mdi-chevron-up</v-icon>
     </v-btn>
-    <!-- footer -->
-    <main-footer />
   </v-app>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
 
-import MainNavDrawer from "./components/miscs/MainNavDrawer.vue";
-import Snackbars from "./components/prompts/Snackbars.vue";
-import Dialogs from "./components/prompts/Dialogs.vue";
-import MainFooter from "./components/miscs/MainFooter.vue";
+// import MainNavDrawer from "./components/miscs/MainNavDrawer.vue";
+// import Snackbars from "./components/prompts/Snackbars.vue";
+// import Dialogs from "./components/prompts/Dialogs.vue";
+// import MainFooter from "./components/miscs/MainFooter.vue";
 import MainLogo from "./components/miscs/MainLogo.vue";
 
 export default {
   name: "App",
 
   components: {
-    MainNavDrawer,
-    Snackbars,
-    Dialogs,
-    MainFooter,
+    MainNavDrawer: () =>
+      import(
+        /*webpackChunkName: "MainNavDrawer" */ "./components/miscs/MainNavDrawer.vue"
+      ),
+    Snackbars: () =>
+      import(
+        /*webpackChunkName: "Snackbars" */ "./components/prompts/Snackbars.vue"
+      ),
+    Dialogs: () =>
+      import(
+        /*webpackChunkName: "Dialogs" */ "./components/prompts/Dialogs.vue"
+      ),
+    MainFooter: () =>
+      import(
+        /*webpackChunkName: "MainFooter" */ "./components/miscs/MainFooter.vue"
+      ),
+
     MainLogo,
     // HelloWorld,
   },
@@ -103,7 +115,7 @@ export default {
     onScroll(e) {
       if (typeof window === "undefined") return;
       const top = window.pageYOffset || e.target.scrollTop || 0;
-      this.btnScrollToTop = top > 480;
+      this.btnScrollToTop = top > 420;
     },
     // scroll to top
     scrollToTop() {

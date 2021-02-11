@@ -1,9 +1,10 @@
 <template>
-  <main-container :isLoading="gameDetails.isLoading"
-      :isError="gameDetails.isError"
-      :actionReload="loadGameDetails"
-      :isEmpty="!gameDetails.data ? true : false"
-      >
+  <main-container
+    :isLoading="gameDetails.isLoading"
+    :isError="gameDetails.isError"
+    :actionReload="loadGameDetails"
+    :isEmpty="!gameDetails.data ? true : false"
+  >
     <template v-slot:content>
       <v-col>
         <!-- GAME MEDIAS -->
@@ -11,7 +12,9 @@
           <game-media :gameDetails="gameDetails" />
         </v-row>
         <!-- GAME NAME -->
-        <h1 class="my-4">{{ gameDetails.data.name }}</h1>
+        <h1 class="my-4">
+          {{ $global.manipulators.capFirstChar(gameDetails.data.name) }}
+        </h1>
         <p class="font-weight-bold">Release Date : {{ releaseDate }}</p>
         <!-- RATINGS -->
         <v-row class="my-2 ps-2 pe-3" no-gutters>
@@ -38,11 +41,7 @@
         </v-row>
         <game-description :gameDetails="gameDetails" />
         <game-sys-req :gameDetails="gameDetails" />
-        <game-similar-list
-          v-if="gameSimilarList.data"
-          :gameSimilarList="gameSimilarList"
-          :loadGameSimilarList="loadGameSimilarList"
-        />
+        <game-similar-list />
         <game-reddit-posts />
       </v-col>
     </template>
@@ -59,7 +58,7 @@ import GameMedia from "./parts/GameMedia.vue";
 import GamePlatform from "./parts/GamePlatform.vue";
 import GamePublisher from "./parts/GamePublisher.vue";
 import GameRating from "./parts/GameRating.vue";
-import GameRedditPosts from './parts/GameRedditPosts.vue';
+import GameRedditPosts from "./parts/GameRedditPosts.vue";
 import GameScore from "./parts/GameScore.vue";
 import GameSimilarList from "./parts/GameSimilarList.vue";
 import GameStore from "./parts/GameStore.vue";
@@ -93,8 +92,6 @@ export default {
   data: function () {
     return {
       gameDetails: { data: {}, isLoading: true, isError: false },
-      gameSimilarList: { data: [], isLoading: true, isError: false },
-      gameRedditPosts: { data: [], isLoading: true, isError: false },
       releaseDate: "",
     };
   },
@@ -109,7 +106,7 @@ export default {
           //   data: response.data,
           //   isLoading: false,
           // });
-          
+
           // getting response data
           this.gameDetails = response;
           // giving alias for shorter code
@@ -120,13 +117,17 @@ export default {
           // if call is not error
           if (!gd.isError) {
             // formatting release date
-            this.releaseDate = this.$global
-              .moment(gd.data.released, "YYYY-MM-DD")
-              .format("D MMMM YYYY");
+            if (gd.data.tba) {
+              this.releaseDate = "Coming Soon";
+            } else {
+              let rd = this.$global.moment(gd.data.released, "YYYY-MM-DD");
+              this.releaseDate =
+                rd.format("D MMMM YYYY") + ` (${rd.fromNow()})`;
+            }
             // sorting platform name
             this.$global.sorting.ascending(gd.data.platforms, "platform.name");
-            // getting similar games
-            this.loadGameSimilarList();
+            // // getting similar games
+            // this.loadGameSimilarList();
             // getting reddit posts
             // this.loadGameRedditPosts();
           }
@@ -135,21 +136,6 @@ export default {
         }
       );
     },
-    loadGameSimilarList() {
-      this.gameSimilarList = { data: [], isLoading: true, isError: false };
-      this.$api.call.rawg.getSimilarGames(
-        this.$route.params.slug,
-        (response) => {
-          // getting response data
-          this.gameSimilarList = response;
-          // console.log(this.gameSimilarList.data)
-          let gls = this.gameSimilarList;
-          // sort by popular game
-          this.$global.sorting.descending(gls.data.results, "added");
-        }
-      );
-    },
-    
   },
   created() {
     this.loadGameDetails();

@@ -27,9 +27,34 @@ import HomeGameCard from "../../home/HomeGameCard.vue";
 export default {
   components: { MainContainer, HomeGameCard },
   props: {
-    gameSimilarList: Object,
-    loadGameSimilarList: Function,
+    // gameSimilarList: Object,
+    // loadGameSimilarList: Function,
   },
+  data(){
+    return{
+      gameSimilarList: { data: [], isLoading: true, isError: false },
+
+    }
+  },
+  methods:{
+    loadGameSimilarList() {
+      this.gameSimilarList = { data: [], isLoading: true, isError: false };
+      this.$api.call.rawg.getSimilarGames(
+        this.$route.params.slug,
+        (response) => {
+          // getting response data
+          this.gameSimilarList = response;
+          // console.log(this.gameSimilarList.data)
+          let gls = this.gameSimilarList;
+          // sort by popular game
+          this.$global.sorting.descending(gls.data.results, "added");
+        }
+      );
+    },
+  },
+  created(){
+    this.loadGameSimilarList()
+  }
 };
 </script>
 

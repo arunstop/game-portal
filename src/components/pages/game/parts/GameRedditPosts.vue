@@ -6,7 +6,7 @@
     transition="fade-transition"
   >
     <v-col class="ma-0 pa-0">
-      <p class="text-h6">Community posts :</p>
+      <p class="text-h6">Community Posts :</p>
       <main-container
         :isLoading="gameRedditPosts.isLoading"
         :isError="gameRedditPosts.isError"

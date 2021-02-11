@@ -8,7 +8,7 @@
       elevation="2"
       dense
     >
-      <p class="text-h6">User Feedback :</p>
+      <p class="text-h6">Users Feedback :</p>
       <v-row no-gutters>
         <v-chip
           v-for="rating in gameDetails.data.ratings"
@@ -18,7 +18,7 @@
           label
         >
           <v-icon left>{{ ratingIcon(rating.title) }}</v-icon>
-          {{ rating.title + " : " }}
+          {{ $global.manipulators.capFirstChar(rating.title + "") }}
           <span class="ms-2 text-h5 font-weight-black">
             {{ Math.ceil(rating.percent) + "%" }}
           </span>

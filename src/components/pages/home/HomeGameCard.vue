@@ -1,12 +1,14 @@
 <template>
-  <div>
+  <v-lazy :options="{threshold:1}">
     <!-- CLICK.STOP IS TO STOP PROPAGATION -->
     <!-- CLICK.PREVENT IS TO STOP EVENT LIKE ROUTER LINK/<a> TAG -->
     <!-- YOU CAN COMBINE BOTH -->
-    <v-hover v-slot="{ hover }">
+    <div class="fill-height">
+      <v-hover v-slot="{ hover }">
       <v-card
         class="c-card-item rounded-lg fill-height d-flex flex-column"
         :class="gameData.added >= 12000 ? 'c-big' : ''"
+        outlined
       >
         <router-link
           :to="'/game/' + gameData.slug"
@@ -27,7 +29,7 @@
                 </v-row>
               </template>
               <!-- clip -->
-              <div v-if="gameData.clip">
+              <v-lazy v-if="gameData.clip" :options="{threshold:1}">
                 <video
                   v-show="hover"
                   class="c-clip animate__animated animate__fadeInUp animate__faster"
@@ -36,10 +38,10 @@
                   loop
                 >
                   <source :src="gameData.clip.clip" type="video/mp4" />
-                  <source src="movie.ogg" type="video/ogg" />
-                  Your browser does not support the video tag.
+                  <!-- <source src="movie.ogg" type="video/ogg" />
+                  Your browser does not support the video tag. -->
                 </video>
-              </div>
+              </v-lazy>
               <!-- image bottom props -->
               <v-row dense no-gutters>
                 <!-- video buttons -->
@@ -100,7 +102,7 @@
           >
             <v-list-item class="ma-0 pa-0" dense>
               <span :class="hover ? 'primary--text' : ''">
-                {{ gameData.name }}
+                {{ $global.manipulators.capFirstChar(gameData.name) }}
               </span>
             </v-list-item>
           </router-link>
@@ -270,12 +272,14 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-  </div>
+    </div>
+  </v-lazy>
 </template>
 
 <script>
 import MainSpinner from "../../miscs/MainSpinner.vue";
 export default {
+  name:'home-game-card',
   components: { MainSpinner },
   data() {
     return {
@@ -322,18 +326,17 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .c-card-item {
   transition: transform 0.3s;
   /* display: inline-flex; */
   vertical-align: top;
 }
-.c-card-item:hover,
-.c-card-item:active {
-  transform: scale(1.06) !important;
+.c-card-item:hover {
+  transform: scale(1.06);
   /* height: 480px; */
   /* z-index : 2 to make the hovered item not overlapped by the next items */
-  z-index: 2;
+  z-index: 666;
   /* position: static; */
   -webkit-box-shadow: 0px 10px 13px -7px #000000;
   box-shadow: 0px 10px 13px -7px #000000;

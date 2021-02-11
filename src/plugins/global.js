@@ -90,11 +90,16 @@ let pickers = {
 }
 
 // let now = moment;
+let manipulators = {
+    capFirstChar(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+}
 
 export default {
     install(Vue) {
         Vue.prototype.$global = {
-            sorting, pickers, moment,
+            sorting, pickers, moment, manipulators
         }
     }
 }

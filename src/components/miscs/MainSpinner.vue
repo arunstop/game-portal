@@ -1,6 +1,6 @@
 <template>
   <!-- <v-progress-circular indeterminate size="120" width="6" /> -->
-  <v-col class="d-flex" cols="12" :class="animated && 'animate__animated animate__fadeInUpBig animate__fast'">
+  <v-col class="d-flex" cols="12" :class="animated && 'animate__animated animate__zoomIn animate__fast'">
     <spring-spinner
       class="ma-auto my-12"
       :animation-duration="2000"

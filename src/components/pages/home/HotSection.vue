@@ -82,15 +82,13 @@ export default {
       } else {
         this.isLoadingNext = true;
       }
-      let dNow = this.$global.moment().add(1, "M").format("YYYY-MM-DD");
-      let dLastYear = this.$global
-        .moment()
-        .subtract(6, "M")
-        .format("YYYY-MM-DD");
+      let dNow = this.$global.moment();
+      let dNextYear = dNow.add(1, "Y").format("YYYY-MM-DD");
+      let dLastYear = dNow.subtract(1, "Y").format("YYYY-MM-DD");
 
       this.$api.call.rawg.getRecentGames(
         {
-          dates: dLastYear + "," + dNow,
+          dates: dLastYear + "," + dNextYear,
           // platforms: "18,1,7",
           page,
         },

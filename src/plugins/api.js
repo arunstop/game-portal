@@ -25,12 +25,15 @@ export default {
             getGameRedditPosts: (params) => init(baseUrlSet.rawg(`games/${params.path}/reddit`)).get('', { params: params.query }),
         }
         let github = {
-            getCountryList: init(baseUrlSet.github.countryList).get(''),
+            getCountryList: ()=>init(baseUrlSet.github.countryList).get(''),
+        }
+        let extra = {
+            getCountryFlag: (code) => { return `https://www.countryflags.io/${code}/shiny/48.png` },
         }
         let apis = {
             github,
             rawg,
-            countryFlag: (code) => { return `https://www.countryflags.io/${code}/flat/48.png` },
+            extra
         }
         // handling the promise event
         let handler = async (apiCall, container, attempt) => {
@@ -72,14 +75,15 @@ export default {
         //call methods
         let call = {
             github: {
-                getCountryList: (container) => handler(apis.github.getCountryList(), container, attemptCount)
+                getCountryList: (container) => (handler(apis.github.getCountryList(), container, attemptCount))
             },
             rawg: {
                 getRecentGames: (params, container) => (handler(apis.rawg.getRecentGames(params), container, attemptCount)),
                 getGameDetails: (params, container) => (handler(apis.rawg.getGameDetails(params), container, attemptCount)),
                 getSimilarGames: (params, container) => (handler(apis.rawg.getSimilarGames(params), container, attemptCount)),
                 getGameRedditPosts: (params, container) => (handler(apis.rawg.getGameRedditPosts(params), container, attemptCount)),
-            }
+            },
+            extra
         }
 
 
@@ -87,7 +91,6 @@ export default {
         // declaring  prototype
         Vue.prototype.$api = {
             // spread the apis
-            ...apis,
             call
         }
     }
