@@ -93,6 +93,9 @@ let pickers = {
 let manipulators = {
     capFirstChar(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
+    },
+    spaceBetweenChars(string){
+        return string.split('').join(' ');
     }
 }
 

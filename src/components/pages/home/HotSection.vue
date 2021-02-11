@@ -18,7 +18,7 @@
       :infiniteLoad="true"
       :isLoadingNext="isLoadingNext"
       :actionNext="loadGameList"
-      :isEmpty="gameList.data.count === 0 ? true : false"
+      
     >
       <template v-slot:content>
         <div class="c-grid-list pa-4">

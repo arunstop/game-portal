@@ -66,21 +66,27 @@
               </v-list-item-avatar>
               <v-list-item-content>
                 <v-list-item-title
-                  class="font-weight-bold text-wrap"
+                  class="font-weight-bold text-wrap d-inline mb-2"
                   :class="hover ? 'primary--text' : ''"
                 >
-                  {{
-                    data.item.name +
-                    (data.item.released
-                      ? " — " + data.item.released.substr(0, 4) + ""
-                      : "")
-                  }}
+                  {{ data.item.name }}
+                  <v-chip
+                    class="ms-1 mb-1 font-weight-black text-caption"
+                    small
+                    label
+                    outlined
+                    :color="hover ? 'primary' : ''"
+                  >
+                    {{
+                     releaseDate(data.item.released)
+                    }}
+                  </v-chip>
                 </v-list-item-title>
                 <v-list-item-title>
                   <v-row no-gutters>
                     <v-chip
                       :color="$global.pickers.scoreColor(data.item.metacritic)"
-                      class="c-chip-text me-1 mt-1 font-weight-black"
+                      class="c-chip-text me-1 mt-1 font-weight-black "
                       outlined
                       small
                     >
@@ -191,6 +197,13 @@ export default {
         this.loadSearchedGameList();
       }, 1200); /* 500ms throttle */
     },
+    releaseDate(date){
+      if(!date){
+        return 'TBA'
+      }else{
+        return (this.$global.manipulators.spaceBetweenChars(date.substring(0,4)))
+      }
+    }
   },
   created() {
     // console.log(this.gameList);

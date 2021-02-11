@@ -110,9 +110,18 @@
               :to="'/game/' + gameData.slug"
               class="text-decoration-none"
             >
-              <v-list-item class="ma-0 pa-0" dense>
+              <v-list-item class="ma-0 pa-0 mb-2" dense>
                 <span :class="hover ? 'primary--text' : ''">
                   {{ $global.manipulators.capFirstChar(gameData.name) }}
+                  <v-chip
+                    class="ms-1 mb-1 font-weight-black text-caption"
+                    small
+                    label
+                    outlined
+                    :color="hover ? 'primary' : 'secondary'"
+                  >
+                    {{ releaseDate(gameData.released) }}
+                  </v-chip>
                 </span>
               </v-list-item>
             </router-link>
@@ -139,11 +148,11 @@
                 </v-icon>
                 {{ gameData.metacritic }}
               </div>
-              <span v-else> Not scored </span>
+              <span v-else> Not yet scored </span>
             </v-chip>
             <!-- GAME GENRES -->
             <v-chip
-              class="c-chip-text me-1 mt-1 font-weight-regular font-weight-bold"
+              class="c-chip-text me-1 mt-1 font-weight-regular"
               v-for="genre in gameData.genres"
               :key="genre.id"
               :color="hover ? 'primary' : ''"
@@ -245,7 +254,15 @@
         max-width="960px"
       >
         <v-card class="rounded-lg">
-          <v-carousel class="mb-2" cycle show-arrows-on-hover>
+          <v-carousel
+            class="mb-2"
+            cycle
+            show-arrows-on-hover
+            height="100%"
+            hide-delimiters
+            progress
+            progress-color="primary"
+          >
             <!-- <template v-slot:prev="{ on, attrs }">
             <v-btn v-bind="attrs" v-on="on" icon x-large color="primary lighten-2">
               <v-icon size="60">mdi-chevron-left-circle</v-icon>
@@ -264,7 +281,6 @@
                 :src="ss.image"
                 :lazy-src="ss.image"
                 :aspect-ratio="16 / 9"
-                height="100%"
               >
                 <template v-slot:placeholder>
                   <v-row
@@ -341,6 +357,15 @@ export default {
     },
     vidOv() {
       this.openVideoOverlay = !this.openVideoOverlay;
+    },
+    releaseDate(date) {
+      if (!date) {
+        return "TBA";
+      } else {
+        return this.$global.manipulators.spaceBetweenChars(
+          date.substring(0, 4)
+        );
+      }
     },
   },
 };
