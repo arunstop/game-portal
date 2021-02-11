@@ -13,7 +13,7 @@ export default new Vuetify({
       dark: {
          reddit: '#ff4500',
          background: '#ff3333',
-         secondary: '#eeeeee'
+         secondary: '#dfdfdfdf'
       },
     },
   },

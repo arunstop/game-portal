@@ -72,7 +72,7 @@
                   {{ data.item.name }}
                   <v-chip
                     class="ms-1 mb-1 font-weight-black text-caption"
-                    small
+                    x-small
                     label
                     outlined
                     :color="hover ? 'primary' : ''"
@@ -201,7 +201,11 @@ export default {
       if(!date){
         return 'TBA'
       }else{
-        return (this.$global.manipulators.spaceBetweenChars(date.substring(0,4)))
+       let month = this.$global
+          .moment(date, "YYYY-MM-DD")
+          .format("MMM")
+          .toUpperCase();
+        return month + " " + date.substring(0, 4);
       }
     }
   },
