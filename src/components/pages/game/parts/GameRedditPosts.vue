@@ -68,7 +68,7 @@
                           Posted
                           <strong>{{ countCreatedTime(post.created) }}</strong>
                           by
-                          <u>{{ post.username }}</u>
+                          <i>{{ post.username }}</i>
                         </p>
                         <!-- <p class="font-weight-bold text-h6"></p>
                     <p class=""></p> -->

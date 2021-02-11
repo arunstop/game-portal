@@ -22,6 +22,7 @@ export default {
             getRecentGames: (params) => init(baseUrlSet.rawg('games')).get('', { params }),
             getGameDetails: (params) => init(baseUrlSet.rawg(`games/${params}`)).get(''),
             getSimilarGames: (params) => init(baseUrlSet.rawg(`games/${params}/suggested`)).get(''),
+            getInSeriesGames: (params) => init(baseUrlSet.rawg(`games/${params.path}/game-series`)).get('', { params: params.query }),
             getGameRedditPosts: (params) => init(baseUrlSet.rawg(`games/${params.path}/reddit`)).get('', { params: params.query }),
         }
         let github = {
@@ -81,6 +82,7 @@ export default {
                 getRecentGames: (params, container) => (handler(apis.rawg.getRecentGames(params), container, attemptCount)),
                 getGameDetails: (params, container) => (handler(apis.rawg.getGameDetails(params), container, attemptCount)),
                 getSimilarGames: (params, container) => (handler(apis.rawg.getSimilarGames(params), container, attemptCount)),
+                getInSeriesGames: (params, container) => (handler(apis.rawg.getInSeriesGames(params), container, attemptCount)),
                 getGameRedditPosts: (params, container) => (handler(apis.rawg.getGameRedditPosts(params), container, attemptCount)),
             },
             extra

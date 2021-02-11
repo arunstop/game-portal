@@ -41,6 +41,7 @@
         </v-row>
         <game-description :gameDetails="gameDetails" />
         <game-sys-req :gameDetails="gameDetails" />
+        <game-in-series-list v-if="gameDetails.data.game_series_count>0 ? true : false"/>
         <game-similar-list />
         <game-reddit-posts />
       </v-col>
@@ -54,6 +55,7 @@ import MainContainer from "../../miscs/MainContainer.vue";
 import GameDescription from "./parts/GameDescription.vue";
 import GameDeveloper from "./parts/GameDeveloper.vue";
 import GameGenre from "./parts/GameGenre.vue";
+import GameInSeriesList from './parts/GameInSeriesList.vue';
 import GameMedia from "./parts/GameMedia.vue";
 import GamePlatform from "./parts/GamePlatform.vue";
 import GamePublisher from "./parts/GamePublisher.vue";
@@ -83,6 +85,7 @@ export default {
     GameSimilarList,
     // lazy loading
     GameRedditPosts,
+    GameInSeriesList,
     // GameRedditPosts : ()=>import(/* webpackChunkName: "GameRedditPosts" */  './parts/GameRedditPosts.vue')
   },
   computed: {

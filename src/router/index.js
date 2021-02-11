@@ -18,38 +18,38 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    component: () => import(/* webpackChunkName: "About" */ '../views/About.vue')
   },
   {
     path: '/auth',
     name: 'auth',
     meta: { auth: true, title: 'Auth' },
-    component: () => import(/* webpackChunkName: "auth" */ '../views/Auth.vue')
+    component: () => import(/* webpackChunkName: "Auth" */ '../views/Auth.vue')
   },
   {
     path: '/library',
     name: 'library',
     meta: { auth: true, title: 'Library' },
-    component: () => import(/* webpackChunkName: "wishlist" */ '../views/Library.vue')
+    component: () => import(/* webpackChunkName: "Library" */ '../views/Library.vue')
   },
   {
     path: '/wishList',
     name: 'wishList',
     meta: { auth: true, title: 'Wish List' },
-    component: () => import(/* webpackChunkName: "wishlist" */ '../views/WishList.vue')
+    component: () => import(/* webpackChunkName: "WishList" */ '../views/WishList.vue')
   },
   {
     path: '/game/:slug',
     name: 'game',
     meta: { auth: true, title: 'Game' },
     props: true,
-    component: () => import(/* webpackChunkName: "wishlist" */ '../views/Game.vue')
+    component: () => import(/* webpackChunkName: "Game" */ '../views/Game.vue')
   },
   {
     path: '*',
     name: 'notFound',
     meta: { auth: true, title: 'Page Not Found' },
-    component: () => import(/* webpackChunkName: "*" */ '../views/NotFound.vue')
+    component: () => import(/* webpackChunkName: "NotFound" */ '../views/NotFound.vue')
   },
 ]
 
