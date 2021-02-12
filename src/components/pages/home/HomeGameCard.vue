@@ -1,5 +1,4 @@
 <template>
-  <v-lazy :options="{ threshold: 1 }">
     <!-- CLICK.STOP IS TO STOP PROPAGATION -->
     <!-- CLICK.PREVENT IS TO STOP EVENT LIKE ROUTER LINK/<a> TAG -->
     <!-- YOU CAN COMBINE BOTH -->
@@ -112,9 +111,9 @@
             >
               <v-list-item class="ma-0 pa-0 mb-2" dense>
                 <span :class="hover ? 'primary--text' : ''">
-                  {{ $global.manipulators.capFirstChar(gameData.name) }}
+                  {{ $global.manipulators.capFirstChar(gameData.name)+'  ' }}
                   <v-chip
-                    class="ms-1 mb-1 font-weight-black text-caption"
+                    class="mb-1 font-weight-black text-caption"
                     x-small
                     label
                     outlined
@@ -309,7 +308,6 @@
         </v-card>
       </v-dialog>
     </div>
-  </v-lazy>
 </template>
 
 <script>

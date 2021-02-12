@@ -8,7 +8,7 @@
       :message="'Something went wrong...'"
       :action="actionReload"
     />
-    <main-empty-layout v-if="isEmpty" :message="'No data found...'" />
+    <main-empty-layout v-else-if="isEmpty" :message="'No data found...'" />
     <v-col v-else class="ma-0 pa-0 py-4">
       <slot name="content" />
       <!-- navigator -->

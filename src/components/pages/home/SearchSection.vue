@@ -69,9 +69,9 @@
                   class="font-weight-bold text-wrap d-inline mb-2"
                   :class="hover ? 'primary--text' : ''"
                 >
-                  {{ data.item.name }}
+                  {{ data.item.name+'  ' }}
                   <v-chip
-                    class="ms-1 mb-1 font-weight-black text-caption"
+                    class="mb-1 font-weight-black text-caption"
                     x-small
                     label
                     outlined

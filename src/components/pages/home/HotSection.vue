@@ -36,9 +36,9 @@
 
 <script>
 import MainContainer from "../../miscs/MainContainer.vue";
-// import MainLogo from '../../miscs/MainLogo.vue';
-// import MainSpinner from '../../miscs/MainSpinner.vue';
-import HomeGameCard from "./HomeGameCard.vue";
+import MainLogo from '../../miscs/MainLogo.vue';
+import MainSpinner from '../../miscs/MainSpinner.vue';
+// import HomeGameCard from "./HomeGameCard.vue";
 // @ is an alias to project root
 // import HelloWorld from "@/components/HelloWorld.vue";
 // import ItemCard from "./ItemCard.vue";
@@ -53,20 +53,20 @@ export default {
     // ItemCard,
     SearchSection,
     MainContainer,
-    HomeGameCard,
-    // HomeGameCard: () => ({
-    //   // The component to load (should be a Promise)
-    //   component: import(/* webpackChunkName: "HomeGameCard" */ "./HomeGameCard.vue"),
-    //   // A component to use while the async component is loading
-    //   loading: MainSpinner,
-    //   // A component to use if the load fails
-    //   error: MainLogo,
-    //   // Delay before showing the loading component. Default: 200ms.
-    //   delay: 10000,
-    //   // The error component will be displayed if a timeout is
-    //   // provided and exceeded. Default: Infinity.
-    //   timeout: 3000,
-    // }),
+    // HomeGameCard,
+    HomeGameCard: () => ({
+      // The component to load (should be a Promise)
+      component: import(/* webpackChunkName: "HomeGameCard" */ "./HomeGameCard.vue"),
+      // A component to use while the async component is loading
+      loading: MainSpinner,
+      // A component to use if the load fails
+      error: MainLogo,
+      // Delay before showing the loading component. Default: 200ms.
+      delay: 500,
+      // The error component will be displayed if a timeout is
+      // provided and exceeded. Default: Infinity.
+      timeout: 3000,
+    }),
     // MainSpinner,
   },
   data: () => ({
