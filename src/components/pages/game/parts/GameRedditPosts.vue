@@ -43,21 +43,20 @@
                     max-width="600px"
                   >
                     <v-list-item>
-                      <v-list-item-avatar
-                        v-if="post.image"
-                        class="rounded-lg"
-                        size="auto"
-                        tile
-                      >
-                        <v-img :src="post.image"> </v-img>
-                      </v-list-item-avatar>
                       <v-list-item-content>
-                        <p
-                          class="font-weight-black text-h6"
-                          :class="hover ? 'primary--text' : ''"
-                        >
-                          {{ post.name }}
-                        </p>
+                          <p
+                            class="mt-2 font-weight-black text-h6"
+                            :class="hover ? 'primary--text' : ''"
+                          >
+                            <img
+                              v-if="post.image"
+                              class="me-4 rounded-lg float-left"
+                              :src="post.image"
+                              height="min-content"
+                              width="min-content"
+                            />
+                            {{ post.name }}
+                          </p>
                         <p
                           class="mt-2 text-body-2"
                           :class="hover ? 'primary--text' : ''"

@@ -23,9 +23,27 @@
 
 <script>
 import MainContainer from "../../../miscs/MainContainer.vue";
-import HomeGameCard from "../../home/HomeGameCard.vue";
+// import HomeGameCard from "../../home/HomeGameCard.vue";
+
 export default {
-  components: { MainContainer, HomeGameCard },
+  components: {
+    MainContainer,
+    HomeGameCard: () => ({
+      // The component to load (should be a Promise)
+      component: import(
+        /* webpackChunkName: "HomeGameCard" */ "@/components/pages/home/HomeGameCard.vue"
+      ),
+      // A component to use while the async component is loading
+      loading: import("@/components/miscs/MainSpinner.vue"),
+      // A component to use if the load fails
+      error: import("@/components/miscs/MainError.vue"),
+      // Delay before showing the loading component. Default: 200ms.
+      delay: 600,
+      // The error component will be displayed if a timeout is
+      // provided and exceeded. Default: Infinity.
+      timeout: 3000,
+    }),
+  },
   props: {
     // gameInSeriesList: Object,
     // loadGameInSeriesList: Function,
@@ -47,9 +65,9 @@ export default {
           // getting response data
           this.gameInSeriesList = response;
           // console.log(this.gameInSeriesList.data)
-        //   let gls = this.gameInSeriesList;
+          //   let gls = this.gameInSeriesList;
           // sort by popular game
-        //   this.$global.sorting.descending(gls.data.results, "added");
+          //   this.$global.sorting.descending(gls.data.results, "added");
         }
       );
     },
