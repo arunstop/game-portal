@@ -55,14 +55,14 @@ import MainContainer from "../../miscs/MainContainer.vue";
 import GameDescription from "./parts/GameDescription.vue";
 import GameDeveloper from "./parts/GameDeveloper.vue";
 import GameGenre from "./parts/GameGenre.vue";
-// import GameInSeriesList from './parts/GameInSeriesList.vue';
+import GameInSeriesList from './parts/GameInSeriesList.vue';
 import GameMedia from "./parts/GameMedia.vue";
 import GamePlatform from "./parts/GamePlatform.vue";
 import GamePublisher from "./parts/GamePublisher.vue";
 import GameRating from "./parts/GameRating.vue";
-// import GameRedditPosts from "./parts/GameRedditPosts.vue";
+import GameRedditPosts from "./parts/GameRedditPosts.vue";
 import GameScore from "./parts/GameScore.vue";
-// import GameSimilarList from "./parts/GameSimilarList.vue";
+import GameSimilarList from "./parts/GameSimilarList.vue";
 import GameStore from "./parts/GameStore.vue";
 import GameSysReq from "./parts/GameSysReq.vue";
 import GameTag from "./parts/GameTag.vue";
@@ -82,10 +82,10 @@ export default {
     GameDescription,
     GameSysReq,
     MainContainer,
+    GameSimilarList,
     // lazy loading
-    // GameSimilarList,
-    // GameRedditPosts,
-    // GameInSeriesList,
+    GameRedditPosts,
+    GameInSeriesList,
     // GameRedditPosts : ()=>import(/* webpackChunkName: "GameRedditPosts" */  './parts/GameRedditPosts.vue')
   },
   computed: {
@@ -114,7 +114,6 @@ export default {
           this.gameDetails = response;
           // giving alias for shorter code
           let gd = this.gameDetails;
-          console.log(gd)
           // setting document title
           this.$store.dispatch("setDocTitle", this.gameDetails.data.name);
 
