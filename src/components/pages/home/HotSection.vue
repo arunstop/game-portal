@@ -88,7 +88,7 @@ export default {
       let dNextYear = dNow.add(1, "Y").format("YYYY-MM-DD");
       let dLastYear = dNow.subtract(1, "Y").format("YYYY-MM-DD");
 
-      this.$api.call.rawg.getRecentGames(
+      this.$api.call.rawg.getGames(
         {
           dates: dLastYear + "," + dNextYear,
           // platforms: "18,1,7",

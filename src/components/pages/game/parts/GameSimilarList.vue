@@ -25,7 +25,9 @@
 import MainContainer from "../../../miscs/MainContainer.vue";
 // import HomeGameCard from "../../home/HomeGameCard.vue";
 export default {
-  components: { MainContainer, HomeGameCard: () => ({
+  components: {
+    MainContainer,
+    HomeGameCard: () => ({
       // The component to load (should be a Promise)
       component: import(
         /* webpackChunkName: "HomeGameCard" */ "@/components/pages/home/HomeGameCard.vue"
@@ -39,18 +41,16 @@ export default {
       // The error component will be displayed if a timeout is
       // provided and exceeded. Default: Infinity.
       timeout: 3000,
-    }), },
+    }),
+  },
   props: {
     // gameSimilarList: Object,
     // loadGameSimilarList: Function,
   },
-  data(){
-    return{
-      gameSimilarList: { data: [], isLoading: true, isError: false },
-
-    }
-  },
-  methods:{
+  data: () => ({
+    gameSimilarList: { data: [], isLoading: true, isError: false },
+  }),
+  methods: {
     loadGameSimilarList() {
       this.gameSimilarList = { data: [], isLoading: true, isError: false };
       this.$api.call.rawg.getSimilarGames(
@@ -66,9 +66,9 @@ export default {
       );
     },
   },
-  created(){
-    this.loadGameSimilarList()
-  }
+  created() {
+    this.loadGameSimilarList();
+  },
 };
 </script>
 

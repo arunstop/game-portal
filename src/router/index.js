@@ -46,6 +46,13 @@ const routes = [
     component: () => import(/* webpackChunkName: "Game" */ '../views/Game.vue')
   },
   {
+    path: '/search',
+    name: 'search',
+    meta: { auth: true, title: 'Search' },
+    props: true,
+    component: () => import(/* webpackChunkName: "Search" */ '../views/Search.vue')
+  },
+  {
     path: '*',
     name: 'notFound',
     meta: { auth: true, title: 'Page Not Found' },

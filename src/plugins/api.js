@@ -19,7 +19,9 @@ export default {
             }
         }
         let rawg = {
-            getRecentGames: (params) => init(baseUrlSet.rawg('games')).get('', { params }),
+            getGames: (params) => init(baseUrlSet.rawg('games')).get('', { params }),
+            getGenres: (params) => init(baseUrlSet.rawg('genres')).get('', { params }),
+            getPlatforms: (params) => init(baseUrlSet.rawg('platforms/lists/parents')).get('', { params }),
             getGameDetails: (params) => init(baseUrlSet.rawg(`games/${params}`)).get(''),
             getSimilarGames: (params) => init(baseUrlSet.rawg(`games/${params}/suggested`)).get(''),
             getInSeriesGames: (params) => init(baseUrlSet.rawg(`games/${params.path}/game-series`)).get('', { params: params.query }),
@@ -79,11 +81,14 @@ export default {
                 getCountryList: (container) => (handler(apis.github.getCountryList(), container, attemptCount))
             },
             rawg: {
-                getRecentGames: (params, container) => (handler(apis.rawg.getRecentGames(params), container, attemptCount)),
+                getGames: (params, container) => (handler(apis.rawg.getGames(params), container, attemptCount)),
+                getGenres: (params, container) => (handler(apis.rawg.getGenres(params), container, attemptCount)),
+                getPlatforms: (params, container) => (handler(apis.rawg.getPlatforms(params), container, attemptCount)),
                 getGameDetails: (params, container) => (handler(apis.rawg.getGameDetails(params), container, attemptCount)),
                 getSimilarGames: (params, container) => (handler(apis.rawg.getSimilarGames(params), container, attemptCount)),
                 getInSeriesGames: (params, container) => (handler(apis.rawg.getInSeriesGames(params), container, attemptCount)),
                 getGameRedditPosts: (params, container) => (handler(apis.rawg.getGameRedditPosts(params), container, attemptCount)),
+                
             },
             extra
         }

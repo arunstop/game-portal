@@ -124,35 +124,17 @@
         </router-link>
       </template>
     </v-autocomplete>
-    <v-btn
-      class="mt-4"
-      color="primary"
-      :outlined="!toggleAdvSearch"
-      @click="toggleAdvSearchHandler"
-    >
-      <v-icon class="me-2">mdi-database-search</v-icon>
-      Advanced Search
-    </v-btn>
-    <v-expand-transition>
-      <v-row class="ma-0 pa-4" v-show="toggleAdvSearch">
-        <v-autocomplete
-          prepend-inner-icon="mdi-magnify"
-          placeholder="Search by genres..."
-          outlined
-          clearable
-          hide-details
-        />
-      </v-row>
-    </v-expand-transition>
+    <home-adv-search-section/>
   </v-col>
 </template>
 
 <script>
 import { mapState } from "vuex";
+import HomeAdvSearchSection from './HomeAdvSearchSection.vue';
 export default {
+  components: { HomeAdvSearchSection },
   data() {
     return {
-      toggleAdvSearch: false,
       gameList: { data: [] },
       search: {
         value: "",
@@ -171,14 +153,11 @@ export default {
         return this.gameListInit;
       }
     },
-    toggleAdvSearchHandler() {
-      this.toggleAdvSearch = !this.toggleAdvSearch;
-    },
     clearSearchedGameList() {
       this.gameList = { data: [], isLoading: false };
     },
     loadSearchedGameList() {
-      this.$api.call.rawg.getRecentGames(
+      this.$api.call.rawg.getGames(
         {
           search_precise: true,
           search: this.search.value,

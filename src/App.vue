@@ -14,7 +14,7 @@
       <v-app-bar-nav-icon @click="toggleDrawer" v-if="isSignedIn">
         <v-badge
           overlap
-          color="amber darken-4"
+          color="accent darken-4"
           class="animate__animated animate__swing"
           :value="notificationCount.total"
           :content="notificationCount.total"
@@ -38,7 +38,7 @@
     <!-- main content -->
     <v-main class="c-scrollbar">
       <!-- main nav pages -->
-      <router-view class="c-vh100 animate__animated animate__fadeIn">
+      <router-view class="c-vh100 animate__animated animate__fadeIn" >
       </router-view>
     </v-main>
     <!-- prompts containers -->
@@ -53,7 +53,7 @@
       fixed
       bottom
       right
-      color="primary"
+      color="accent darken-4"
       v-show="btnScrollToTop"
       class="animate__animated animate__slideInUp animate__faster rounded-t-pill"
       v-scroll="onScroll"
@@ -126,6 +126,7 @@ export default {
     // this.$vuetify.theme.dark = true
   },
   created() {
+    // console.log(this.$vuetify.theme)
     // console.log(this.notificationCount);
   },
 };
@@ -155,6 +156,23 @@ export default {
   box-shadow: inset 0 0 10px 10px #2196f3 !important;
   border: solid 4px transparent #2196f3 !important;
   border-radius: 4px !important;
+}
+
+/* CUSTOM ANIMATE DURATION */
+
+.animate__fastest{
+  --animate-duration: 300ms;
+}
+
+/* CUSTOM GRID LIST */
+
+.c-grid-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 1rem;
+  grid-template-rows: repeat(auto-fit, minmax(300px, 1fr));
+  grid-auto-flow: dense;
+  position: relative;
 }
 
 /* 

@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex pa-4">
+  <div class="d-flex pa-4 mt-4 mb-12">
     <v-card
       class="my-auto mx-auto flex-fill rounded-lg"
       outlined
@@ -29,9 +29,9 @@
             large
             disabled
           >
-            <v-divider/>
+            <v-divider />
             <span class="mx-2">OR</span>
-            <v-divider/>
+            <v-divider />
           </v-btn>
           <!-- login form button -->
           <v-btn
@@ -105,6 +105,12 @@ export default {
   methods: {
     showForm(formName) {
       return (this.form = formName);
+    },
+  },
+  watch: {
+    // watcher of data 'form'
+    form() {
+      this.$vuetify.goTo(0);
     },
   },
 };
