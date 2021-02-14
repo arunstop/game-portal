@@ -1,5 +1,6 @@
 import moment from 'moment'
 
+
 //getting nested object key using recursive function
 // =================SORTING=================
 var getObjectKey = (object, path) => {
@@ -94,8 +95,18 @@ let manipulators = {
     capFirstChar(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     },
-    spaceBetweenChars(string){
+    spaceBetweenChars(string) {
         return string.split('').join(' ');
+    },
+    //eliminating empty properties
+    trimObject(obj) {
+        for (var propName in obj) {
+            //if property is empty
+            if (!obj[propName]) {
+                delete obj[propName]
+            }
+        }
+        return obj
     }
 }
 
