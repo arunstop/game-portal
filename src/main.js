@@ -22,6 +22,6 @@ new Vue({
   vuetify,
   mixins,
   beforeCreate: mixins.initializers,
-  watch: mixins.watchers.pageTitle,
+  watch: mixins.watchers,
   render: h => h(App)
 }).$mount('#app')

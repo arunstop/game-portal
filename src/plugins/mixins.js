@@ -1,7 +1,7 @@
 export default {
     //initializing dark theme
     initializers() {
-        
+
         //re-authenticate
         let auth = () => {
             //update local storage expire date whenever user open the app
@@ -28,29 +28,41 @@ export default {
             }
         }
 
-        //EXECUTE THE FUNCTIONS
+        //EXECUTE THE METHODS
         auth(); theme(); wishList();
 
     },
     watchers: {
-        pageTitle: {
-            $route: {
-                immediate: true,
-                handler(to, from) {
-                    // console.log(to)
-                    // handling undefined value of meta title that happens at the start of loading
-                    from = ''
+        $route: {
+            immediate: true,
+
+            handler(currentRoute, lastRoute) {
+                // console.log(to)
+                // handling undefined value of meta title that happens at the start of loading
+                let setPageTitle = () => {
                     let appName = this.$store.state.appName
                     let pageTitle = () => {
-                        if (to.meta.title != undefined) {
-                            return to.meta.title + ' — ' + appName
+                        if (currentRoute.meta.title != undefined) {
+                            return currentRoute.meta.title + ' — ' + appName
                         }
                         else {
-                            return appName + from
+                            return appName + lastRoute
                         }
                     }
                     document.title = pageTitle()
                 }
+
+                let getLastVisitedRoute = () => {
+
+                    if (this.$route.name && this.$route.name != 'auth') {
+                        this.$store.state.lastVisitedPage = this.$route.fullPath
+                        // console.log(this.$route)
+                    }
+                }
+                // from = ''
+
+                // EXECUTE METHODS
+                setPageTitle(); getLastVisitedRoute()
             }
         }
     }

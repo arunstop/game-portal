@@ -52,7 +52,7 @@ export default {
           password: this.password.value,
           lastSession: Date.now(),
         });
-        this.$router.push("/");
+        this.$router.push(this.$store.state.lastVisitedPage);
       }
 
       // this.$store.dispatch("ui/showSnackbar", {

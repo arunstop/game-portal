@@ -18,7 +18,8 @@ export default new Vuex.Store({
       { name: "about", title: `About`, icon: `mdi-information`, path: "/about" },
     ],
     gameDetails: { data: {}, isLoading: true },
-    gameListInit: { data: [] }
+    gameListInit: { data: [] },
+    lastVisitedPage: '/'
   },
   mutations: {
     SET_GAME_DETAILS(state, gameDetails) {
