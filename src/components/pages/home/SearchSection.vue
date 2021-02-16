@@ -69,24 +69,22 @@
                   class="font-weight-bold text-wrap d-inline mb-2"
                   :class="hover ? 'primary--text' : ''"
                 >
-                  {{ data.item.name+'  ' }}
+                  {{ data.item.name + "  " }}
                   <v-chip
                     class="mb-1 font-weight-black text-caption"
                     x-small
                     label
                     outlined
-                    :color="hover ? 'primary' : ''"
+                    :color="hover ? 'primary' : 'secondary'"
                   >
-                    {{
-                     releaseDate(data.item.released)
-                    }}
+                    {{ releaseDate(data.item.released) }}
                   </v-chip>
                 </v-list-item-title>
                 <v-list-item-title>
                   <v-row no-gutters>
                     <v-chip
                       :color="$global.pickers.scoreColor(data.item.metacritic)"
-                      class="c-chip-text me-1 mt-1 font-weight-black "
+                      class="c-chip-text me-1 mt-1 font-weight-black"
                       outlined
                       small
                     >
@@ -124,15 +122,30 @@
         </router-link>
       </template>
     </v-autocomplete>
-    <home-adv-search-section/>
+    <v-col class="ma-0 pa-0">
+      <v-btn
+        class="mt-4"
+        color="primary"
+        :outlined="!toggleAdvSearch"
+        @click.stop="toggleAdvSearch = true"
+      >
+        <v-icon class="me-2">mdi-database-search</v-icon>
+        Advanced Search
+      </v-btn>
+      <home-adv-search-dialog v-model="toggleAdvSearch" />
+    </v-col>
   </v-col>
 </template>
 
 <script>
 import { mapState } from "vuex";
-import HomeAdvSearchSection from './HomeAdvSearchSection.vue';
 export default {
-  components: { HomeAdvSearchSection },
+  components: {
+    HomeAdvSearchDialog: () =>
+      import(
+        /* webpackChunkName : "HomeAdvSearchDialog" */ "@/components/pages/home/HomeAdvSearchDialog.vue"
+      ),
+  },
   data() {
     return {
       gameList: { data: [] },
@@ -140,6 +153,7 @@ export default {
         value: "",
         isLoading: false,
       },
+      toggleAdvSearch: false,
     };
   },
   computed: {
@@ -176,17 +190,17 @@ export default {
         this.loadSearchedGameList();
       }, 1200); /* 500ms throttle */
     },
-    releaseDate(date){
-      if(!date){
-        return 'TBA'
-      }else{
-       let month = this.$global
+    releaseDate(date) {
+      if (!date) {
+        return "TBA";
+      } else {
+        let month = this.$global
           .moment(date, "YYYY-MM-DD")
           .format("MMM")
           .toUpperCase();
         return month + " " + date.substring(0, 4);
       }
-    }
+    },
   },
   created() {
     // console.log(this.gameList);
@@ -206,6 +220,10 @@ export default {
 </script>
 
 <style>
+.c-lh-30 {
+  line-height: 30px;
+}
+
 .c-chip-text span {
   white-space: nowrap;
   overflow: hidden;

@@ -24,11 +24,11 @@
         </v-badge>
       </v-app-bar-nav-icon>
       <v-btn
+        v-if="!isSignedIn && $route.name != 'auth'"
         color="white"
         class="font-weight-bold"
         outlined
-        @click="$router.replace('/auth').catch((err) => {})"
-        v-else
+        @click="$router.push('/auth')"
       >
         Login here
       </v-btn>
@@ -38,7 +38,7 @@
     <!-- main content -->
     <v-main class="c-scrollbar">
       <!-- main nav pages -->
-      <router-view class="c-vh100 animate__animated animate__fadeIn" >
+      <router-view class="c-vh100 animate__animated animate__fadeIn">
       </router-view>
     </v-main>
     <!-- prompts containers -->
@@ -49,18 +49,20 @@
     <!-- footer -->
     <main-footer />
     <!-- scroll to top button -->
-    <v-btn
-      fixed
-      bottom
-      right
-      color="accent darken-4"
+    <div
       v-show="btnScrollToTop"
-      class="animate__animated animate__slideInUp animate__faster rounded-t-pill"
-      v-scroll="onScroll"
-      @click="scrollToTop()"
+      class="c-btn-to-top-container animate__animated animate__slideInUp animate__faster"
     >
-      <v-icon x-large>mdi-chevron-up</v-icon>
-    </v-btn>
+      <v-btn
+        color="accent darken-4"
+        class="rounded-tl-pill"
+        v-scroll="onScroll"
+        large
+        @click="scrollToTop()"
+      >
+        <v-icon x-large>mdi-chevron-up</v-icon>
+      </v-btn>
+    </div>
   </v-app>
 </template>
 
@@ -121,6 +123,10 @@ export default {
     scrollToTop() {
       this.$vuetify.goTo(0);
     },
+    navToAuth() {
+      // console.log(this.$route)
+      if (this.$route.name != "auth") this.$router.push("/auth");
+    },
   },
   beforeCreate() {
     // this.$vuetify.theme.dark = true
@@ -128,6 +134,7 @@ export default {
   created() {
     // console.log(this.$vuetify.theme)
     // console.log(this.notificationCount);
+    console.log(this.$route);
   },
 };
 </script>
@@ -158,9 +165,16 @@ export default {
   border-radius: 4px !important;
 }
 
+/* Button scroll to top container */
+.c-btn-to-top-container {
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+}
+
 /* CUSTOM ANIMATE DURATION */
 
-.animate__fastest{
+.animate__fastest {
   --animate-duration: 300ms;
 }
 

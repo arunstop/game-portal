@@ -1,5 +1,5 @@
 import moment from 'moment'
-
+import _ from 'lodash'
 
 //getting nested object key using recursive function
 // =================SORTING=================
@@ -107,7 +107,8 @@ let manipulators = {
             }
         }
         return obj
-    }
+    },
+    lodash: _
 }
 
 export default {

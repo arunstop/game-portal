@@ -225,7 +225,7 @@
         v-model="openVideoOverlay"
         persistent
         :overlay-opacity="0.6"
-        max-width="640px"
+        max-width="min-content"
       >
         <!-- <v-btn icon absolute x-large right top @click="openVideoOverlay = false">
         <v-icon large>mdi-close</v-icon>
@@ -250,7 +250,8 @@
         v-model="openScreenshotOverlay"
         persistent
         :overlay-opacity="0.6"
-        max-width="960px"
+        max-width="900px"
+
       >
         <v-card class="rounded-lg">
           <v-carousel

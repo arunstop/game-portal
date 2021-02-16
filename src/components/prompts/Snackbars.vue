@@ -5,9 +5,9 @@
   <!-- creating snackbarcontainer -->
   <v-col class="c-snackbar-container ma-0">
     <v-snackbar
-      class="mb-2 justify-center animate__animated animate__zoomIn animate__faster"
+      class="mb-2 justify-center animate__animated animate__fadeInUp animate__faster "
       bottom
-      :timeout="2400"
+      :timeout="3000"
       v-for="(snackbar, index) in snackbarSet.filter((s) => s.showing)"
       v-model="snackbar.showing"
       :id="snackbar.key"

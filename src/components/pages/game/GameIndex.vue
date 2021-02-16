@@ -43,7 +43,7 @@
         <game-sys-req :gameDetails="gameDetails" />
         <game-in-series-list  v-if="!gameDetails.isError && gameDetails.data.game_series_count>0 ? true : false"/>
         <game-similar-list v-if="!gameDetails.isError" />
-        <game-reddit-posts v-if="!gameDetails.isError" />
+        <game-reddit-posts v-if="!gameDetails.isError && gameDetails.data.reddit_count>0" />
       </v-col>
     </template>
   </main-container>

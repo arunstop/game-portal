@@ -1,32 +1,55 @@
 <template>
   <!-- item cards -->
-  <main-container
-    :isLoading="searchResultList.isLoading"
-    :isError="searchResultList.isError"
-    :actionReload="loadSearchResultList"
-    :infiniteLoad="true"
-    :isLoadingNext="false"
-    :actionNext="loadSearchResultList"
-  >
-    <template v-slot:content>
-      <div class="c-grid-list pa-4">
-        <home-game-card
-          class="c-grid-item"
-          v-for="game in searchResultList.data.results"
-          :key="game.slug"
-          :gameData="game"
-        />
-      </div>
-    </template>
-  </main-container>
+  <v-col>
+    <search-section />
+    <main-container
+      :isLoading="searchResultList.isLoading"
+      :isError="searchResultList.isError"
+      :actionReload="loadSearchResultList"
+      :infiniteLoad="true"
+      :isLoadingNext="false"
+      :actionNext="loadSearchResultList"
+    >
+      <template v-slot:content>
+        <v-row 
+            class="ps-4"
+         no-gutters justify="start">
+          <v-alert
+          class="pe-6 text-body-1 font-weight-bold rounded-r-pill"
+            type="info"
+            text
+            border="left"
+            max-width="max-content"
+            
+          >
+          <!-- thousand separator with toLocaleString -->
+            {{ searchResultList.data.count.toLocaleString() }} Games Found
+          </v-alert>
+        </v-row>
+
+        <div class="c-grid-list pa-4">
+          <home-game-card
+            class="c-grid-item"
+            v-for="game in searchResultList.data.results"
+            :key="game.slug"
+            :gameData="game"
+          />
+        </div>
+      </template>
+    </main-container>
+  </v-col>
 </template>
 
 <script>
 export default {
   components: {
+    SearchSection: () =>
+      import(
+        /* webpackChunkName: "SearchSection" */ "@/components/pages/home/SearchSection.vue"
+      ),
     MainContainer: () =>
       import(
-        /* webpackChunkName: "HomeGameCard" */ "@/components/miscs/MainContainer.vue"
+        /* webpackChunkName: "MainContainer" */ "@/components/miscs/MainContainer.vue"
       ),
     HomeGameCard: () => ({
       // The component to load (should be a Promise)
@@ -54,14 +77,15 @@ export default {
   },
   methods: {
     loadSearchResultList() {
-        //  let q = this.$route.query;
+      this.searchResultList = { data: [], isLoading: true, isError: false };
+      //  let q = this.$route.query;
       this.$api.call.rawg.getGames(
         {
-          ...this.$route.query
+          ...this.$route.query,
         },
         //
         (response) => {
-            this.searchResultList = response
+          this.searchResultList = response;
           console.log(response);
         }
       );
@@ -69,6 +93,11 @@ export default {
   },
   created() {
     this.loadSearchResultList();
+  },
+  watch: {
+    $route() {
+      this.loadSearchResultList();
+    },
   },
 };
 </script>

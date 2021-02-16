@@ -35,7 +35,7 @@
                 >
                   <v-alert
                     class="ms-2 c-reddit-post"
-                    border="left"
+                    :border="hover ? 'right' : 'left'"
                     text
                     colored-border
                     :color="hover ? 'primary' : 'reddit'"
