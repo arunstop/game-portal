@@ -5,10 +5,10 @@
     <main-container
       :isLoading="searchResultList.isLoading"
       :isError="searchResultList.isError"
-      :actionReload="loadSearchResultList"
+      :actionReload="()=>loadSearchResultList()"
       :infiniteLoad="true"
-      :isLoadingNext="false"
-      :actionNext="loadSearchResultList"
+      :isLoadingNext="isLoadingNext"
+      :actionNext="()=>loadSearchResultList()"
     >
       <template v-slot:content>
         <v-row 
@@ -57,7 +57,7 @@ export default {
         /* webpackChunkName: "HomeGameCard" */ "@/components/pages/home/HomeGameCard.vue"
       ),
       // A component to use while the async component is loading
-      loading: import("@/components/miscs/MainSpinner.vue"),
+      loading: import("@/components/miscs/MainSkeleton.vue"),
       // A component to use if the load fails
       error: import("@/components/miscs/MainError.vue"),
       // Delay before showing the loading component. Default: 200ms.
@@ -72,21 +72,53 @@ export default {
   },
   data: () => {
     return {
-      searchResultList: { data: [], isLoading: true, isError: false },
+      searchResultList: { data: {}, isLoading: true, isError: false },
+      currentPage: 1,
+    isLoadingNext: false,
     };
   },
   methods: {
     loadSearchResultList() {
-      this.searchResultList = { data: [], isLoading: true, isError: false };
-      //  let q = this.$route.query;
+      let page = this.currentPage;
+      //if first page, showing the loading animation
+      if (page === 1) {
+        this.searchResultList = { data: {}, isLoading: true, isError: false };
+      } 
+      //otherwise showing only the loadingNext animation
+      else {
+        this.isLoadingNext = true;
+      }
+      
+      // calling api
       this.$api.call.rawg.getGames(
         {
           ...this.$route.query,
+          page
         },
         //
         (response) => {
-          this.searchResultList = response;
-          console.log(response);
+          // if first page, filling the searchResultList with response
+          // then scroll up
+          if(page==1){
+            this.searchResultList = response;
+            window.scrollTo(0,0)
+          }
+          // otherwise adding response data to the current data
+          else{
+            // merging the current results with response results
+            let moreResults = [].concat(
+              this.searchResultList.data.results,
+              response.data.results
+            )
+            // replacing the current results with new merged results
+            this.searchResultList.data.results = moreResults
+            // stopping the loadinNext animation
+            this.isLoadingNext =false
+          }
+          // if error, current page does not increase
+          if(!this.searchResultList.isError){
+            this.currentPage++
+          }
         }
       );
     },
@@ -96,6 +128,7 @@ export default {
   },
   watch: {
     $route() {
+      this.currentPage=1;
       this.loadSearchResultList();
     },
   },

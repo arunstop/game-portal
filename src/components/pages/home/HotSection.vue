@@ -60,7 +60,7 @@ export default {
         /* webpackChunkName: "HomeGameCard" */ "@/components/pages/home/HomeGameCard.vue"
       ),
       // A component to use while the async component is loading
-      loading: import("@/components/miscs/MainSpinner.vue"),
+      loading: import("@/components/miscs/MainSkeleton.vue"),
       // A component to use if the load fails
       error: import("@/components/miscs/MainError.vue"),
       // Delay before showing the loading component. Default: 200ms.

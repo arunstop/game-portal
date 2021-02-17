@@ -134,7 +134,8 @@ export default {
   created() {
     // console.log(this.$vuetify.theme)
     // console.log(this.notificationCount);
-    console.log(this.$route);
+    // console.log(this.$route);
+    // console.log(this.$vuetify.breakpoint)
   },
 };
 </script>

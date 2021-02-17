@@ -14,8 +14,10 @@
       <!-- navigator -->
       <!-- infinite load -->
       <v-row class="my-12" v-if="infiniteLoad" no-gutters justify="center">
-        <main-spinner v-if="isLoadingNext" animated />
-        <v-row v-else class="mx-6" no-gutters justify="center" align="center">
+      <v-expand-transition>
+
+        
+        <v-row v-if="!isLoadingNext" class="mx-6" no-gutters justify="center" align="center">
           <v-divider />
           <v-btn
             class="mx-4 text-h6 py-0 text-none rounded-pill"
@@ -28,6 +30,9 @@
           </v-btn>
           <v-divider />
         </v-row>
+        <main-spinner v-else animated />
+
+      </v-expand-transition>
       </v-row>
     </v-col>
   </v-row>
@@ -48,9 +53,6 @@ export default {
     isEmpty: { type: Boolean, default: false },
   },
   methods: {
-    kappa() {
-      alert("123");
-    },
   },
 };
 </script>
