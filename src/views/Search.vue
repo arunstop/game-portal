@@ -5,26 +5,25 @@
     <main-container
       :isLoading="searchResultList.isLoading"
       :isError="searchResultList.isError"
-      :actionReload="()=>loadSearchResultList()"
+      :actionReload="() => loadSearchResultList()"
       :infiniteLoad="true"
       :isLoadingNext="isLoadingNext"
-      :actionNext="()=>loadSearchResultList()"
+      :actionNext="() => loadSearchResultList()"
     >
       <template v-slot:content>
-        <v-row 
-            class="ps-4"
-         no-gutters justify="start">
-          <v-alert
-          class="pe-6 text-body-1 font-weight-bold rounded-r-pill"
+        <v-row no-gutters justify="start">
+          <v-col class="ms-4">
+            <v-alert
+            class="pe-6 text-body-1 font-weight-bold rounded-r-pill"
             type="info"
             text
             border="left"
             max-width="max-content"
-            
           >
-          <!-- thousand separator with toLocaleString -->
+            <!-- thousand separator with toLocaleString -->
             {{ searchResultList.data.count.toLocaleString() }} Games Found
           </v-alert>
+          </v-col>
         </v-row>
 
         <div class="c-grid-list pa-4">
@@ -74,7 +73,7 @@ export default {
     return {
       searchResultList: { data: {}, isLoading: true, isError: false },
       currentPage: 1,
-    isLoadingNext: false,
+      isLoadingNext: false,
     };
   },
   methods: {
@@ -83,41 +82,41 @@ export default {
       //if first page, showing the loading animation
       if (page === 1) {
         this.searchResultList = { data: {}, isLoading: true, isError: false };
-      } 
+      }
       //otherwise showing only the loadingNext animation
       else {
         this.isLoadingNext = true;
       }
-      
+
       // calling api
       this.$api.call.rawg.getGames(
         {
           ...this.$route.query,
-          page
+          page,
         },
         //
         (response) => {
           // if first page, filling the searchResultList with response
           // then scroll up
-          if(page==1){
+          if (page == 1) {
             this.searchResultList = response;
-            window.scrollTo(0,0)
+            window.scrollTo(0, 0);
           }
           // otherwise adding response data to the current data
-          else{
+          else {
             // merging the current results with response results
             let moreResults = [].concat(
               this.searchResultList.data.results,
               response.data.results
-            )
+            );
             // replacing the current results with new merged results
-            this.searchResultList.data.results = moreResults
+            this.searchResultList.data.results = moreResults;
             // stopping the loadinNext animation
-            this.isLoadingNext =false
+            this.isLoadingNext = false;
           }
           // if error, current page does not increase
-          if(!this.searchResultList.isError){
-            this.currentPage++
+          if (!this.searchResultList.isError) {
+            this.currentPage++;
           }
         }
       );
@@ -128,7 +127,7 @@ export default {
   },
   watch: {
     $route() {
-      this.currentPage=1;
+      this.currentPage = 1;
       this.loadSearchResultList();
     },
   },

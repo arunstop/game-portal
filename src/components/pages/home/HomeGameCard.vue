@@ -34,7 +34,7 @@
               <!-- clip -->
               <v-lazy v-if="gameData.clip" :options="{ threshold: 1 }">
                 <video
-                  v-show="hover"
+                  v-if="hover"
                   class="c-clip animate__animated animate__fadeInUp animate__faster"
                   autoplay
                   muted

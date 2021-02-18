@@ -19,7 +19,16 @@ export default new Vuex.Store({
     ],
     gameDetails: { data: {}, isLoading: true },
     gameListInit: { data: [] },
-    lastVisitedPage: '/'
+    lastVisitedPage: '/',
+    ordering: [
+      // { label: "name", value: "name" },
+      { label: "Newly Released", value: "-released" },
+      { label: "Most Popular", value: "-added" },
+      // { label: "created", value: "created" },
+      // { label: "updated", value: "updated" },
+      // { label: "rating", value: "rating" },
+      { label: "Top Rated", value: "-metacritic" },
+    ],
   },
   mutations: {
     SET_GAME_DETAILS(state, gameDetails) {
