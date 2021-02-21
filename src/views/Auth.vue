@@ -23,7 +23,44 @@
         <v-col>
           <!-- 'OR' divider -->
           <v-btn
-            class="my-4 font-weight-bold text-h5"
+            class="my-4 font-weight-bold text-body-1"
+            text
+            block
+            large
+            disabled
+          >
+            <v-divider />
+            <span class="mx-2">OR</span>
+            <v-divider />
+          </v-btn>
+          <v-row no-gutters>
+            <v-btn
+              class="font-weight-bold text-none text-body-1 rounded-pill"
+              dark
+              large
+              block
+              outlined
+              link
+              color="gmail"
+            >
+              <v-icon class="me-2">mdi-google</v-icon>
+              Login with Google
+            </v-btn>
+            <v-btn
+              class="mt-4 font-weight-bold text-none text-body-1 rounded-pill"
+              dark
+              large
+              block
+              outlined
+              link
+              color="facebook"
+            >
+              <v-icon class="me-2">mdi-facebook</v-icon>
+              Login with Facebook
+            </v-btn>
+          </v-row>
+          <v-btn
+            class="my-4 font-weight-bold text-body-1"
             text
             block
             large
@@ -39,6 +76,7 @@
             text
             large
             link
+            color="primary"
             v-if="form != 'login'"
             @click="showForm('login')"
           >
@@ -52,6 +90,7 @@
             text
             large
             link
+            color="primary"
             v-if="form != 'register'"
             @click="showForm('register')"
           >
@@ -65,6 +104,7 @@
             text
             large
             link
+            color="primary"
             v-if="form != 'reset'"
             @click="showForm('reset')"
           >

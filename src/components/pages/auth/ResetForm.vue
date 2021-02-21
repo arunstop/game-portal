@@ -21,7 +21,7 @@
       prepend-inner-icon="mdi-email"
       required
     />
-    <v-btn block color="success" large @click="resetPassword">
+    <v-btn class="rounded-pill" block color="success" large @click="resetPassword">
       Reset Password
     </v-btn>
   </v-form>

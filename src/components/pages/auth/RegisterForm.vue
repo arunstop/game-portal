@@ -96,7 +96,7 @@
       outlined
       required
       label="Phone Number"
-      :prefix="(dialCode.value||'').slice(2) /*slicing the country code out*/"
+      :prefix="(dialCode.value || '').slice(2) /*slicing the country code out*/"
       placeholder="81234567890"
       v-model="phone.value"
       :rules="phone.rules"
@@ -104,8 +104,8 @@
       prepend-inner-icon="mdi-phone"
     />
 
-    <v-btn block color="primary" large type="submit"> Register </v-btn>
-    <v-btn class="mt-6" block color="error" large @click="resetForm">
+    <v-btn class="rounded-pill" block color="primary" large type="submit"> Register </v-btn>
+    <v-btn class="rounded-pill mt-4" block color="error" large @click="resetForm">
       Clear
     </v-btn>
   </v-form>
@@ -140,6 +140,7 @@ export default {
       value: "",
       rules: [
         (v) => !!v || "Phone is required",
+        (v) => v > 0 || "Incorrect format",
         (v) => (v && v.length) >= 10 || "Phone requires at least 10 characters",
       ],
     },

@@ -10,11 +10,15 @@ export default new Vuetify({
       light: {
          reddit: '#ff4500',
          accent: colors.amber,
+         gmail: '#e94034',
+         facebook: '#4867aa',
       },
       dark: {
+        secondary: '#dfdfdf',
          reddit: '#ff4500',
          accent: colors.amber,
-         secondary: '#dfdfdf'
+         gmail: '#e94034',
+         facebook: '#4867aa',
       },
     },
   },

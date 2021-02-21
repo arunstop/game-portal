@@ -11,20 +11,7 @@
       :actionNext="() => loadSearchResultList()"
     >
       <template v-slot:content>
-        <v-row no-gutters justify="start">
-          <v-col class="ms-4">
-            <v-alert
-            class="pe-6 text-body-1 font-weight-bold rounded-r-pill"
-            type="info"
-            text
-            border="left"
-            max-width="max-content"
-          >
-            <!-- thousand separator with toLocaleString -->
-            {{ searchResultList.data.count.toLocaleString() }} Games Found
-          </v-alert>
-          </v-col>
-        </v-row>
+        <main-result-alert :type="'info'" :text="searchResultList.data.count.toLocaleString()+' Games Found'" />
 
         <div class="c-grid-list pa-4">
           <home-game-card
@@ -40,6 +27,7 @@
 </template>
 
 <script>
+import MainResultAlert from '../components/miscs/MainResultAlert.vue';
 export default {
   components: {
     SearchSection: () =>
@@ -65,6 +53,7 @@ export default {
       // provided and exceeded. Default: Infinity.
       timeout: 3000,
     }),
+    MainResultAlert,
   },
   props: {
     selection: Object,

@@ -19,7 +19,7 @@
       prepend-inner-icon="mdi-lock"
       required
     />
-    <v-btn block color="primary" large type="submit"> Login </v-btn>
+    <v-btn class="rounded-pill" block color="primary" large type="submit"> Login </v-btn>
   </v-form>
 </template>
 

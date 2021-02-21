@@ -4,7 +4,8 @@
     <!-- <span>{{ search.value }}</span> -->
     <v-autocomplete
       prepend-inner-icon="mdi-magnify"
-      placeholder="Search games..."
+      placeholder="Search games... (Enter 2 or more characters)"
+      label="Search games"
       solo
       clearable
       hide-details
@@ -210,10 +211,12 @@ export default {
   watch: {
     "search.value"(val) {
       // if value is empty or null
-      if (!val) return;
+      if (!val || val.length<2) return;
+
       this.search.isLoading = true;
       this.clearSearchedGameList();
       this.loadSearchedGameListDebounce(val);
+      
     },
   },
 };

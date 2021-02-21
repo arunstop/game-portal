@@ -2,14 +2,6 @@
   <v-col class="ma-0 pa-0">
     <!-- search section -->
     <search-section />
-    <v-btn
-      class="c-section-label ma-0 mt-4 text-none white--text rounded-br-xl rounded-tr-xl"
-      color="orange"
-      x-large
-    >
-      <v-icon x-large left>mdi-fire</v-icon>
-      <span class="text-h4">Hot Games</span>
-    </v-btn>
     <!-- item cards -->
     <main-container
       :isLoading="gameList.isLoading"
@@ -18,9 +10,10 @@
       :infiniteLoad="true"
       :isLoadingNext="isLoadingNext"
       :actionNext="loadGameList"
-      
     >
       <template v-slot:content>
+    <main-result-alert :color="'orange'" :icon="'mdi-fire'" :text="'Hot Games'" />
+
         <div class="c-grid-list pa-4">
           <home-game-card
             class="c-grid-item"
@@ -36,6 +29,7 @@
 
 <script>
 import MainContainer from "../../miscs/MainContainer.vue";
+import MainResultAlert from "../../miscs/MainResultAlert.vue";
 // import MainLogo from '../../miscs/MainLogo.vue';
 // import MainSpinner from '../../miscs/MainSpinner.vue';
 // import HomeGameCard from "./HomeGameCard.vue";
@@ -69,6 +63,7 @@ export default {
       // provided and exceeded. Default: Infinity.
       timeout: 3000,
     }),
+    MainResultAlert,
     // MainSpinner,
   },
   data: () => ({
