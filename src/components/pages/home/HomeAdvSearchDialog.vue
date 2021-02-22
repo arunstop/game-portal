@@ -257,16 +257,18 @@
                           <v-btn
                             icon
                             small
-                            @click="selection.metacritic.min--"
                             :color="sliderColor(selection.metacritic.min)"
+                            @click="selection.metacritic.min--"
+                            v-long-click="()=>selection.metacritic.min-=3"
                           >
                             <v-icon>mdi-minus-thick</v-icon>
                           </v-btn>
                           <v-btn
                             icon
                             small
-                            @click="selection.metacritic.min++"
                             :color="sliderColor(selection.metacritic.min)"
+                            @click="selection.metacritic.min++"
+                            v-long-click="()=>selection.metacritic.min+=3"
                           >
                             <v-icon>mdi-plus-thick</v-icon>
                           </v-btn>
@@ -284,21 +286,23 @@
                         thumb-label="always"
                         thumb-size="24"
                         label="Max"
-                        >>
+                        >
                         <template v-slot:append>
                           <v-btn
                             icon
                             small
-                            @click="selection.metacritic.max--"
                             :color="sliderColor(selection.metacritic.max)"
+                            @click="selection.metacritic.max--"
+                            v-long-click="()=>selection.metacritic.max-=3"
                           >
                             <v-icon>mdi-minus-thick</v-icon>
                           </v-btn>
                           <v-btn
                             icon
                             small
-                            @click="selection.metacritic.max++"
                             :color="sliderColor(selection.metacritic.max)"
+                            @click="selection.metacritic.max++"
+                            v-long-click="()=>selection.metacritic.max+=3"
                           >
                             <v-icon>mdi-plus-thick</v-icon>
                           </v-btn>

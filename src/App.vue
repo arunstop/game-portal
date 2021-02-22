@@ -10,6 +10,12 @@
           </v-row>
         </v-toolbar-title>
       </router-link>
+      <!-- <v-slider v-model="lc" thumb-label="always" color="accent">
+
+      </v-slider>
+      <v-btn @click="lc++" v-long-click="()=>lc+=5">
+        {{lc}}
+      </v-btn> -->
       <v-spacer />
       <v-app-bar-nav-icon @click="toggleDrawer" v-if="isSignedIn">
         <v-badge
@@ -102,6 +108,7 @@ export default {
   data: function () {
     return {
       btnScrollToTop: false,
+      lc:1,
     };
   },
   computed: {

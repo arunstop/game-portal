@@ -2,6 +2,7 @@
   <!-- CLICK.STOP IS TO STOP PROPAGATION -->
   <!-- CLICK.PREVENT IS TO STOP EVENT LIKE ROUTER LINK/<a> TAG -->
   <!-- YOU CAN COMBINE BOTH -->
+  <!-- <v-lazy :options="{ threshold: 1 }"> -->
   <div class="fill-height">
     <v-hover v-slot="{ hover }">
       <v-card
@@ -293,6 +294,7 @@
       </template>
     </main-dialog-container>
   </div>
+  <!-- </v-lazy> -->
 </template>
 
 <script>

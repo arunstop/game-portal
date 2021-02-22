@@ -8,13 +8,19 @@ import api from './plugins/api';
 import global from './plugins/global';
 // animate.css
 import 'animate.css'
+//youtube embed
 import VueYouTubeEmbed from 'vue-youtube-embed'
+// longclick
+import { longClickDirective } from 'vue-long-click'
 
 
 Vue.config.productionTip = false
 Vue.use(api)
 Vue.use(global)
 Vue.use(VueYouTubeEmbed)
+// directives
+
+Vue.directive('long-click',  longClickDirective({delay: 300, interval: 1}))
 
 new Vue({
   router,
