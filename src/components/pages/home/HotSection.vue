@@ -4,20 +4,24 @@
     <search-section />
     <!-- item cards -->
     <main-container
-      :isLoading="gameList.isLoading"
-      :isError="gameList.isError"
-      :actionReload="loadGameList"
+      :isLoading="recentGames.list.isLoading"
+      :isError="recentGames.list.isError"
+      :actionReload="initRecentGames"
       :infiniteLoad="true"
-      :isLoadingNext="isLoadingNext"
-      :actionNext="loadGameList"
+      :isLoadingNext="recentGames.isLoadingNext"
+      :actionNext="initRecentGames"
     >
       <template v-slot:content>
-    <main-result-alert :color="'orange'" :icon="'mdi-fire'" :text="'Hot Games'" />
+        <main-result-alert
+          :color="'orange'"
+          :icon="'mdi-fire'"
+          :text="'Hot Games'"
+        />
 
         <div class="c-grid-list pa-4">
           <home-game-card
             class="c-grid-item"
-            v-for="game in gameList.data.results"
+            v-for="game in recentGames.list.data.results"
             :key="game.slug"
             :gameData="game"
           />
@@ -28,14 +32,11 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 import MainContainer from "../../miscs/MainContainer.vue";
 import MainResultAlert from "../../miscs/MainResultAlert.vue";
-// import MainLogo from '../../miscs/MainLogo.vue';
-// import MainSpinner from '../../miscs/MainSpinner.vue';
 // import HomeGameCard from "./HomeGameCard.vue";
-// @ is an alias to project root
-// import HelloWorld from "@/components/HelloWorld.vue";
-// import ItemCard from "./ItemCard.vue";
 import SearchSection from "./SearchSection.vue";
 
 // import MainSpinner from "../../miscs/MainSpinner.vue";
@@ -67,18 +68,32 @@ export default {
     // MainSpinner,
   },
   data: () => ({
-    gameList: { data: [], isLoading: true, isError: false },
-    currentPage: 1,
-    isLoadingNext: false,
+    // gameList: { data: [], isLoading: true, isError: false },
+    // currentPage: 1,
+    // isLoadingNext: false,
   }),
+  computed: {
+    ...mapGetters("data", ["isEmptyRecentGames"]),
+    recentGames: {
+      get() {
+        return this.$store.state.data.recentGames;
+      },
+      set(newVal) {
+        this.$store.dispatch("data/setRecentGames", newVal);
+      },
+    },
+  },
   methods: {
-    loadGameList() {
-      let page = this.currentPage;
+    initRecentGames() {
+      let rg = this.recentGames;
+      let page = rg.page;
+      console.log(rg);
       if (page === 1) {
-        this.gameList = { data: [], isLoading: true, isError: false };
+        rg.list = { data: null, isLoading: true, isError: false };
       } else {
-        this.isLoadingNext = true;
+        rg.isLoadingNext = true;
       }
+      console.log(rg);
       let dNow = this.$global.moment();
       let dNextYear = dNow.add(1, "Y").format("YYYY-MM-DD");
       let dLastYear = dNow.subtract(1, "Y").format("YYYY-MM-DD");
@@ -90,23 +105,23 @@ export default {
           page,
         },
         (response) => {
-          // console.log(this.gameList.data.results)
+          // console.log(rg.list.data.results)
           if (page === 1) {
-            this.gameList = response;
+            rg.list = response;
             //setting game list for search bar
             // this.$store.dispatch('setGameListInit', response)
             window.scrollTo(0, 0);
           } else {
             var moreResults = [].concat(
-              this.gameList.data.results,
+              rg.list.data.results,
               response.data.results
             );
-            this.gameList.data.results = moreResults;
-            // console.log(this.gameList.data.results);
-            this.isLoadingNext = false;
+            rg.list.data.results = moreResults;
+            // console.log(rg.list.data.results);
+            rg.isLoadingNext = false;
           }
-          if (!this.gameList.isError) {
-            this.currentPage++;
+          if (!rg.list.isError) {
+            rg.page++;
           }
         }
       );
@@ -114,7 +129,8 @@ export default {
   },
   created() {},
   mounted() {
-    this.loadGameList();
+    if (!this.isEmptyRecentGames) return;
+    this.initRecentGames();
   },
 };
 </script>

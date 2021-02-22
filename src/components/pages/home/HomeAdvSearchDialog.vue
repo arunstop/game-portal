@@ -259,7 +259,7 @@
                             small
                             :color="sliderColor(selection.metacritic.min)"
                             @click="selection.metacritic.min--"
-                            v-long-click="()=>selection.metacritic.min-=3"
+                            v-long-click="() => (selection.metacritic.min -= 3)"
                           >
                             <v-icon>mdi-minus-thick</v-icon>
                           </v-btn>
@@ -268,7 +268,7 @@
                             small
                             :color="sliderColor(selection.metacritic.min)"
                             @click="selection.metacritic.min++"
-                            v-long-click="()=>selection.metacritic.min+=3"
+                            v-long-click="() => (selection.metacritic.min += 3)"
                           >
                             <v-icon>mdi-plus-thick</v-icon>
                           </v-btn>
@@ -286,14 +286,14 @@
                         thumb-label="always"
                         thumb-size="24"
                         label="Max"
-                        >
+                      >
                         <template v-slot:append>
                           <v-btn
                             icon
                             small
                             :color="sliderColor(selection.metacritic.max)"
                             @click="selection.metacritic.max--"
-                            v-long-click="()=>selection.metacritic.max-=3"
+                            v-long-click="() => (selection.metacritic.max -= 3)"
                           >
                             <v-icon>mdi-minus-thick</v-icon>
                           </v-btn>
@@ -302,7 +302,7 @@
                             small
                             :color="sliderColor(selection.metacritic.max)"
                             @click="selection.metacritic.max++"
-                            v-long-click="()=>selection.metacritic.max+=3"
+                            v-long-click="() => (selection.metacritic.max += 3)"
                           >
                             <v-icon>mdi-plus-thick</v-icon>
                           </v-btn>
@@ -373,6 +373,7 @@
 </template>
 
 <script>
+import { mapGetters, mapState } from 'vuex';
 export default {
   props: {
     value: Boolean,
@@ -409,8 +410,8 @@ export default {
     // console.log(query.dateRange.min);
     return {
       toggleAdvSearch: false,
-      genreList: { data: [], isLoading: true, isError: false },
-      platformList: { data: [], isLoading: true, isError: false },
+      // genreList: { data: [], isLoading: true, isError: false },
+      // platformList: { data: [], isLoading: true, isError: false },
       dateRangeDialog: { min: false, max: false },
       selection: {
         genres: query.genres,
@@ -429,6 +430,8 @@ export default {
     };
   },
   computed: {
+    ...mapGetters('data', ["isEmptyGenreList","isEmptyPlatformList"]),
+    ...mapState('data', ["genreList","platformList"]),
     showModal: {
       get() {
         return this.value;
@@ -443,15 +446,21 @@ export default {
       this.toggleAdvSearch = !this.toggleAdvSearch;
     },
     loadGenreList() {
+      if(!this.isEmptyGenreList) return
       this.$api.call.rawg.getGenres({ ordering: "name" }, (response) => {
         // console.log(response);
-        this.genreList = response;
+        // this.genreList = response;
+        this.$store.dispatch('data/setGenreList',response);
+        // console.log(this.$store.state.data.genreList)
       });
     },
     loadPlatformList() {
+      if(!this.isEmptyPlatformList) return
       this.$api.call.rawg.getPlatforms({}, (response) => {
         // console.log(response);
-        this.platformList = response;
+        // this.platformList = response;
+        this.$store.dispatch('data/setPlatformList',response);
+        // console.log(this.$store.state.data.platformList)
       });
     },
     clearGenreSelection() {

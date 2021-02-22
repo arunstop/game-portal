@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import localStorage from './localStorage'
 import auth from './modules/auth'
 import ui from './modules/ui'
+import data from './modules/data'
 
 Vue.use(Vuex)
 
@@ -81,6 +82,6 @@ export default new Vuex.Store({
     },
   },
   modules: {
-    ui, auth,
+    ui, auth, data
   },
 })

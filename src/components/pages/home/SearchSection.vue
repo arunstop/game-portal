@@ -129,6 +129,7 @@
         color="primary"
         :outlined="!toggleAdvSearch"
         @click.stop="toggleAdvSearch = true"
+        :loading="toggleAdvSearch"
       >
         <v-icon class="me-2">mdi-database-search</v-icon>
         Advanced Search
